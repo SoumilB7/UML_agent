@@ -21,6 +21,7 @@ export default function DiagramDisplay({ mermaidCode, isLoading }: DiagramDispla
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isDragging, setIsDragging] = useState(false)
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     mermaid.initialize({
@@ -183,6 +184,34 @@ export default function DiagramDisplay({ mermaidCode, isLoading }: DiagramDispla
     setIsDragging(false)
   }, [])
 
+  // Copy mermaid code to clipboard
+  const handleCopyCode = useCallback(async () => {
+    if (!mermaidCode) return
+    
+    try {
+      await navigator.clipboard.writeText(mermaidCode)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy code:', err)
+      // Fallback for older browsers
+      const textArea = document.createElement('textarea')
+      textArea.value = mermaidCode
+      textArea.style.position = 'fixed'
+      textArea.style.left = '-999999px'
+      document.body.appendChild(textArea)
+      textArea.select()
+      try {
+        document.execCommand('copy')
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } catch (fallbackErr) {
+        console.error('Fallback copy failed:', fallbackErr)
+      }
+      document.body.removeChild(textArea)
+    }
+  }, [mermaidCode])
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col h-full">
       <div className="mb-4 flex items-center justify-between">
@@ -190,8 +219,31 @@ export default function DiagramDisplay({ mermaidCode, isLoading }: DiagramDispla
           <h2 className="text-sm font-semibold text-gray-900">Diagram Preview</h2>
           <p className="text-xs text-gray-500 mt-1">Zoom and pan to explore the diagram</p>
         </div>
-        {imageUrl && (
-          <div className="flex gap-2">
+        <div className="flex gap-2">
+          {mermaidCode && (
+            <button
+              onClick={handleCopyCode}
+              className="px-3 py-1.5 text-xs font-medium text-primary-700 bg-primary-50 hover:bg-primary-100 rounded-lg transition-colors flex items-center gap-1.5"
+              title="Copy Mermaid code to clipboard"
+            >
+              {copied ? (
+                <>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                  </svg>
+                  Copy Code
+                </>
+              )}
+            </button>
+          )}
+          {imageUrl && (
             <a
               href={imageUrl}
               download="diagram.svg"
@@ -199,8 +251,8 @@ export default function DiagramDisplay({ mermaidCode, isLoading }: DiagramDispla
             >
               Download SVG
             </a>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       <div 
