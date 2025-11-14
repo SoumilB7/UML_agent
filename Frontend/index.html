@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Diagram Generator</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            display: flex;
+            height: calc(100vh - 40px);
+        }
+
+        .left-panel {
+            width: 40%;
+            padding: 30px;
+            border-right: 2px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            background: #f8f9fa;
+        }
+
+        .right-panel {
+            width: 60%;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            overflow: auto;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .diagram-container {
+            flex: 1;
+            border: 2px dashed #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .diagram-container.empty {
+            color: #999;
+            font-size: 16px;
+        }
+
+        .diagram-container.error {
+            color: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        .mermaid {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            background: #fee;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .examples {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .examples h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .example-btn {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 5px 5px 5px 0;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .example-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h1>Mermaid Diagram Generator</h1>
+            <p class="subtitle">Enter a prompt to generate a UML diagram</p>
+            
+            <form id="diagramForm">
+                <div class="form-group">
+                    <label for="prompt">Prompt:</label>
+                    <textarea 
+                        id="prompt" 
+                        name="prompt" 
+                        placeholder="e.g., Create a class diagram for an e-commerce system with User, Product, Order, and Payment classes"
+                        required
+                    ></textarea>
+                </div>
+                
+                <button type="submit" id="submitBtn">Generate Diagram</button>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Generating diagram...</p>
+                </div>
+                
+                <div class="error-message" id="errorMessage"></div>
+            </form>
+
+            <div class="examples">
+                <h3>Example Prompts:</h3>
+                <button class="example-btn" onclick="setExample('Create a class diagram for a library management system with Book, Author, Member, and Loan classes')">
+                    Library System
+                </button>
+                <button class="example-btn" onclick="setExample('Create a sequence diagram for user login process')">
+                    Login Sequence
+                </button>
+                <button class="example-btn" onclick="setExample('Create a class diagram for a banking system')">
+                    Banking System
+                </button>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <h1>Diagram Preview</h1>
+            <p class="subtitle">Your generated diagram will appear here</p>
+            
+            <div class="diagram-container empty" id="diagramContainer">
+                <p>Enter a prompt and click "Generate Diagram" to see your diagram here</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#667eea',
+                primaryTextColor: '#333',
+                primaryBorderColor: '#667eea',
+                lineColor: '#333',
+                secondaryColor: '#764ba2',
+                tertiaryColor: '#f8f9fa'
+            }
+        });
+
+        const form = document.getElementById('diagramForm');
+        const promptInput = document.getElementById('prompt');
+        const submitBtn = document.getElementById('submitBtn');
+        const loading = document.getElementById('loading');
+        const errorMessage = document.getElementById('errorMessage');
+        const diagramContainer = document.getElementById('diagramContainer');
+
+        // API endpoint - adjust if your backend runs on a different port
+        const API_URL = 'http://localhost:8000/diagram/generate';
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const prompt = promptInput.value.trim();
+            if (!prompt) {
+                showError('Please enter a prompt');
+                return;
+            }
+
+            // Reset UI
+            hideError();
+            setLoading(true);
+            diagramContainer.className = 'diagram-container';
+            diagramContainer.innerHTML = '';
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ prompt: prompt })
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || 'Failed to generate diagram');
+                }
+
+                const data = await response.json();
+                const mermaidCode = data.mermaid_code;
+
+                if (!mermaidCode) {
+                    throw new Error('No diagram code received from server');
+                }
+
+                // Render the diagram
+                renderDiagram(mermaidCode);
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError(error.message || 'An error occurred while generating the diagram');
+                diagramContainer.className = 'diagram-container error';
+                diagramContainer.innerHTML = '<p>Failed to generate diagram. Please try again.</p>';
+            } finally {
+                setLoading(false);
+            }
+        });
+
+        function renderDiagram(mermaidCode) {
+            // Create a unique ID for this diagram
+            const diagramId = 'mermaid-' + Date.now();
+            
+            // Create the diagram element
+            const diagramDiv = document.createElement('div');
+            diagramDiv.className = 'mermaid';
+            diagramDiv.id = diagramId;
+            diagramDiv.textContent = mermaidCode;
+            
+            // Clear container and add new diagram
+            diagramContainer.className = 'diagram-container';
+            diagramContainer.innerHTML = '';
+            diagramContainer.appendChild(diagramDiv);
+            
+            // Render with Mermaid
+            mermaid.run({
+                nodes: [diagramDiv],
+                suppressErrors: false
+            }).then(() => {
+                console.log('Diagram rendered successfully');
+            }).catch((error) => {
+                console.error('Mermaid rendering error:', error);
+                showError('Failed to render diagram. The generated code might be invalid.');
+                diagramContainer.className = 'diagram-container error';
+                diagramContainer.innerHTML = `
+                    <div>
+                        <p style="color: #e74c3c; margin-bottom: 10px;">Failed to render diagram</p>
+                        <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; overflow: auto; max-height: 300px; font-size: 12px;">${mermaidCode}</pre>
+                    </div>
+                `;
+            });
+        }
+
+        function setLoading(isLoading) {
+            if (isLoading) {
+                loading.classList.add('active');
+                submitBtn.disabled = true;
+            } else {
+                loading.classList.remove('active');
+                submitBtn.disabled = false;
+            }
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('active');
+        }
+
+        function hideError() {
+            errorMessage.classList.remove('active');
+        }
+
+        function setExample(prompt) {
+            promptInput.value = prompt;
+            promptInput.focus();
+        }
+    </script>
+</body>
+</html>
+
