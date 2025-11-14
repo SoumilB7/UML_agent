@@ -2,7 +2,78 @@
 ================================================================================
 LLM Call Log Entry
 ================================================================================
-Timestamp: 2025-11-14 21:52:40
+Timestamp: 2025-11-14 22:14:04
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant SEBI
+participant Ingestion
+participant Parser
+participant "Clause Store"
+participant Analyzer
+participant "Compliance DB"
+participant "Gap Engine"
+participant "Impact Engine"
+participant "Reporting UI"
+
+SEBI-->>Ingestion: Publish new circulars
+Ingestion->>Ingestion: Fetch latest circulars (API/scrape)
+Ingestion-->>Parser: Raw circular documents
+
+Parser->>Parser: Normalize & clean text
+Parser->>Parser: Identify sections and clauses
+Parser-->>"Clause Store": Structured clauses table
+
+Analyzer->>"Clause Store": Read latest clauses
+Analyzer->>"Compliance DB": Read existing controls & mappings
+Analyzer->>Analyzer: Classify clauses (new/changed/unchanged)
+Analyzer-->>"Gap Engine": New & changed compliance requirements
+
+"Gap Engine"->>"Compliance DB": Retrieve mapped controls
+"Gap Engine"->>"Gap Engine": Compare clauses vs existing controls
+"Gap Engine"-->>"Impact Engine": Gaps and weak coverage
+
+"Impact Engine"->>"Compliance DB": Fetch IT assets, processes, owners...
+
+Token Usage:
+  Prompt tokens: 1978
+  Completion tokens: 314
+  Total tokens: 2292
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-14 22:14:37
 Function: edit_diagram_mermaid
 Model: gpt-5.1
 Parameters: {
@@ -13,15 +84,15 @@ Parameters: {
 Input Messages:
 --------------------------------------------------------------------------------
 Message 1 (system):
-You are a Mermaid diagram editor. Your task is to modify existing Mermaid diagram code based on user instructions.
+You are a Mermaid diagram editor. Your task is to generate structured edit instructions for modifying existing Mermaid diagram code based on user instructions.
 
-Rules:
-1. Output ONLY the complete, updated Mermaid code, nothing else
-2. Do not include markdown code blocks (no ```mermaid or ```)
-3. Do not include any explanations or comments
-4. Preserve the structure and style of the existing diagram unless the user explicitly asks to change it
-5. Apply the requested changes while maintaining valid Mermaid UML syntax
-6. If the user wants to a...
+CRITICAL: You must output ONLY a JSON object with edit instructions, NOT the complete updated code. The system will apply these edits automatically.
+
+Output Format (JSON only, no markdown, no code blocks):
+{
+  "edits": [
+    {
+      "type": "add_class|remove_class|modify_class|add_relationship|remove_relationship|modify_relationship|add_...
 
 Message 2 (user):
 Existing Mermaid diagram code:
@@ -30,54 +101,73 @@ participant SEBI
 participant Ingestion
 participant Parser
 participant "Clause Store"
-participant "Existing Controls DB"
+participant Analyzer
+participant "Compliance DB"
+participant "Gap Engine"
 participant "Impact Engine"
-participant "Compliance Team"
+participant "Reporting UI"
 
-SEBI-->>Ingestion: Publish new circular
-Ingestion->>Ingestion: Fetch circular (API/scrape)
-Ingestion-->>Parser: Raw circular text
-activate Parser
-Parser->>Parser: NLP + rules-based parsing
-Parser-->>"Clause Store": Structured clauses table
-deactivate Parser
+SEBI-->>Ingestion: Publish new circulars
+Ingestion->>Ingestion: Fetch latest circulars (API/scrape)
+Ingestion-->>Parser: Raw circular documents
 
-"Compliance Tea...
+Parser->>Parser: Normalize & clean text
+Parser->>Parser: Identify sections and clauses
+Parser...
 
 --------------------------------------------------------------------------------
 Output:
 --------------------------------------------------------------------------------
 Content:
-sequenceDiagram
-participant SEBI
-participant Ingestion
-participant "Clause Store"
-participant "Existing Controls DB"
-participant "Impact Engine"
-participant "Compliance Team"
-
-SEBI-->>Ingestion: Publish new circular
-Ingestion->>Ingestion: Fetch circular (API/scrape)
-Ingestion-->>"Clause Store": NLP + rules-based parsing → Structured clauses table
-
-"Compliance Team"->>"Clause Store": Define analysis run & load new clauses
-"Compliance Team"->>"Existing Controls DB": Load current controls
-"Compliance Team"->>"Compliance Team": Analyze & map clauses to controls
-"Compliance Team"-->>"Compliance Team": 1) New requirements list
-
-"Compliance Team"->>"Compliance Team": Compare clauses vs controls
-"Compliance Team"-->>"Compliance Team": 2) Gap analysis report
-
-"Compliance Team"-->>"Impact Engine": Gaps + mapped assets
-activate "Impact Engine"
-"Impact Engine"->>"Impact Engine": Assess IT & ops impact
-"Impact Engine"-->>"Compliance Team": 3) Impact assessment (IT/Operational)
-deactivate "Impact En...
+{
+  "edits": [
+    {
+      "type": "remove_participant",
+      "target": "Analyzer"
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "Analyzer",
+        "to": "\"Clause Store\"",
+        "message": "Read latest clauses"
+      }
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "Analyzer",
+        "to": "\"Compliance DB\"",
+        "message": "Read existing controls & mappings"
+      }
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "Analyzer",
+        "to": "Analyzer",
+        "message": "Classify clauses (new/changed/unchanged)"
+      }
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "Analyzer",
+        "to": "\"Gap Engine\"",
+        "message": "New & changed compliance requirements"
+      }
+    },
+    {
+      "type": "add_message",
+      "details": {
+        "from": "\"Clause Store\"",
+        "to": "\"Gap Engine\"",
+        "message": "New & changed complianc...
 
 Token Usage:
-  Prompt tokens: 481
-  Completion tokens: 238
-  Total tokens: 719
+  Prompt tokens: 1994
+  Completion tokens: 290
+  Total tokens: 2284
 
 Finish reason: stop
 
