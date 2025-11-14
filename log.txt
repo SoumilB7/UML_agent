@@ -215,3 +215,792 @@ Floor4 --> [*]
 Code Length: 850 characters
 ================================================================================
 
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:51:28
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Calibrated : gpsOk
+  Ready --> [*]
+  Calibrated --> [*]
+}
+PreFlight --> FlightModes : missionStart
+state FlightModes {
+  [*] --> Hover
+  Hover --> Cruise : startCruise
+  Cruise --> ReturnToHome : rth
+  state NormalOps {
+    [*] --> HoverMode
+    HoverMode --> [*]
+  }
+  state AggressiveOps {
+    [*] --> SportMode
+    SportMode --> [*]
+  }
+  state StealthOps {
+    [*] --> SilentMode
+    SilentMode --> [*]
+  }
+  Cruise --> NormalOps : modeNormal
+  Cruise --> AggressiveOps : modeSport
+  Cruise --> StealthOps : modeSilent
+}
+FlightModes --> EmergencyLanding : criticalFault
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : abortMission
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 240
+  Total tokens: 2222
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:51:32
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlightParallel
+
+state PreFlightParallel {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Calibrated : gpsOk
+  Ready --> [*]
+  Calibrated --> [*]
+}
+
+PreFlightParallel --> FlightModes : startMission
+
+state FlightModes {
+  [*] --> Cruise
+
+  Cruise --> Hover : enterHover
+  Cruise --> Navigate : startNavigation
+  Cruise --> ReturnToBase : rtb
+
+  Hover --> HoverFinal : hoverDone
+  Navigate --> NavigateFinal : navigateDone
+  ReturnToBase --> RTBFinal : rtbDone
+
+  HoverFinal --> [*]
+  NavigateFinal --> [*]
+  RTBFinal --> [*]
+}
+
+FlightModes --> EmergencyLanding : criticalFault
+
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : terminate
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 205
+  Total tokens: 2187
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:51:44
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlightParallel
+
+state PreFlightParallel {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsCalibrated
+  Ready --> [*] : preflightDone
+}
+
+PreFlightParallel --> FlightModes : startMission
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachedAltitude
+  Cruise --> Landing : beginDescent
+
+  state AutoPilot {
+    [*] --> AutoEngaged
+    AutoEngaged --> [*] : autoComplete
+  }
+
+  state ManualControl {
+    [*] --> ManualEngaged
+    ManualEngaged --> [*] : manualComplete
+  }
+
+  state ReturnToHome {
+    [*] --> RTHEngaged
+    RTHEngaged --> [*] : rthComplete
+  }
+
+  Cruise --> AutoPilot : enableAuto
+  Cruise --> ManualControl : enableManual
+  Cruise --> ReturnToHome : enableRTH
+}
+
+FlightModes --> EmergencyLanding : criticalFault
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : shutdown
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 259
+  Total tokens: 2241
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:54:31
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : launch
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachAltitude
+  Cruise --> Landing : beginDescent
+  Landing --> FinalHover : hoverComplete
+  Landing --> FinalShutdown : shutdownComplete
+  Landing --> FinalReturn : returnComplete
+  FinalHover --> [*]
+  FinalShutdown --> [*]
+  FinalReturn --> [*]
+}
+
+FlightModes --> EmergencyLanding : criticalFailure
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : terminate
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 179
+  Total tokens: 2161
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:54:35
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> ParallelStartup
+
+state ParallelStartup {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Calibrated : gpsLocked
+
+  Ready --> [*]
+  Calibrated --> [*]
+}
+
+ParallelStartup --> FlightModes : enterFlight
+
+state FlightModes {
+  [*] --> Cruise
+
+  Cruise --> Hover : switchToHover
+  Cruise --> ReturnHome : returnCommand
+  Cruise --> Patrol : startPatrol
+
+  Hover --> FinalHover : hoverComplete
+  ReturnHome --> FinalReturn : homeReached
+  Patrol --> FinalPatrol : patrolComplete
+
+  FinalHover --> [*]
+  FinalReturn --> [*]
+  FinalPatrol --> [*]
+}
+
+FlightModes --> EmergencyLanding : criticalFailure
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : shutdown
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 201
+  Total tokens: 2183
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:54:39
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> ParallelStartup
+
+state ParallelStartup {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Calibrated : gpsOk
+
+  Ready --> [*]
+  Calibrated --> [*]
+}
+
+ParallelStartup --> FlightModes : startMission
+
+state FlightModes {
+  [*] --> Takeoff
+
+  Takeoff --> Cruise : reachAltitude
+  Cruise --> Landing : beginDescent
+
+  Cruise --> FinalA : missionComplete
+  Cruise --> FinalB : missionComplete
+  Cruise --> FinalC : missionComplete
+
+  FinalA --> [*]
+  FinalB --> [*]
+  FinalC --> [*]
+}
+
+FlightModes --> EmergencyLanding : anomalyDetected
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : abortMission
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 191
+  Total tokens: 2173
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:55:27
+Function: edit_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid diagram editor. Your task is to generate structured edit instructions for modifying existing Mermaid diagram code based on user instructions.
+
+CRITICAL: You must output ONLY a JSON object with edit instructions, NOT the complete updated code. The system will apply these edits automatically.
+
+Output Format (JSON only, no markdown, no code blocks):
+{
+  "edits": [
+    {
+      "type": "add_class|remove_class|modify_class|add_relationship|remove_relationship|modify_relationship|add_...
+
+Message 2 (user):
+Existing Mermaid diagram code:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : launch
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachAltitude
+  Cruise --> Landing : beginDescent
+  Landing --> FinalHover : hoverComplete
+  Landing --> FinalShutdown : shutdownComplete
+  Landing --> FinalReturn : ret...
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+{
+  "edits": []
+}
+
+Token Usage:
+  Prompt tokens: 1857
+  Completion tokens: 17
+  Total tokens: 1874
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+Mermaid Code Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:55:27
+Function: edit_diagram_mermaid
+Code Type: post_edit
+Context: Edit request: add 15 min break in the arrow of lunch
+
+Mermaid Code:
+--------------------------------------------------------------------------------
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : launch
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachAltitude
+  Cruise --> Landing : beginDescent
+  Landing --> FinalHover : hoverComplete
+  Landing --> FinalShutdown : shutdownComplete
+  Landing --> FinalReturn : returnComplete
+  FinalHover --> [*]
+  FinalShutdown --> [*]
+  FinalReturn --> [*]
+}
+
+FlightModes --> EmergencyLanding : criticalFailure
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : terminate
+--------------------------------------------------------------------------------
+Code Length: 681 characters
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:55:40
+Function: edit_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid diagram editor. Your task is to generate structured edit instructions for modifying existing Mermaid diagram code based on user instructions.
+
+CRITICAL: You must output ONLY a JSON object with edit instructions, NOT the complete updated code. The system will apply these edits automatically.
+
+Output Format (JSON only, no markdown, no code blocks):
+{
+  "edits": [
+    {
+      "type": "add_class|remove_class|modify_class|add_relationship|remove_relationship|modify_relationship|add_...
+
+Message 2 (user):
+Existing Mermaid diagram code:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : launch
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachAltitude
+  Cruise --> Landing : beginDescent
+  Landing --> FinalHover : hoverComplete
+  Landing --> FinalShutdown : shutdownComplete
+  Landing --> FinalReturn : ret...
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+{
+  "edits": []
+}
+
+Token Usage:
+  Prompt tokens: 1857
+  Completion tokens: 17
+  Total tokens: 1874
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+Mermaid Code Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:55:40
+Function: edit_diagram_mermaid
+Code Type: post_edit
+Context: Edit request: add 15 min break in the arrow of lunch
+
+Mermaid Code:
+--------------------------------------------------------------------------------
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : launch
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachAltitude
+  Cruise --> Landing : beginDescent
+  Landing --> FinalHover : hoverComplete
+  Landing --> FinalShutdown : shutdownComplete
+  Landing --> FinalReturn : returnComplete
+  FinalHover --> [*]
+  FinalShutdown --> [*]
+  FinalReturn --> [*]
+}
+
+FlightModes --> EmergencyLanding : criticalFailure
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : terminate
+--------------------------------------------------------------------------------
+Code Length: 681 characters
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:56:18
+Function: edit_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid diagram editor. Your task is to generate structured edit instructions for modifying existing Mermaid diagram code based on user instructions.
+
+CRITICAL: You must output ONLY a JSON object with edit instructions, NOT the complete updated code. The system will apply these edits automatically.
+
+Output Format (JSON only, no markdown, no code blocks):
+{
+  "edits": [
+    {
+      "type": "add_class|remove_class|modify_class|add_relationship|remove_relationship|modify_relationship|add_...
+
+Message 2 (user):
+Existing Mermaid diagram code:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : launch
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachAltitude
+  Cruise --> Landing : beginDescent
+  Landing --> FinalHover : hoverComplete
+  Landing --> FinalShutdown : shutdownComplete
+  Landing --> FinalReturn : ret...
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+{
+  "edits": [
+    {
+      "type": "add_state",
+      "details": {
+        "name": "Tilt",
+        "parent": "FlightModes"
+      }
+    },
+    {
+      "type": "remove_transition",
+      "details": {
+        "from": "Takeoff",
+        "to": "Cruise"
+      }
+    },
+    {
+      "type": "add_transition",
+      "details": {
+        "from": "Takeoff",
+        "to": "Tilt",
+        "label": "reachAltitude"
+      }
+    },
+    {
+      "type": "add_transition",
+      "details": {
+        "from": "Tilt",
+        "to": "Cruise"
+      }
+    }
+  ]
+}
+
+Token Usage:
+  Prompt tokens: 1857
+  Completion tokens: 164
+  Total tokens: 2021
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+Mermaid Code Log Entry
+================================================================================
+Timestamp: 2025-11-14 23:56:18
+Function: edit_diagram_mermaid
+Code Type: post_edit
+Context: Edit request: add a block of tilt between take off and cruise
+
+
+Mermaid Code:
+--------------------------------------------------------------------------------
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : launch
+
+state FlightModes {
+  [*] --> Takeoff
+  Cruise --> Landing : beginDescent
+  Landing --> FinalHover : hoverComplete
+  Landing --> FinalShutdown : shutdownComplete
+  Landing --> FinalReturn : returnComplete
+  FinalHover --> [*]
+  FinalShutdown --> [*]
+  FinalReturn --> [*]
+    Tilt
+}
+
+FlightModes --> EmergencyLanding : criticalFailure
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : terminate
+Takeoff --> Tilt : reachAltitude
+Tilt --> Cruise
+--------------------------------------------------------------------------------
+Code Length: 702 characters
+================================================================================
+

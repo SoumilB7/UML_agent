@@ -16,17 +16,39 @@ async def generate_diagram(request: DiagramRequest):
     Generate Mermaid UML diagram code from a user prompt.
     
     Args:
-        request: DiagramRequest containing the user's prompt
+        request: DiagramRequest containing the user's prompt and num_variations
         
     Returns:
-        DiagramResponse containing the Mermaid code
+        DiagramResponse containing the Mermaid code(s)
     """
     if not request.prompt or not request.prompt.strip():
         raise HTTPException(status_code=400, detail="Prompt cannot be empty")
     
+    num_variations = request.num_variations or 1
+    if num_variations < 1:
+        num_variations = 1
+    if num_variations > 3:
+        num_variations = 3  # Limit to 3 variations max
+    
     try:
-        mermaid_code = generate_diagram_mermaid(request.prompt)
-        return DiagramResponse(mermaid_code=mermaid_code)
+        if num_variations == 1:
+            # Single generation
+            mermaid_code = generate_diagram_mermaid(request.prompt)
+            return DiagramResponse(mermaid_code=mermaid_code)
+        else:
+            # Multiple variations
+            variations = []
+            for i in range(num_variations):
+                logger.info(f"Generating variation {i+1}/{num_variations}")
+                variation = generate_diagram_mermaid(request.prompt)
+                variations.append(variation)
+            
+            # Return first variation as mermaid_code for backward compatibility
+            # and all variations in the variations list
+            return DiagramResponse(
+                mermaid_code=variations[0],
+                variations=variations
+            )
     
     except ValueError as e:
         raise HTTPException(status_code=500, detail=str(e))

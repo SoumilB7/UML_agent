@@ -6,9 +6,168 @@ import mermaid from 'mermaid'
 interface DiagramDisplayProps {
   mermaidCode: string
   isLoading: boolean
+  variations?: string[]
+  selectedVariationIndex?: number | null
+  onSelectVariation?: (index: number) => void
+  onConfirmSelection?: () => void
 }
 
-export default function DiagramDisplay({ mermaidCode, isLoading }: DiagramDisplayProps) {
+interface VariationThumbnailProps {
+  mermaidCode: string
+  index: number
+  isSelected: boolean
+  onSelect: () => void
+}
+
+function VariationThumbnail({ mermaidCode, index, isSelected, onSelect }: VariationThumbnailProps) {
+  const [thumbnailUrl, setThumbnailUrl] = useState<string>('')
+  const [isRendering, setIsRendering] = useState(false)
+  const [renderError, setRenderError] = useState(false)
+
+  useEffect(() => {
+    if (!mermaidCode) {
+      setThumbnailUrl('')
+      setIsRendering(false)
+      setRenderError(false)
+      return
+    }
+
+    const renderThumbnail = async () => {
+      setIsRendering(true)
+      setRenderError(false)
+      let tempContainer: HTMLDivElement | null = null
+      
+      try {
+        // Ensure mermaid is initialized
+        if (typeof mermaid === 'undefined' || !mermaid.run) {
+          throw new Error('Mermaid is not initialized')
+        }
+
+        // Add a delay based on index to avoid simultaneous rendering conflicts
+        // This helps prevent race conditions when multiple thumbnails render at once
+        await new Promise(resolve => setTimeout(resolve, index * 300))
+
+        // Generate a truly unique ID for this render
+        const uniqueId = `variation-thumb-${index}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+
+        // Create a unique container for this thumbnail
+        tempContainer = document.createElement('div')
+        tempContainer.style.position = 'absolute'
+        tempContainer.style.left = '-9999px'
+        tempContainer.style.top = '-9999px'
+        tempContainer.style.width = '200px'
+        tempContainer.style.height = '200px'
+        tempContainer.style.visibility = 'hidden'
+        document.body.appendChild(tempContainer)
+
+        // Create the mermaid div with unique ID
+        const div = document.createElement('div')
+        div.className = 'mermaid'
+        div.id = uniqueId
+        div.textContent = mermaidCode.trim()
+        tempContainer.appendChild(div)
+
+        // Wait a bit to ensure DOM is ready
+        await new Promise(resolve => setTimeout(resolve, 150))
+
+        // Render with mermaid - use suppressErrors: true to avoid breaking other renders
+        await mermaid.run({
+          nodes: [div],
+          suppressErrors: true,
+        })
+
+        // Wait and retry to find SVG (mermaid might need more time)
+        let svgElement: SVGElement | null = null
+        for (let retry = 0; retry < 5; retry++) {
+          await new Promise(resolve => setTimeout(resolve, 200))
+          svgElement = div.querySelector('svg')
+          if (svgElement) break
+        }
+
+        if (svgElement) {
+          const svgData = new XMLSerializer().serializeToString(svgElement)
+          const svgDataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)))
+          setThumbnailUrl(svgDataUrl)
+          setRenderError(false)
+        } else {
+          console.warn(`No SVG found for variation ${index + 1} after rendering. Mermaid code length: ${mermaidCode.length}`)
+          // Log the mermaid code for debugging
+          console.debug(`Mermaid code for variation ${index + 1}:`, mermaidCode.substring(0, 200))
+          setRenderError(true)
+        }
+
+      } catch (error) {
+        console.error(`Error rendering thumbnail for variation ${index + 1}:`, error)
+        setRenderError(true)
+        setThumbnailUrl('')
+      } finally {
+        setIsRendering(false)
+        // Cleanup after a delay
+        setTimeout(() => {
+          if (tempContainer && document.body.contains(tempContainer)) {
+            document.body.removeChild(tempContainer)
+          }
+        }, 3000)
+      }
+    }
+
+    renderThumbnail()
+  }, [mermaidCode, index])
+
+  return (
+    <button
+      onClick={onSelect}
+      className={`relative p-2 border-2 rounded-lg transition-all ${
+        isSelected
+          ? 'border-primary-600 bg-primary-50 shadow-md'
+          : 'border-gray-200 bg-white hover:border-primary-300 hover:bg-primary-50/50'
+      }`}
+    >
+      <div className="aspect-square w-full bg-gray-50 rounded overflow-hidden flex items-center justify-center">
+        {thumbnailUrl ? (
+          <img
+            src={thumbnailUrl}
+            alt={`Variation ${index + 1}`}
+            className="w-full h-full object-contain"
+            onError={() => {
+              console.error(`Failed to load thumbnail for variation ${index + 1}`)
+              setRenderError(true)
+            }}
+          />
+        ) : renderError ? (
+          <div className="text-xs text-red-400 text-center p-2">
+            Render Error
+          </div>
+        ) : (
+          <div className="text-xs text-gray-400">
+            {isRendering ? 'Rendering...' : 'Loading...'}
+          </div>
+        )}
+      </div>
+      <div className="mt-2 text-center">
+        <span className={`text-xs font-medium ${isSelected ? 'text-primary-700' : 'text-gray-600'}`}>
+          Variation {index + 1}
+        </span>
+      </div>
+      {isSelected && (
+        <div className="absolute top-1 right-1 bg-primary-600 rounded-full p-1">
+          <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+      )}
+    </button>
+  )
+}
+
+export default function DiagramDisplay({ 
+  mermaidCode, 
+  isLoading,
+  variations = [],
+  selectedVariationIndex = null,
+  onSelectVariation,
+  onConfirmSelection
+}: DiagramDisplayProps) {
   const svgRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLImageElement>(null)
@@ -212,15 +371,34 @@ export default function DiagramDisplay({ mermaidCode, isLoading }: DiagramDispla
     }
   }, [mermaidCode])
 
+  const hasMultipleVariations = variations && variations.length > 1
+
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col h-full">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-gray-900">Diagram Preview</h2>
-          <p className="text-xs text-gray-500 mt-1">Zoom and pan to explore the diagram</p>
+          <h2 className="text-sm font-semibold text-gray-900">
+            {hasMultipleVariations ? 'Select a Variation' : 'Diagram Preview'}
+          </h2>
+          <p className="text-xs text-gray-500 mt-1">
+            {hasMultipleVariations 
+              ? 'Choose one of the generated variations to continue' 
+              : 'Zoom and pan to explore the diagram'}
+          </p>
         </div>
         <div className="flex gap-2">
-          {mermaidCode && (
+          {hasMultipleVariations && onConfirmSelection && selectedVariationIndex !== null && (
+            <button
+              onClick={onConfirmSelection}
+              className="px-4 py-1.5 text-xs font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors flex items-center gap-1.5"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              Use This One
+            </button>
+          )}
+          {mermaidCode && !hasMultipleVariations && (
             <button
               onClick={handleCopyCode}
               className="px-3 py-1.5 text-xs font-medium text-primary-700 bg-primary-50 hover:bg-primary-100 rounded-lg transition-colors flex items-center gap-1.5"
@@ -243,7 +421,7 @@ export default function DiagramDisplay({ mermaidCode, isLoading }: DiagramDispla
               )}
             </button>
           )}
-          {imageUrl && (
+          {imageUrl && !hasMultipleVariations && (
             <a
               href={imageUrl}
               download="diagram.svg"
@@ -255,9 +433,28 @@ export default function DiagramDisplay({ mermaidCode, isLoading }: DiagramDispla
         </div>
       </div>
 
+      {/* Variations Selector */}
+      {hasMultipleVariations && (
+        <div className="mb-4">
+          <div className="grid grid-cols-3 gap-3">
+            {variations.map((variation, index) => (
+              <VariationThumbnail
+                key={index}
+                mermaidCode={variation}
+                index={index}
+                isSelected={selectedVariationIndex === index}
+                onSelect={() => onSelectVariation?.(index)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
       <div 
         ref={containerRef}
-        className="flex-1 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 overflow-hidden min-h-[400px] relative cursor-move"
+        className={`flex-1 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 overflow-hidden relative cursor-move ${
+          hasMultipleVariations ? 'min-h-[300px]' : 'min-h-[400px]'
+        }`}
         onWheel={handleWheel}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}

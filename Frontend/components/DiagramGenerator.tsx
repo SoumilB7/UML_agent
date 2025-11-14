@@ -10,11 +10,13 @@ const GENERATE_URL = `${GENERATE_API_URL}/diagram/generate`
 
 export default function DiagramGenerator() {
   const [mermaidCode, setMermaidCode] = useState<string>('')
+  const [variations, setVariations] = useState<string[]>([])
+  const [selectedVariationIndex, setSelectedVariationIndex] = useState<number | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string>('')
   const [isEditing, setIsEditing] = useState(false)
 
-  const handleGenerate = async (prompt: string) => {
+  const handleGenerate = async (prompt: string, numVariations: number = 1) => {
     if (!prompt.trim()) {
       setError('Please enter a prompt')
       return
@@ -22,13 +24,15 @@ export default function DiagramGenerator() {
 
     setIsLoading(true)
     setError('')
+    setVariations([])
+    setSelectedVariationIndex(null)
 
     try {
       // If we have existing code, use edit endpoint, otherwise use generate
       const url = mermaidCode && isEditing ? EDIT_API_URL : GENERATE_URL
       const body = mermaidCode && isEditing
         ? { prompt, existing_mermaid_code: mermaidCode }
-        : { prompt }
+        : { prompt, num_variations: numVariations }
 
       const response = await fetch(url, {
         method: 'POST',
@@ -44,7 +48,18 @@ export default function DiagramGenerator() {
       }
 
       const data = await response.json()
-      setMermaidCode(data.mermaid_code || '')
+      
+      // Handle multiple variations
+      if (data.variations && data.variations.length > 1) {
+        setVariations(data.variations)
+        setMermaidCode(data.variations[0]) // Show first variation by default
+        setSelectedVariationIndex(0)
+      } else {
+        setMermaidCode(data.mermaid_code || '')
+        setVariations([])
+        setSelectedVariationIndex(null)
+      }
+      
       setIsEditing(true) // After first generation, subsequent calls will be edits
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred')
@@ -54,8 +69,26 @@ export default function DiagramGenerator() {
     }
   }
 
+  const handleSelectVariation = (index: number) => {
+    if (variations[index]) {
+      setMermaidCode(variations[index])
+      setSelectedVariationIndex(index)
+    }
+  }
+
+  const handleConfirmSelection = () => {
+    // When user confirms selection, clear variations and keep only the selected one
+    if (selectedVariationIndex !== null && variations[selectedVariationIndex]) {
+      setMermaidCode(variations[selectedVariationIndex])
+      setVariations([])
+      setSelectedVariationIndex(null)
+    }
+  }
+
   const handleNew = () => {
     setMermaidCode('')
+    setVariations([])
+    setSelectedVariationIndex(null)
     setIsEditing(false)
     setError('')
   }
@@ -89,6 +122,10 @@ export default function DiagramGenerator() {
             <DiagramDisplay 
               mermaidCode={mermaidCode} 
               isLoading={isLoading}
+              variations={variations}
+              selectedVariationIndex={selectedVariationIndex}
+              onSelectVariation={handleSelectVariation}
+              onConfirmSelection={handleConfirmSelection}
             />
           </div>
         </div>

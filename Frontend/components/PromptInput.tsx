@@ -3,7 +3,7 @@
 import { useState, FormEvent } from 'react'
 
 interface PromptInputProps {
-  onGenerate: (prompt: string) => void
+  onGenerate: (prompt: string, numVariations: number) => void
   onNew: () => void
   isLoading: boolean
   error: string
@@ -19,10 +19,12 @@ const EXAMPLE_PROMPTS = [
 
 export default function PromptInput({ onGenerate, onNew, isLoading, error, hasExistingDiagram }: PromptInputProps) {
   const [prompt, setPrompt] = useState('')
+  const [generateMany, setGenerateMany] = useState(false)
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    onGenerate(prompt)
+    const numVariations = generateMany ? 3 : 1
+    onGenerate(prompt, numVariations)
   }
 
   const handleExampleClick = (example: string) => {
@@ -41,15 +43,39 @@ export default function PromptInput({ onGenerate, onNew, isLoading, error, hasEx
           <label htmlFor="prompt" className="block text-sm font-semibold text-gray-900">
             {hasExistingDiagram ? 'Edit your diagram' : 'Enter your prompt'}
           </label>
-          {hasExistingDiagram && (
-            <button
-              onClick={handleNewClick}
-              disabled={isLoading}
-              className="text-xs font-medium text-primary-600 hover:text-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              New Diagram
-            </button>
-          )}
+          <div className="flex items-center gap-3">
+            {!hasExistingDiagram && (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-600">One</span>
+                <button
+                  type="button"
+                  onClick={() => setGenerateMany(!generateMany)}
+                  disabled={isLoading}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+                    generateMany ? 'bg-primary-600' : 'bg-gray-300'
+                  }`}
+                  role="switch"
+                  aria-checked={generateMany}
+                >
+                  <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                      generateMany ? 'translate-x-6' : 'translate-x-1'
+                    }`}
+                  />
+                </button>
+                <span className="text-xs text-gray-600">Many (3)</span>
+              </div>
+            )}
+            {hasExistingDiagram && (
+              <button
+                onClick={handleNewClick}
+                disabled={isLoading}
+                className="text-xs font-medium text-primary-600 hover:text-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                New Diagram
+              </button>
+            )}
+          </div>
         </div>
         {hasExistingDiagram && (
           <div className="mb-3 p-2 bg-blue-50 border border-blue-200 rounded-lg">
