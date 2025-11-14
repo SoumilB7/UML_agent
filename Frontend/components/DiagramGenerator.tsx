@@ -1,12 +1,23 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import PromptInput from './PromptInput'
 import DiagramDisplay from './DiagramDisplay'
+import { 
+  trackNewButton, 
+  trackTabAway, 
+  trackDiagramGenerated, 
+  trackDiagramEdited 
+} from '@/utils/rlTracking'
 
 const GENERATE_API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 const EDIT_API_URL = `${GENERATE_API_URL}/diagram/edit`
 const GENERATE_URL = `${GENERATE_API_URL}/diagram/generate`
+
+// Generate a unique diagram ID
+function generateDiagramId(): string {
+  return `diagram-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+}
 
 export default function DiagramGenerator() {
   const [mermaidCode, setMermaidCode] = useState<string>('')
@@ -15,6 +26,9 @@ export default function DiagramGenerator() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string>('')
   const [isEditing, setIsEditing] = useState(false)
+  const [diagramId, setDiagramId] = useState<string>(generateDiagramId())
+  const [currentPrompt, setCurrentPrompt] = useState<string>('')
+  const previousMermaidCodeRef = useRef<string>('')
 
   const handleGenerate = async (prompt: string, numVariations: number = 1) => {
     if (!prompt.trim()) {
@@ -26,11 +40,17 @@ export default function DiagramGenerator() {
     setError('')
     setVariations([])
     setSelectedVariationIndex(null)
+    
+    // Store previous mermaid code for tracking
+    previousMermaidCodeRef.current = mermaidCode
+    const isEdit = mermaidCode && isEditing
+    const previousPrompt = currentPrompt
+    setCurrentPrompt(prompt)
 
     try {
       // If we have existing code, use edit endpoint, otherwise use generate
-      const url = mermaidCode && isEditing ? EDIT_API_URL : GENERATE_URL
-      const body = mermaidCode && isEditing
+      const url = isEdit ? EDIT_API_URL : GENERATE_URL
+      const body = isEdit
         ? { prompt, existing_mermaid_code: mermaidCode }
         : { prompt, num_variations: numVariations }
 
@@ -50,14 +70,24 @@ export default function DiagramGenerator() {
       const data = await response.json()
       
       // Handle multiple variations
+      let newMermaidCode: string
       if (data.variations && data.variations.length > 1) {
         setVariations(data.variations)
-        setMermaidCode(data.variations[0]) // Show first variation by default
+        newMermaidCode = data.variations[0] // Show first variation by default
+        setMermaidCode(newMermaidCode)
         setSelectedVariationIndex(0)
       } else {
-        setMermaidCode(data.mermaid_code || '')
+        newMermaidCode = data.mermaid_code || ''
+        setMermaidCode(newMermaidCode)
         setVariations([])
         setSelectedVariationIndex(null)
+      }
+      
+      // Track the action
+      if (isEdit) {
+        trackDiagramEdited(prompt, newMermaidCode, diagramId, previousMermaidCodeRef.current)
+      } else {
+        trackDiagramGenerated(prompt, newMermaidCode, diagramId, numVariations)
       }
       
       setIsEditing(true) // After first generation, subsequent calls will be edits
@@ -86,12 +116,35 @@ export default function DiagramGenerator() {
   }
 
   const handleNew = () => {
+    // Track new button click
+    trackNewButton(diagramId, mermaidCode)
+    
+    // Generate new diagram ID for new session
+    setDiagramId(generateDiagramId())
     setMermaidCode('')
     setVariations([])
     setSelectedVariationIndex(null)
     setIsEditing(false)
     setError('')
+    setCurrentPrompt('')
+    previousMermaidCodeRef.current = ''
   }
+  
+  // Track tab visibility changes (when user clicks away)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden && mermaidCode) {
+        // User clicked away from tab
+        trackTabAway(diagramId, mermaidCode)
+      }
+    }
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
+  }, [diagramId, mermaidCode])
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -114,6 +167,7 @@ export default function DiagramGenerator() {
               isLoading={isLoading}
               error={error}
               hasExistingDiagram={!!mermaidCode && isEditing}
+              diagramId={diagramId}
             />
           </div>
 
@@ -126,6 +180,7 @@ export default function DiagramGenerator() {
               selectedVariationIndex={selectedVariationIndex}
               onSelectVariation={handleSelectVariation}
               onConfirmSelection={handleConfirmSelection}
+              diagramId={diagramId}
             />
           </div>
         </div>

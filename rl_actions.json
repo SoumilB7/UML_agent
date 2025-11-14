@@ -1,0 +1,339 @@
+[
+  {
+    "action_id": "1b7be86d-9fb5-48a6-9498-9756fa18cb3d",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:57:50.446Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : launch\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Cruise --> EmergencyLanding : emergencyDetected\n  Landing --> [*]\n  EmergencyLanding --> [*]\n}\n\nFlightModes --> [*] : missionComplete\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "44958f3f-7532-4e93-bf6f-e33d95ea6caa",
+    "action_type": "variation_selection",
+    "timestamp": "2025-11-14T18:58:03.829Z",
+    "metadata": {},
+    "variation_index": 1,
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "bb11ea8b-fbd4-4c1c-94cb-d0b2c99ced78",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:58:04.178Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "a9c5be50-781d-4d30-8c72-d01796db0813",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:58:22.701Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "b43543dd-1931-4f1b-81b0-908152f67b5f",
+    "action_type": "mermaid_copy",
+    "timestamp": "2025-11-14T18:58:28.403Z",
+    "metadata": {},
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "182e3a94-eb1f-4e7e-bd62-3f73b6ce6811",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:58:29.695Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "99b8bef3-d913-44a2-b4e3-12df207b9d1a",
+    "action_type": "image_copy",
+    "timestamp": "2025-11-14T18:58:33.324Z",
+    "metadata": {},
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "59bcf658-ab75-4a47-8011-db3b72844a09",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:58:34.897Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "2682b4ad-1661-4b1b-b923-08e64d0e7bc6",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:59:02.139Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "fd9f9b10-7aff-4a89-a26a-6044e889c942",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:59:15.551Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "36df747e-a4a4-4bb3-8146-e80ad731fb12",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:59:20.609Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "3111a6e6-6b88-46f8-b4d8-87dd2fce4eea",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:59:18.156Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "e9d1e61f-dbc2-4529-91d4-98271c06b4f1",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:59:07.572Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Takeoff --> Cruise : reachedAltitude\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "84fb6ff1-977d-4c1d-a970-c1da28a87377",
+    "action_type": "diagram_edited",
+    "timestamp": "2025-11-14T18:59:22.582Z",
+    "metadata": {
+      "had_previous_diagram": true
+    },
+    "prompt": "add a 'tilt' stage between takeoff and cruise",
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n    Tilt\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission\nTakeoff --> Tilt : reachedAltitude\nTilt --> Cruise",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "d0dd3d09-b789-4b83-ac75-9e99cc98ee93",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:59:23.596Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n    Tilt\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission\nTakeoff --> Tilt : reachedAltitude\nTilt --> Cruise",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "945b05a7-ce80-4156-ad67-4edb372e2f9c",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:59:37.066Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n    Tilt\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission\nTakeoff --> Tilt : reachedAltitude\nTilt --> Cruise",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "e71cc128-f8d7-43ec-b47a-8b6293cbafad",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:59:40.031Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n    Tilt\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission\nTakeoff --> Tilt : reachedAltitude\nTilt --> Cruise",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "f7731bda-ed13-4ae7-8277-bb55105d66ab",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T18:59:49.922Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n    Tilt\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission\nTakeoff --> Tilt : reachedAltitude\nTilt --> Cruise",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "af91348b-9acd-4f46-9394-bce597857549",
+    "action_type": "prompt_update",
+    "timestamp": "2025-11-14T19:02:13.237Z",
+    "metadata": {},
+    "prompt": "Autonomous Drone Mission State Diagram\n\nCreate a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.",
+    "previous_prompt": "a",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "2435edf4-3444-461a-8ae5-aec47f72e9c6",
+    "action_type": "new_button",
+    "timestamp": "2025-11-14T19:02:17.810Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Takeoff\n  Cruise --> Landing : beginDescent\n  Landing --> FinalA : landCompleteA\n  Landing --> FinalB : landCompleteB\n  Landing --> FinalC : landCompleteC\n  FinalA --> [*]\n  FinalB --> [*]\n  FinalC --> [*]\n    Tilt\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission\nTakeoff --> Tilt : reachedAltitude\nTilt --> Cruise",
+    "diagram_id": "diagram-1763146608576-j4jvb1vq2"
+  },
+  {
+    "action_id": "06905a70-5fac-4dcb-be43-031aa65e5e93",
+    "action_type": "diagram_generated",
+    "timestamp": "2025-11-14T19:02:44.176Z",
+    "metadata": {
+      "num_variations": 3
+    },
+    "prompt": "Autonomous Drone Mission State Diagram\n\nCreate a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.",
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Hover\n  Hover --> Cruise : beginCruise\n  Cruise --> ReturnHome : rthCommand\n  Cruise --> Hover : hold\n  ReturnHome --> Hover : resume\n  Hover --> FinalHover : missionComplete\n  Hover --> FinalCruise : missionComplete\n  Hover --> FinalReturn : missionComplete\n  FinalHover --> [*]\n  FinalCruise --> [*]\n  FinalReturn --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFault\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146937810-fryaltq1i"
+  },
+  {
+    "action_id": "4cafea15-f587-409e-a9d5-3f0e09be11e9",
+    "action_type": "variation_selection",
+    "timestamp": "2025-11-14T19:02:49.071Z",
+    "metadata": {},
+    "variation_index": 1,
+    "all_variations": [
+      "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlight --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Hover\n  Hover --> Cruise : beginCruise\n  Cruise --> ReturnHome : rthCommand\n  Cruise --> Hover : hold\n  ReturnHome --> Hover : resume\n  Hover --> FinalHover : missionComplete\n  Hover --> FinalCruise : missionComplete\n  Hover --> FinalReturn : missionComplete\n  FinalHover --> [*]\n  FinalCruise --> [*]\n  FinalReturn --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFault\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+      "stateDiagram-v2\n[*] --> ParallelStartup\n\nstate ParallelStartup {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsLocked\n\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nParallelStartup --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n\n  Cruise --> Hover : eventComplete\n  Cruise --> ReturnToBase : eventComplete\n  Cruise --> Patrol : eventComplete\n\n  Hover --> [*]\n  ReturnToBase --> [*]\n  Patrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\n\nEmergencyLanding --> FlightModes : recoverAttempt\nEmergencyLanding --> [*] : abortMission",
+      "stateDiagram-v2\n[*] --> ParallelInit\n\nstate ParallelInit {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nParallelInit --> FlightModes : initComplete\n\nstate FlightModes {\n  [*] --> Cruise\n\n  Cruise --> Hover : switchToHover\n  Cruise --> ReturnHome : switchToReturn\n  Cruise --> Patrol : switchToPatrol\n\n  Hover --> FinalHover : hoverComplete\n  ReturnHome --> FinalReturn : returnComplete\n  Patrol --> FinalPatrol : patrolComplete\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFault\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission"
+    ],
+    "mermaid_code": "stateDiagram-v2\n[*] --> ParallelStartup\n\nstate ParallelStartup {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsLocked\n\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nParallelStartup --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n\n  Cruise --> Hover : eventComplete\n  Cruise --> ReturnToBase : eventComplete\n  Cruise --> Patrol : eventComplete\n\n  Hover --> [*]\n  ReturnToBase --> [*]\n  Patrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\n\nEmergencyLanding --> FlightModes : recoverAttempt\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146937810-fryaltq1i"
+  },
+  {
+    "action_id": "ada94240-2cd3-48cd-a534-36d7eda7d5e8",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T19:02:50.124Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> ParallelStartup\n\nstate ParallelStartup {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsLocked\n\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nParallelStartup --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n\n  Cruise --> Hover : eventComplete\n  Cruise --> ReturnToBase : eventComplete\n  Cruise --> Patrol : eventComplete\n\n  Hover --> [*]\n  ReturnToBase --> [*]\n  Patrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\n\nEmergencyLanding --> FlightModes : recoverAttempt\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146937810-fryaltq1i"
+  },
+  {
+    "action_id": "59c5e156-4e36-45c9-9df2-a5772f2f367e",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T19:03:13.842Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> ParallelStartup\n\nstate ParallelStartup {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsLocked\n\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nParallelStartup --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n\n  Cruise --> Hover : eventComplete\n  Cruise --> ReturnToBase : eventComplete\n  Cruise --> Patrol : eventComplete\n\n  Hover --> [*]\n  ReturnToBase --> [*]\n  Patrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\n\nEmergencyLanding --> FlightModes : recoverAttempt\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146937810-fryaltq1i"
+  },
+  {
+    "action_id": "a0576ac2-707a-4ffd-b310-ae0f288a6804",
+    "action_type": "new_button",
+    "timestamp": "2025-11-14T19:03:23.304Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> ParallelStartup\n\nstate ParallelStartup {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsLocked\n\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nParallelStartup --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n\n  Cruise --> Hover : eventComplete\n  Cruise --> ReturnToBase : eventComplete\n  Cruise --> Patrol : eventComplete\n\n  Hover --> [*]\n  ReturnToBase --> [*]\n  Patrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\n\nEmergencyLanding --> FlightModes : recoverAttempt\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763146937810-fryaltq1i"
+  },
+  {
+    "action_id": "9ec9ae63-a958-4a6f-b2e1-7e1b9ced55b8",
+    "action_type": "diagram_generated",
+    "timestamp": "2025-11-14T19:03:47.392Z",
+    "metadata": {
+      "num_variations": 3
+    },
+    "prompt": "I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:\n1. The new compliance requirements proposed by the regulator\n2. Gap analysis with my existing compliance setup\n3. The impact of these new compliance requirements on my organization at an IT and operational level",
+    "mermaid_code": "flowchart TB\nsubgraph \"User Organization\"\n  ActorUser[actor ComplianceOfficer]\nend\n\nsubgraph \"Compliance Monitoring System\"\n  direction TB\n  (Ingest SEBI Circulars)\n  (Parse Circulars to Clauses)\n  (Identify New Compliance Requirements)\n  (Map Clauses to Existing Controls)\n  (Perform Gap Analysis)\n  (Assess IT Impact)\n  (Assess Operational Impact)\n  (Generate Compliance Impact Report)\nend\n\nActorUser --> (Ingest SEBI Circulars)\n(Ingest SEBI Circulars) --> (Parse Circulars to Clauses)\n(Parse Circulars to Clauses) --> (Identify New Compliance Requirements)\n(Identify New Compliance Requirements) --> (Map Clauses to Existing Controls)\n(Map Clauses to Existing Controls) --> (Perform Gap Analysis)\n(Perform Gap Analysis) --> (Assess IT Impact)\n(Perform Gap Analysis) --> (Assess Operational Impact)\n(Assess IT Impact) --> (Generate Compliance Impact Report)\n(Assess Operational Impact) --> (Generate Compliance Impact Report)",
+    "diagram_id": "diagram-1763147003306-q8vb6lj9r"
+  },
+  {
+    "action_id": "35107d53-7bcf-4315-b9dc-031431e05017",
+    "action_type": "variation_selection",
+    "timestamp": "2025-11-14T19:03:53.344Z",
+    "metadata": {},
+    "variation_index": 1,
+    "all_variations": [
+      "flowchart TB\nsubgraph \"User Organization\"\n  ActorUser[actor ComplianceOfficer]\nend\n\nsubgraph \"Compliance Monitoring System\"\n  direction TB\n  (Ingest SEBI Circulars)\n  (Parse Circulars to Clauses)\n  (Identify New Compliance Requirements)\n  (Map Clauses to Existing Controls)\n  (Perform Gap Analysis)\n  (Assess IT Impact)\n  (Assess Operational Impact)\n  (Generate Compliance Impact Report)\nend\n\nActorUser --> (Ingest SEBI Circulars)\n(Ingest SEBI Circulars) --> (Parse Circulars to Clauses)\n(Parse Circulars to Clauses) --> (Identify New Compliance Requirements)\n(Identify New Compliance Requirements) --> (Map Clauses to Existing Controls)\n(Map Clauses to Existing Controls) --> (Perform Gap Analysis)\n(Perform Gap Analysis) --> (Assess IT Impact)\n(Perform Gap Analysis) --> (Assess Operational Impact)\n(Assess IT Impact) --> (Generate Compliance Impact Report)\n(Assess Operational Impact) --> (Generate Compliance Impact Report)",
+      "sequenceDiagram\nparticipant SEBI\nparticipant Ingestion\nparticipant Parser\nparticipant \"Clause Store\"\nparticipant Analyzer\nparticipant \"Existing Controls DB\"\nparticipant \"Impact Engine\"\nparticipant \"Compliance Team\"\n\nSEBI-->>Ingestion: Publish new circular\nIngestion->>Ingestion: Detect & download circular\nIngestion->>Parser: send(rawCircular)\nactivate Parser\nParser->>Parser: Extract sections and clauses\nParser->>\"Clause Store\": save(parsedClauses)\ndeactivate Parser\n\n\"Compliance Team\"->>Analyzer: configure(scope, mappings)\nAnalyzer->>\"Clause Store\": fetch(parsedClauses)\nAnalyzer->>\"Existing Controls DB\": fetch(currentControls)\nAnalyzer->>Analyzer: Map clauses to control framework\n\nAnalyzer->>\"Existing Controls DB\": compare(clauses, controls)\nAnalyzer-->>\"Compliance Team\": 1) New requirements list\n\nAnalyzer->>Analyzer: Identify missing/weak controls\nAnalyzer-->>\"Compliance Team\": 2) Gap analysis report\n\nAnalyzer->>\"Impact Engine\": send(newRequirements, gaps)\nactivate \"Impact Engine\"\n\"Impact Engine\"->>\"Impact Engine\": Assess IT impact\\n(systems, data, integrations)\n\"Impact Engine\"->>\"Impact Engine\": Assess operational impact\\n(process, people, reporting)\n\"Impact Engine\"-->>\"Compliance Team\": 3) IT & operational impact assessment\ndeactivate \"Impact Engine\"",
+      "flowchart TB\nsubgraph \"User Organization\"\n  ActorCompliance[actor ComplianceOfficer]\n  ActorIT[actor ITOwner]\n  ActorOps[actor OperationsLead]\nend\nsubgraph \"Compliance Monitoring System\"\n  (Ingest SEBI Circulars)\n  (Parse & Structure Clauses)\n  (Identify New Requirements)\n  (Map to Existing Controls)\n  (Gap Analysis Report)\n  (IT Impact Assessment)\n  (Operational Impact Assessment)\n  (Consolidated Impact Report)\nend\nActorCompliance --> (Ingest SEBI Circulars)\n(Ingest SEBI Circulars) --> (Parse & Structure Clauses)\n(Parse & Structure Clauses) --> (Identify New Requirements)\n(Identify New Requirements) --> (Map to Existing Controls)\n(Map to Existing Controls) --> (Gap Analysis Report)\n(Gap Analysis Report) --> (IT Impact Assessment)\n(Gap Analysis Report) --> (Operational Impact Assessment)\n(IT Impact Assessment) --> (Consolidated Impact Report)\n(Operational Impact Assessment) --> (Consolidated Impact Report)\nActorCompliance --> (Consolidated Impact Report)\nActorIT --> (IT Impact Assessment)\nActorOps --> (Operational Impact Assessment)"
+    ],
+    "mermaid_code": "sequenceDiagram\nparticipant SEBI\nparticipant Ingestion\nparticipant Parser\nparticipant \"Clause Store\"\nparticipant Analyzer\nparticipant \"Existing Controls DB\"\nparticipant \"Impact Engine\"\nparticipant \"Compliance Team\"\n\nSEBI-->>Ingestion: Publish new circular\nIngestion->>Ingestion: Detect & download circular\nIngestion->>Parser: send(rawCircular)\nactivate Parser\nParser->>Parser: Extract sections and clauses\nParser->>\"Clause Store\": save(parsedClauses)\ndeactivate Parser\n\n\"Compliance Team\"->>Analyzer: configure(scope, mappings)\nAnalyzer->>\"Clause Store\": fetch(parsedClauses)\nAnalyzer->>\"Existing Controls DB\": fetch(currentControls)\nAnalyzer->>Analyzer: Map clauses to control framework\n\nAnalyzer->>\"Existing Controls DB\": compare(clauses, controls)\nAnalyzer-->>\"Compliance Team\": 1) New requirements list\n\nAnalyzer->>Analyzer: Identify missing/weak controls\nAnalyzer-->>\"Compliance Team\": 2) Gap analysis report\n\nAnalyzer->>\"Impact Engine\": send(newRequirements, gaps)\nactivate \"Impact Engine\"\n\"Impact Engine\"->>\"Impact Engine\": Assess IT impact\\n(systems, data, integrations)\n\"Impact Engine\"->>\"Impact Engine\": Assess operational impact\\n(process, people, reporting)\n\"Impact Engine\"-->>\"Compliance Team\": 3) IT & operational impact assessment\ndeactivate \"Impact Engine\"",
+    "diagram_id": "diagram-1763147003306-q8vb6lj9r"
+  },
+  {
+    "action_id": "f553d682-eedd-4234-991c-ad043d118896",
+    "action_type": "variation_selection",
+    "timestamp": "2025-11-14T19:03:54.804Z",
+    "metadata": {},
+    "variation_index": 0,
+    "all_variations": [
+      "flowchart TB\nsubgraph \"User Organization\"\n  ActorUser[actor ComplianceOfficer]\nend\n\nsubgraph \"Compliance Monitoring System\"\n  direction TB\n  (Ingest SEBI Circulars)\n  (Parse Circulars to Clauses)\n  (Identify New Compliance Requirements)\n  (Map Clauses to Existing Controls)\n  (Perform Gap Analysis)\n  (Assess IT Impact)\n  (Assess Operational Impact)\n  (Generate Compliance Impact Report)\nend\n\nActorUser --> (Ingest SEBI Circulars)\n(Ingest SEBI Circulars) --> (Parse Circulars to Clauses)\n(Parse Circulars to Clauses) --> (Identify New Compliance Requirements)\n(Identify New Compliance Requirements) --> (Map Clauses to Existing Controls)\n(Map Clauses to Existing Controls) --> (Perform Gap Analysis)\n(Perform Gap Analysis) --> (Assess IT Impact)\n(Perform Gap Analysis) --> (Assess Operational Impact)\n(Assess IT Impact) --> (Generate Compliance Impact Report)\n(Assess Operational Impact) --> (Generate Compliance Impact Report)",
+      "sequenceDiagram\nparticipant SEBI\nparticipant Ingestion\nparticipant Parser\nparticipant \"Clause Store\"\nparticipant Analyzer\nparticipant \"Existing Controls DB\"\nparticipant \"Impact Engine\"\nparticipant \"Compliance Team\"\n\nSEBI-->>Ingestion: Publish new circular\nIngestion->>Ingestion: Detect & download circular\nIngestion->>Parser: send(rawCircular)\nactivate Parser\nParser->>Parser: Extract sections and clauses\nParser->>\"Clause Store\": save(parsedClauses)\ndeactivate Parser\n\n\"Compliance Team\"->>Analyzer: configure(scope, mappings)\nAnalyzer->>\"Clause Store\": fetch(parsedClauses)\nAnalyzer->>\"Existing Controls DB\": fetch(currentControls)\nAnalyzer->>Analyzer: Map clauses to control framework\n\nAnalyzer->>\"Existing Controls DB\": compare(clauses, controls)\nAnalyzer-->>\"Compliance Team\": 1) New requirements list\n\nAnalyzer->>Analyzer: Identify missing/weak controls\nAnalyzer-->>\"Compliance Team\": 2) Gap analysis report\n\nAnalyzer->>\"Impact Engine\": send(newRequirements, gaps)\nactivate \"Impact Engine\"\n\"Impact Engine\"->>\"Impact Engine\": Assess IT impact\\n(systems, data, integrations)\n\"Impact Engine\"->>\"Impact Engine\": Assess operational impact\\n(process, people, reporting)\n\"Impact Engine\"-->>\"Compliance Team\": 3) IT & operational impact assessment\ndeactivate \"Impact Engine\"",
+      "flowchart TB\nsubgraph \"User Organization\"\n  ActorCompliance[actor ComplianceOfficer]\n  ActorIT[actor ITOwner]\n  ActorOps[actor OperationsLead]\nend\nsubgraph \"Compliance Monitoring System\"\n  (Ingest SEBI Circulars)\n  (Parse & Structure Clauses)\n  (Identify New Requirements)\n  (Map to Existing Controls)\n  (Gap Analysis Report)\n  (IT Impact Assessment)\n  (Operational Impact Assessment)\n  (Consolidated Impact Report)\nend\nActorCompliance --> (Ingest SEBI Circulars)\n(Ingest SEBI Circulars) --> (Parse & Structure Clauses)\n(Parse & Structure Clauses) --> (Identify New Requirements)\n(Identify New Requirements) --> (Map to Existing Controls)\n(Map to Existing Controls) --> (Gap Analysis Report)\n(Gap Analysis Report) --> (IT Impact Assessment)\n(Gap Analysis Report) --> (Operational Impact Assessment)\n(IT Impact Assessment) --> (Consolidated Impact Report)\n(Operational Impact Assessment) --> (Consolidated Impact Report)\nActorCompliance --> (Consolidated Impact Report)\nActorIT --> (IT Impact Assessment)\nActorOps --> (Operational Impact Assessment)"
+    ],
+    "mermaid_code": "flowchart TB\nsubgraph \"User Organization\"\n  ActorUser[actor ComplianceOfficer]\nend\n\nsubgraph \"Compliance Monitoring System\"\n  direction TB\n  (Ingest SEBI Circulars)\n  (Parse Circulars to Clauses)\n  (Identify New Compliance Requirements)\n  (Map Clauses to Existing Controls)\n  (Perform Gap Analysis)\n  (Assess IT Impact)\n  (Assess Operational Impact)\n  (Generate Compliance Impact Report)\nend\n\nActorUser --> (Ingest SEBI Circulars)\n(Ingest SEBI Circulars) --> (Parse Circulars to Clauses)\n(Parse Circulars to Clauses) --> (Identify New Compliance Requirements)\n(Identify New Compliance Requirements) --> (Map Clauses to Existing Controls)\n(Map Clauses to Existing Controls) --> (Perform Gap Analysis)\n(Perform Gap Analysis) --> (Assess IT Impact)\n(Perform Gap Analysis) --> (Assess Operational Impact)\n(Assess IT Impact) --> (Generate Compliance Impact Report)\n(Assess Operational Impact) --> (Generate Compliance Impact Report)",
+    "diagram_id": "diagram-1763147003306-q8vb6lj9r"
+  },
+  {
+    "action_id": "00dba9c9-3c64-4a58-b4ab-bcc536b89be4",
+    "action_type": "mermaid_copy",
+    "timestamp": "2025-11-14T19:03:58.162Z",
+    "metadata": {},
+    "mermaid_code": "flowchart TB\nsubgraph \"User Organization\"\n  ActorUser[actor ComplianceOfficer]\nend\n\nsubgraph \"Compliance Monitoring System\"\n  direction TB\n  (Ingest SEBI Circulars)\n  (Parse Circulars to Clauses)\n  (Identify New Compliance Requirements)\n  (Map Clauses to Existing Controls)\n  (Perform Gap Analysis)\n  (Assess IT Impact)\n  (Assess Operational Impact)\n  (Generate Compliance Impact Report)\nend\n\nActorUser --> (Ingest SEBI Circulars)\n(Ingest SEBI Circulars) --> (Parse Circulars to Clauses)\n(Parse Circulars to Clauses) --> (Identify New Compliance Requirements)\n(Identify New Compliance Requirements) --> (Map Clauses to Existing Controls)\n(Map Clauses to Existing Controls) --> (Perform Gap Analysis)\n(Perform Gap Analysis) --> (Assess IT Impact)\n(Perform Gap Analysis) --> (Assess Operational Impact)\n(Assess IT Impact) --> (Generate Compliance Impact Report)\n(Assess Operational Impact) --> (Generate Compliance Impact Report)",
+    "diagram_id": "diagram-1763147003306-q8vb6lj9r"
+  },
+  {
+    "action_id": "6a576c82-742f-4ba5-a149-dca803b3c500",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T19:04:02.582Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "flowchart TB\nsubgraph \"User Organization\"\n  ActorUser[actor ComplianceOfficer]\nend\n\nsubgraph \"Compliance Monitoring System\"\n  direction TB\n  (Ingest SEBI Circulars)\n  (Parse Circulars to Clauses)\n  (Identify New Compliance Requirements)\n  (Map Clauses to Existing Controls)\n  (Perform Gap Analysis)\n  (Assess IT Impact)\n  (Assess Operational Impact)\n  (Generate Compliance Impact Report)\nend\n\nActorUser --> (Ingest SEBI Circulars)\n(Ingest SEBI Circulars) --> (Parse Circulars to Clauses)\n(Parse Circulars to Clauses) --> (Identify New Compliance Requirements)\n(Identify New Compliance Requirements) --> (Map Clauses to Existing Controls)\n(Map Clauses to Existing Controls) --> (Perform Gap Analysis)\n(Perform Gap Analysis) --> (Assess IT Impact)\n(Perform Gap Analysis) --> (Assess Operational Impact)\n(Assess IT Impact) --> (Generate Compliance Impact Report)\n(Assess Operational Impact) --> (Generate Compliance Impact Report)",
+    "diagram_id": "diagram-1763147003306-q8vb6lj9r"
+  },
+  {
+    "action_id": "6bfa82c3-2ec0-4a24-bf23-dde4eaf5e9a3",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T19:04:24.942Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "flowchart TB\nsubgraph \"User Organization\"\n  ActorUser[actor ComplianceOfficer]\nend\n\nsubgraph \"Compliance Monitoring System\"\n  direction TB\n  (Ingest SEBI Circulars)\n  (Parse Circulars to Clauses)\n  (Identify New Compliance Requirements)\n  (Map Clauses to Existing Controls)\n  (Perform Gap Analysis)\n  (Assess IT Impact)\n  (Assess Operational Impact)\n  (Generate Compliance Impact Report)\nend\n\nActorUser --> (Ingest SEBI Circulars)\n(Ingest SEBI Circulars) --> (Parse Circulars to Clauses)\n(Parse Circulars to Clauses) --> (Identify New Compliance Requirements)\n(Identify New Compliance Requirements) --> (Map Clauses to Existing Controls)\n(Map Clauses to Existing Controls) --> (Perform Gap Analysis)\n(Perform Gap Analysis) --> (Assess IT Impact)\n(Perform Gap Analysis) --> (Assess Operational Impact)\n(Assess IT Impact) --> (Generate Compliance Impact Report)\n(Assess Operational Impact) --> (Generate Compliance Impact Report)",
+    "diagram_id": "diagram-1763147003306-q8vb6lj9r"
+  },
+  {
+    "action_id": "50f34358-58c9-40d6-8df2-e909edcbf77a",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T19:04:28.341Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "flowchart TB\nsubgraph \"User Organization\"\n  ActorUser[actor ComplianceOfficer]\nend\n\nsubgraph \"Compliance Monitoring System\"\n  direction TB\n  (Ingest SEBI Circulars)\n  (Parse Circulars to Clauses)\n  (Identify New Compliance Requirements)\n  (Map Clauses to Existing Controls)\n  (Perform Gap Analysis)\n  (Assess IT Impact)\n  (Assess Operational Impact)\n  (Generate Compliance Impact Report)\nend\n\nActorUser --> (Ingest SEBI Circulars)\n(Ingest SEBI Circulars) --> (Parse Circulars to Clauses)\n(Parse Circulars to Clauses) --> (Identify New Compliance Requirements)\n(Identify New Compliance Requirements) --> (Map Clauses to Existing Controls)\n(Map Clauses to Existing Controls) --> (Perform Gap Analysis)\n(Perform Gap Analysis) --> (Assess IT Impact)\n(Perform Gap Analysis) --> (Assess Operational Impact)\n(Assess IT Impact) --> (Generate Compliance Impact Report)\n(Assess Operational Impact) --> (Generate Compliance Impact Report)",
+    "diagram_id": "diagram-1763147003306-q8vb6lj9r"
+  },
+  {
+    "action_id": "17c25d03-63ee-4b3f-ae63-a5380b6a27f4",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-14T19:05:20.191Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "flowchart TB\nsubgraph \"User Organization\"\n  ActorUser[actor ComplianceOfficer]\nend\n\nsubgraph \"Compliance Monitoring System\"\n  direction TB\n  (Ingest SEBI Circulars)\n  (Parse Circulars to Clauses)\n  (Identify New Compliance Requirements)\n  (Map Clauses to Existing Controls)\n  (Perform Gap Analysis)\n  (Assess IT Impact)\n  (Assess Operational Impact)\n  (Generate Compliance Impact Report)\nend\n\nActorUser --> (Ingest SEBI Circulars)\n(Ingest SEBI Circulars) --> (Parse Circulars to Clauses)\n(Parse Circulars to Clauses) --> (Identify New Compliance Requirements)\n(Identify New Compliance Requirements) --> (Map Clauses to Existing Controls)\n(Map Clauses to Existing Controls) --> (Perform Gap Analysis)\n(Perform Gap Analysis) --> (Assess IT Impact)\n(Perform Gap Analysis) --> (Assess Operational Impact)\n(Assess IT Impact) --> (Generate Compliance Impact Report)\n(Assess Operational Impact) --> (Generate Compliance Impact Report)",
+    "diagram_id": "diagram-1763147003306-q8vb6lj9r"
+  }
+]

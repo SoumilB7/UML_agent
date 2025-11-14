@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react'
 import mermaid from 'mermaid'
+import { trackMermaidCopy, trackVariationSelection, trackImageCopy } from '@/utils/rlTracking'
+import FeedbackPanel from './FeedbackPanel'
 
 interface DiagramDisplayProps {
   mermaidCode: string
@@ -10,6 +12,7 @@ interface DiagramDisplayProps {
   selectedVariationIndex?: number | null
   onSelectVariation?: (index: number) => void
   onConfirmSelection?: () => void
+  diagramId?: string
 }
 
 interface VariationThumbnailProps {
@@ -17,9 +20,10 @@ interface VariationThumbnailProps {
   index: number
   isSelected: boolean
   onSelect: () => void
+  diagramId?: string
 }
 
-function VariationThumbnail({ mermaidCode, index, isSelected, onSelect }: VariationThumbnailProps) {
+function VariationThumbnail({ mermaidCode, index, isSelected, onSelect, diagramId }: VariationThumbnailProps & { diagramId?: string }) {
   const [thumbnailUrl, setThumbnailUrl] = useState<string>('')
   const [isRendering, setIsRendering] = useState(false)
   const [renderError, setRenderError] = useState(false)
@@ -166,14 +170,16 @@ export default function DiagramDisplay({
   variations = [],
   selectedVariationIndex = null,
   onSelectVariation,
-  onConfirmSelection
+  onConfirmSelection,
+  diagramId
 }: DiagramDisplayProps) {
   const svgRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const imageRef = useRef<HTMLImageElement>(null)
   const [imageUrl, setImageUrl] = useState<string>('')
   const [renderError, setRenderError] = useState<string>('')
-  const [diagramId] = useState(() => `mermaid-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`)
+  // Use diagramId from props, or generate a fallback if not provided
+  const effectiveDiagramId = diagramId || `mermaid-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
   
   // Zoom and pan state
   const [scale, setScale] = useState(1)
@@ -351,6 +357,8 @@ export default function DiagramDisplay({
       await navigator.clipboard.writeText(mermaidCode)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
+      // Track the action
+      trackMermaidCopy(effectiveDiagramId, mermaidCode)
     } catch (err) {
       console.error('Failed to copy code:', err)
       // Fallback for older browsers
@@ -364,12 +372,14 @@ export default function DiagramDisplay({
         document.execCommand('copy')
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
+        // Track the action
+        trackMermaidCopy(effectiveDiagramId, mermaidCode)
       } catch (fallbackErr) {
         console.error('Fallback copy failed:', fallbackErr)
       }
       document.body.removeChild(textArea)
     }
-  }, [mermaidCode])
+  }, [mermaidCode, diagramId])
 
   const hasMultipleVariations = variations && variations.length > 1
 
@@ -425,6 +435,7 @@ export default function DiagramDisplay({
             <a
               href={imageUrl}
               download="diagram.svg"
+              onClick={() => trackImageCopy(effectiveDiagramId, mermaidCode)}
               className="px-3 py-1.5 text-xs font-medium text-primary-700 bg-primary-50 hover:bg-primary-100 rounded-lg transition-colors"
             >
               Download SVG
@@ -443,7 +454,11 @@ export default function DiagramDisplay({
                 mermaidCode={variation}
                 index={index}
                 isSelected={selectedVariationIndex === index}
-                onSelect={() => onSelectVariation?.(index)}
+                onSelect={() => {
+                  onSelectVariation?.(index)
+                  trackVariationSelection(index, effectiveDiagramId, variation, variations)
+                }}
+                diagramId={effectiveDiagramId}
               />
             ))}
           </div>
@@ -556,6 +571,13 @@ export default function DiagramDisplay({
         )}
       </div>
       <div ref={svgRef} className="hidden"></div>
+      
+      {/* Feedback Panel - Show only when diagram is displayed */}
+      {mermaidCode && !hasMultipleVariations && !isLoading && (
+        <div className="mt-4">
+          <FeedbackPanel diagramId={effectiveDiagramId} mermaidCode={mermaidCode} />
+        </div>
+      )}
     </div>
   )
 }

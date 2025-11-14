@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from api import diagram
+from api import diagram, rl
 import os
 
 
@@ -37,3 +37,4 @@ async def root():
 
 
 app.include_router(diagram.router)
+app.include_router(rl.router)

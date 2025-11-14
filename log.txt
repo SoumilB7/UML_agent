@@ -1004,3 +1004,984 @@ Tilt --> Cruise
 Code Length: 702 characters
 ================================================================================
 
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:05:34
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+class diagram for student and teacher interaction on courses and assignments
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class Student
+Student : +id Integer
+Student : +name String
+Student : +email String
+Student : +enrollInCourse(course Course) void
+Student : +submitAssignment(assignment Assignment, content String) void
+
+class Teacher
+Teacher : +id Integer
+Teacher : +name String
+Teacher : +email String
+Teacher : +createCourse(title String) Course
+Teacher : +assignAssignment(course Course, assignment Assignment) void
+Teacher : +gradeSubmission(submission Submission, grade String) void
+
+class Course
+Course : +id Integer
+Course : +title String
+Course : +description String
+Course : +addStudent(student Student) void
+Course : +addAssignment(assignment Assignment) void
+
+class Assignment
+Assignment : +id Integer
+Assignment : +title String
+Assignment : +description String
+Assignment : +dueDate Date
+
+class Submission
+Submission : +id Integer
+Submission : +submittedAt DateTime
+Submission : +content String
+Submission : +grade String
+
+Student "1" --> "*" Submission : creates
+Student "1" --> ...
+
+Token Usage:
+  Prompt tokens: 1907
+  Completion tokens: 291
+  Total tokens: 2198
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:05:42
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+class diagram for student and teacher interaction on courses and assignments
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class Student
+Student : +id Integer
+Student : +name String
+Student : +email String
+Student : +enrollInCourse(course Course) void
+Student : +submitAssignment(assignment Assignment, content String) Submission
+
+class Teacher
+Teacher : +id Integer
+Teacher : +name String
+Teacher : +email String
+Teacher : +createCourse(title String) Course
+Teacher : +assignAssignment(course Course, assignment Assignment) void
+Teacher : +gradeSubmission(submission Submission, grade String) void
+
+class Course
+Course : +id Integer
+Course : +title String
+Course : +description String
+Course : +addStudent(student Student) void
+Course : +addAssignment(assignment Assignment) void
+
+class Assignment
+Assignment : +id Integer
+Assignment : +title String
+Assignment : +description String
+Assignment : +dueDate Date
+
+class Submission
+Submission : +id Integer
+Submission : +submittedAt DateTime
+Submission : +content String
+Submission : +grade String
+
+Student "1" --> "*" Submission : makes
+Student "1" ...
+
+Token Usage:
+  Prompt tokens: 1907
+  Completion tokens: 385
+  Total tokens: 2292
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:05:49
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+class diagram for student and teacher interaction on courses and assignments
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class Student
+Student : +id Integer
+Student : +name String
+Student : +email String
+Student : +enrollInCourse(course Course) void
+Student : +submitAssignment(assignment Assignment, content String) void
+
+class Teacher
+Teacher : +id Integer
+Teacher : +name String
+Teacher : +email String
+Teacher : +createCourse(title String) Course
+Teacher : +assignAssignment(course Course, assignment Assignment) void
+Teacher : +gradeSubmission(submission Submission, grade String) void
+
+class Course
+Course : +id Integer
+Course : +title String
+Course : +description String
+Course : +addStudent(student Student) void
+Course : +addAssignment(assignment Assignment) void
+
+class Assignment
+Assignment : +id Integer
+Assignment : +title String
+Assignment : +description String
+Assignment : +dueDate Date
+
+class Submission
+Submission : +id Integer
+Submission : +submittedAt DateTime
+Submission : +content String
+Submission : +grade String
+
+Student "1" --> "*" Submission : creates
+Student "1" --> ...
+
+Token Usage:
+  Prompt tokens: 1907
+  Completion tokens: 307
+  Total tokens: 2214
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:27:24
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : launch
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachedAltitude
+  Cruise --> Landing : beginDescent
+  Cruise --> EmergencyLanding : emergencyDetected
+  Landing --> [*]
+  EmergencyLanding --> [*]
+}
+
+FlightModes --> [*] : missionComplete
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : abortMission
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 155
+  Total tokens: 2137
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:27:31
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : startMission
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachedAltitude
+  Cruise --> Landing : beginDescent
+  Landing --> FinalA : landCompleteA
+  Landing --> FinalB : landCompleteB
+  Landing --> FinalC : landCompleteC
+  FinalA --> [*]
+  FinalB --> [*]
+  FinalC --> [*]
+}
+
+FlightModes --> EmergencyLanding : emergencyDetected
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : abortMission
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 184
+  Total tokens: 2166
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:27:38
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : startMission
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachedAltitude
+  Cruise --> Landing : beginDescent
+  Cruise --> FinalHover : holdPosition
+  Cruise --> FinalReturn : returnHome
+  Cruise --> FinalAbort : abortMission
+  FinalHover --> [*]
+  FinalReturn --> [*]
+  FinalAbort --> [*]
+}
+
+FlightModes --> EmergencyLanding : criticalFailure
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : shutdown
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 180
+  Total tokens: 2162
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:29:22
+Function: edit_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid diagram editor. Your task is to generate structured edit instructions for modifying existing Mermaid diagram code based on user instructions.
+
+CRITICAL: You must output ONLY a JSON object with edit instructions, NOT the complete updated code. The system will apply these edits automatically.
+
+Output Format (JSON only, no markdown, no code blocks):
+{
+  "edits": [
+    {
+      "type": "add_class|remove_class|modify_class|add_relationship|remove_relationship|modify_relationship|add_...
+
+Message 2 (user):
+Existing Mermaid diagram code:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : startMission
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachedAltitude
+  Cruise --> Landing : beginDescent
+  Landing --> FinalA : landCompleteA
+  Landing --> FinalB : landCompleteB
+  Landing --> FinalC : landCompleteC
+...
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+{
+  "edits": [
+    {
+      "type": "add_state",
+      "details": {
+        "name": "Tilt",
+        "parent": "FlightModes"
+      }
+    },
+    {
+      "type": "remove_transition",
+      "details": {
+        "from": "Takeoff",
+        "to": "Cruise"
+      }
+    },
+    {
+      "type": "add_transition",
+      "details": {
+        "from": "Takeoff",
+        "to": "Tilt",
+        "label": "reachedAltitude"
+      }
+    },
+    {
+      "type": "add_transition",
+      "details": {
+        "from": "Tilt",
+        "to": "Cruise"
+      }
+    }
+  ]
+}
+
+Token Usage:
+  Prompt tokens: 1864
+  Completion tokens: 165
+  Total tokens: 2029
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+Mermaid Code Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:29:22
+Function: edit_diagram_mermaid
+Code Type: post_edit
+Context: Edit request: add a 'tilt' stage between takeoff and cruise
+
+Mermaid Code:
+--------------------------------------------------------------------------------
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : startMission
+
+state FlightModes {
+  [*] --> Takeoff
+  Cruise --> Landing : beginDescent
+  Landing --> FinalA : landCompleteA
+  Landing --> FinalB : landCompleteB
+  Landing --> FinalC : landCompleteC
+  FinalA --> [*]
+  FinalB --> [*]
+  FinalC --> [*]
+    Tilt
+}
+
+FlightModes --> EmergencyLanding : emergencyDetected
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : abortMission
+Takeoff --> Tilt : reachedAltitude
+Tilt --> Cruise
+--------------------------------------------------------------------------------
+Code Length: 679 characters
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:32:36
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : startMission
+state FlightModes {
+  [*] --> Hover
+  Hover --> Cruise : beginCruise
+  Cruise --> ReturnHome : rthCommand
+  Cruise --> Hover : hold
+  ReturnHome --> Hover : resume
+  Hover --> FinalHover : missionComplete
+  Hover --> FinalCruise : missionComplete
+  Hover --> FinalReturn : missionComplete
+  FinalHover --> [*]
+  FinalCruise --> [*]
+  FinalReturn --> [*]
+}
+FlightModes --> EmergencyLanding : criticalFault
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : abortMission
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 198
+  Total tokens: 2180
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:32:40
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> ParallelStartup
+
+state ParallelStartup {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Calibrated : gpsLocked
+
+  Ready --> [*]
+  Calibrated --> [*]
+}
+
+ParallelStartup --> FlightModes : startMission
+
+state FlightModes {
+  [*] --> Cruise
+
+  Cruise --> Hover : eventComplete
+  Cruise --> ReturnToBase : eventComplete
+  Cruise --> Patrol : eventComplete
+
+  Hover --> [*]
+  ReturnToBase --> [*]
+  Patrol --> [*]
+}
+
+FlightModes --> EmergencyLanding : criticalFailure
+
+EmergencyLanding --> FlightModes : recoverAttempt
+EmergencyLanding --> [*] : abortMission
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 171
+  Total tokens: 2153
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:32:44
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> ParallelInit
+
+state ParallelInit {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Calibrated : gpsOk
+
+  Ready --> [*]
+  Calibrated --> [*]
+}
+
+ParallelInit --> FlightModes : initComplete
+
+state FlightModes {
+  [*] --> Cruise
+
+  Cruise --> Hover : switchToHover
+  Cruise --> ReturnHome : switchToReturn
+  Cruise --> Patrol : switchToPatrol
+
+  Hover --> FinalHover : hoverComplete
+  ReturnHome --> FinalReturn : returnComplete
+  Patrol --> FinalPatrol : patrolComplete
+
+  FinalHover --> [*]
+  FinalReturn --> [*]
+  FinalPatrol --> [*]
+}
+
+FlightModes --> EmergencyLanding : criticalFault
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : abortMission
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 204
+  Total tokens: 2186
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:33:35
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+subgraph "User Organization"
+  ActorUser[actor ComplianceOfficer]
+end
+
+subgraph "Compliance Monitoring System"
+  direction TB
+  (Ingest SEBI Circulars)
+  (Parse Circulars to Clauses)
+  (Identify New Compliance Requirements)
+  (Map Clauses to Existing Controls)
+  (Perform Gap Analysis)
+  (Assess IT Impact)
+  (Assess Operational Impact)
+  (Generate Compliance Impact Report)
+end
+
+ActorUser --> (Ingest SEBI Circulars)
+(Ingest SEBI Circulars) --> (Parse Circulars to Clauses)
+(Parse Circulars to Clauses) --> (Identify New Compliance Requirements)
+(Identify New Compliance Requirements) --> (Map Clauses to Existing Controls)
+(Map Clauses to Existing Controls) --> (Perform Gap Analysis)
+(Perform Gap Analysis) --> (Assess IT Impact)
+(Perform Gap Analysis) --> (Assess Operational Impact)
+(Assess IT Impact) --> (Generate Compliance Impact Report)
+(Assess Operational Impact) --> (Generate Compliance Impact Report)
+
+Token Usage:
+  Prompt tokens: 1977
+  Completion tokens: 216
+  Total tokens: 2193
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:33:41
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant SEBI
+participant Ingestion
+participant Parser
+participant "Clause Store"
+participant Analyzer
+participant "Existing Controls DB"
+participant "Impact Engine"
+participant "Compliance Team"
+
+SEBI-->>Ingestion: Publish new circular
+Ingestion->>Ingestion: Detect & download circular
+Ingestion->>Parser: send(rawCircular)
+activate Parser
+Parser->>Parser: Extract sections and clauses
+Parser->>"Clause Store": save(parsedClauses)
+deactivate Parser
+
+"Compliance Team"->>Analyzer: configure(scope, mappings)
+Analyzer->>"Clause Store": fetch(parsedClauses)
+Analyzer->>"Existing Controls DB": fetch(currentControls)
+Analyzer->>Analyzer: Map clauses to control framework
+
+Analyzer->>"Existing Controls DB": compare(clauses, controls)
+Analyzer-->>"Compliance Team": 1) New requirements list
+
+Analyzer->>Analyzer: Identify missing/weak controls
+Analyzer-->>"Compliance Team": 2) Gap analysis report
+
+Analyzer->>"Impact Engine": send(newRequirements, gaps)
+activate "Impact Engine"
+"Impa...
+
+Token Usage:
+  Prompt tokens: 1977
+  Completion tokens: 287
+  Total tokens: 2264
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:33:47
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+subgraph "User Organization"
+  ActorCompliance[actor ComplianceOfficer]
+  ActorIT[actor ITOwner]
+  ActorOps[actor OperationsLead]
+end
+subgraph "Compliance Monitoring System"
+  (Ingest SEBI Circulars)
+  (Parse & Structure Clauses)
+  (Identify New Requirements)
+  (Map to Existing Controls)
+  (Gap Analysis Report)
+  (IT Impact Assessment)
+  (Operational Impact Assessment)
+  (Consolidated Impact Report)
+end
+ActorCompliance --> (Ingest SEBI Circulars)
+(Ingest SEBI Circulars) --> (Parse & Structure Clauses)
+(Parse & Structure Clauses) --> (Identify New Requirements)
+(Identify New Requirements) --> (Map to Existing Controls)
+(Map to Existing Controls) --> (Gap Analysis Report)
+(Gap Analysis Report) --> (IT Impact Assessment)
+(Gap Analysis Report) --> (Operational Impact Assessment)
+(IT Impact Assessment) --> (Consolidated Impact Report)
+(Operational Impact Assessment) --> (Consolidated Impact Report)
+ActorCompliance --> (Consolidated Impact Report)
+ActorIT --> (IT Impact Assessme...
+
+Token Usage:
+  Prompt tokens: 1977
+  Completion tokens: 246
+  Total tokens: 2223
+
+Finish reason: stop
+
+================================================================================
+

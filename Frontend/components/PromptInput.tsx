@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useEffect, useRef } from 'react'
+import { trackPromptUpdate } from '@/utils/rlTracking'
 
 interface PromptInputProps {
   onGenerate: (prompt: string, numVariations: number) => void
@@ -8,6 +9,7 @@ interface PromptInputProps {
   isLoading: boolean
   error: string
   hasExistingDiagram: boolean
+  diagramId?: string
 }
 
 const EXAMPLE_PROMPTS = [
@@ -17,9 +19,22 @@ const EXAMPLE_PROMPTS = [
   'Create a class diagram for a banking system with Account, Transaction, and Customer classes',
 ]
 
-export default function PromptInput({ onGenerate, onNew, isLoading, error, hasExistingDiagram }: PromptInputProps) {
+export default function PromptInput({ onGenerate, onNew, isLoading, error, hasExistingDiagram, diagramId }: PromptInputProps) {
   const [prompt, setPrompt] = useState('')
   const [generateMany, setGenerateMany] = useState(false)
+  const previousPromptRef = useRef<string>('')
+  
+  // Track prompt changes when user types
+  useEffect(() => {
+    if (prompt && prompt !== previousPromptRef.current && previousPromptRef.current) {
+      // Only track if there's a previous prompt (user is editing)
+      // We'll track significant changes (more than just a few characters)
+      if (prompt.length > 10 && Math.abs(prompt.length - previousPromptRef.current.length) > 5) {
+        trackPromptUpdate(prompt, previousPromptRef.current, diagramId)
+      }
+    }
+    previousPromptRef.current = prompt
+  }, [prompt, diagramId])
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
