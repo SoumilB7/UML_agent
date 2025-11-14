@@ -8,6 +8,7 @@ import httpx
 
 from constants import OPENAI_MODEL_NAME, MERMAID_SYSTEM_PROMPT, MERMAID_EDIT_SYSTEM_PROMPT
 from openai import OpenAI
+from utils.logger import log_llm_call
 
 
 OPANAI_API_KEY = dotenv.get_key('.env', 'OPENAI_API_KEY')  # Ensure .env is loaded
@@ -195,15 +196,27 @@ def generate_diagram_mermaid(user_prompt: str) -> str:
 
         logger.info(f"Generating Mermaid UML diagram for prompt: {user_prompt[:100]}...")
 
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt}
+        ]
+        
         response = openai_client.chat.completions.create(
             model=OPENAI_MODEL_NAME,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt}
-            ],
+            messages=messages,
             temperature=0.3,
             top_p=0.7,
             stream=False,
+        )
+
+        # Log the LLM call
+        log_llm_call(
+            model=OPENAI_MODEL_NAME,
+            messages=messages,
+            response=response,
+            temperature=0.3,
+            top_p=0.7,
+            function_name="generate_diagram_mermaid"
         )
 
         raw_answer = response.choices[0].message.content.strip()
@@ -215,6 +228,18 @@ def generate_diagram_mermaid(user_prompt: str) -> str:
         return mermaid_code
 
     except Exception as e:
+        # Log the error
+        log_llm_call(
+            model=OPENAI_MODEL_NAME,
+            messages=[
+                {"role": "system", "content": MERMAID_SYSTEM_PROMPT},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0.3,
+            top_p=0.7,
+            error=str(e),
+            function_name="generate_diagram_mermaid"
+        )
         logger.error(f"Error while generating Mermaid diagram: {e}", exc_info=True)
         raise
 
@@ -246,15 +271,27 @@ Please update the diagram according to the user's request and return the complet
         logger.info(f"Editing Mermaid UML diagram. Edit request: {user_prompt[:100]}...")
         logger.debug(f"Existing code length: {len(existing_mermaid_code)} chars")
 
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_message}
+        ]
+
         response = openai_client.chat.completions.create(
             model=OPENAI_MODEL_NAME,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_message}
-            ],
+            messages=messages,
             temperature=0.3,
             top_p=0.7,
             stream=False,
+        )
+
+        # Log the LLM call
+        log_llm_call(
+            model=OPENAI_MODEL_NAME,
+            messages=messages,
+            response=response,
+            temperature=0.3,
+            top_p=0.7,
+            function_name="edit_diagram_mermaid"
         )
 
         raw_answer = response.choices[0].message.content.strip()
@@ -266,6 +303,18 @@ Please update the diagram according to the user's request and return the complet
         return updated_mermaid_code
 
     except Exception as e:
+        # Log the error
+        log_llm_call(
+            model=OPENAI_MODEL_NAME,
+            messages=[
+                {"role": "system", "content": MERMAID_EDIT_SYSTEM_PROMPT},
+                {"role": "user", "content": user_message if 'user_message' in locals() else f"Edit request: {user_prompt}"}
+            ],
+            temperature=0.3,
+            top_p=0.7,
+            error=str(e),
+            function_name="edit_diagram_mermaid"
+        )
         logger.error(f"Error while editing Mermaid diagram: {e}", exc_info=True)
         raise
 

@@ -1,97 +1,55 @@
 flowchart TD
-    subgraph SystemBoundary[Compliance Monitoring Solution]
+    Start([Start]) --> A[Fetch Latest SEBI Circulars]
+
+    subgraph IngestionParsing["Ingestion & Parsing"]
         direction TB
-
-        subgraph A[1. Ingestion & Parsing of SEBI Circulars]
-            A1[Fetch Latest SEBI Circulars
-(Scheduled/On-demand)]
-            A2[Classify Circular Type
-(e.g., Market Intermediary,
-Mutual Funds, Brokers)]
-            A3[Parse Circular Content
-(NLP / Rule-based Extraction)]
-            A4[Normalize & Store Clauses
-in Structured Repository]
-
-            A1 --> A2 --> A3 --> A4
-        end
-
-        subgraph B[2. New Compliance Requirement Extraction]
-            B1[Identify Regulatory Obligations
-from Parsed Clauses]
-            B2[Tag Clauses with Metadata
-(Area, Function, Risk, IT/Ops, Timeline)]
-            B3[Create Requirement Objects
-(Unique IDs, Versioning)]
-            B4[Store in Regulatory Requirement Catalog]
-
-            A4 --> B1 --> B2 --> B3 --> B4
-        end
-
-        subgraph C[3. Gap Analysis vs Existing Setup]
-            C1[Load Existing Compliance Controls
-(Policies, SOPs, IT Controls)]
-            C2[Map Requirements to Controls
-(Control Library Mapping)]
-            C3{Coverage Status?}
-            C4[Mark as Fully Covered]
-            C5[Mark as Partially Covered
-& Identify Control Gaps]
-            C6[Mark as Not Covered
-(New Control Needed)]
-            C7[Generate Gap Analysis Report
-(Per Requirement & Per Function)]
-
-            B4 --> C2
-            C1 --> C2
-            C2 --> C3
-            C3 -->|Yes, Fully| C4 --> C7
-            C3 -->|Partial| C5 --> C7
-            C3 -->|No| C6 --> C7
-        end
-
-        subgraph D[4. Impact Assessment
-(IT & Operational)]
-            D1[Classify Impact Type
-(IT Systems, Data, Processes,People, Vendors)]
-            D2[Identify Affected Assets
-(Applications, Databases,Interfaces, SOPs)]
-            D3[Assess Change Effort
-(Complexity, Cost, Timeline)]
-            D4[Assess Risk Impact
-(Compliance, Operational,Reputational)]
-            D5[Define Required Actions
-(IT Changes, Process Changes,Training, Vendor Updates)]
-            D6[Generate Impact Assessment
-& Implementation Roadmap]
-
-            C7 --> D1 --> D2 --> D3 --> D4 --> D5 --> D6
-        end
-
-        subgraph E[5. Output & Governance]
-            E1[Dashboards & Reports
-(New Requirements, Gaps, Impacts)]
-            E2[Task/Issue Creation
-(JIRA/ITSM/GRC Tool Integration)]
-            E3[Approval Workflow
-(Compliance, Risk, IT, Operations)]
-            E4[Evidence & Audit Trail
-(Decisions, Mappings, Changes)]
-
-            D6 --> E1 --> E2 --> E3 --> E4
-        end
+        A --> B[Download circular PDFs/HTML]
+        B --> C[Extract raw text<br />from documents]
+        C --> D[Normalize text<br />(cleaning, encoding)]
+        D --> E[Segment into sections<br />and clauses]
+        E --> F[Store structured clauses<br />in Clause Table]
     end
 
-    subgraph ExternalActors[Actors]
-        F1[Regulator: SEBI]
-        F2[Compliance Team]
-        F3[IT Team]
-        F4[Operations Team]
-        F5[Risk & Audit]
+    subgraph RequirementExtraction["1. Extract New Compliance Requirements"]
+        direction TB
+        F --> G[Identify regulatory intent<br />(NLP classification)]
+        G --> H[Detect new vs existing<br />requirements]
+        H --> I[Extract obligation details:<br />who, what, when, how often]
+        I --> J[Tag requirements with:<br />domain, process, system, data]
+        J --> K[Create/Update Requirement Repository]
     end
 
-    F1 -->|Publishes Circulars| A1
-    F2 -->|Reviews Requirements & Gaps| C7
-    F3 -->|Implements IT Changes| D5
-    F4 -->|Implements Process Changes| D5
-    F5 -->|Reviews Impact & Evidence| E4
+    subgraph GapAnalysis["2. Gap Analysis vs Existing Setup"]
+        direction TB
+        K --> L[Load existing policies,<br />SOPs, controls, mappings]
+        L --> M[Map new requirements<br />to existing controls]
+        M --> N{Coverage status?}
+        N --> O[No gap:<br />mark as compliant]
+        N --> P[Partial gap:<br />identify enhancements]
+        N --> Q[Full gap:<br />new control needed]
+        O --> R[Generate gap analysis report]
+        P --> R
+        Q --> R
+    end
+
+    subgraph ImpactAssessment["3. IT & Operational Impact Assessment"]
+        direction TB
+        R --> S[Link requirements to<br />IT assets & business processes]
+        S --> T[Assess IT impact:<br />apps, interfaces, data, logs]
+        T --> U[Assess operational impact:<br />roles, workflows, SLAs]
+        U --> V[Estimate effort, cost,<br />timeline, risk]
+        V --> W[Prioritize remediation<br />and assign owners]
+        W --> X[Generate impact &<br />implementation roadmap]
+    end
+
+    X --> End([End])
+
+    %% class definitions
+    classDef statusOK fill:#d4f8d4,stroke:#2e7d32,stroke-width:1px
+    classDef statusWarn fill:#fff3cd,stroke:#ff9800,stroke-width:1px
+    classDef statusFail fill:#f8d7da,stroke:#c62828,stroke-width:1px
+
+    %% class assignment
+    class O statusOK
+    class P statusWarn
+    class Q statusFail
