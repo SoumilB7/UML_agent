@@ -1985,3 +1985,360 @@ Finish reason: stop
 
 ================================================================================
 
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:36:19
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant SEBI
+participant Ingestion
+participant Parser
+participant "Clause DB"
+participant Analyzer
+participant "Compliance DB"
+participant "Gap Engine"
+participant "Impact Engine"
+participant "Reporting UI"
+
+SEBI-->>Ingestion: publish circulars (PDF/HTML)
+Ingestion->>Ingestion: schedule & fetch latest circulars
+Ingestion->>Parser: send raw circulars
+activate Parser
+Parser->>Parser: extract text & structure
+Parser->>"Clause DB": store clauses with metadata
+deactivate Parser
+
+Analyzer->>"Clause DB": fetch latest clauses
+Analyzer->>"Compliance DB": fetch existing controls
+Analyzer->>Analyzer: identify new/changed requirements
+
+Analyzer->>"Gap Engine": send mapped clauses & controls
+activate "Gap Engine"
+"Gap Engine"->>"Gap Engine": compare clauses vs controls
+"Gap Engine"-->>Analyzer: gaps & overlaps
+deactivate "Gap Engine"
+
+Analyzer->>"Impact Engine": send gaps & changes
+activate "Impact Engine"
+"Impact Engine"->>"Impact Engine": assess IT & ops impact
+"Impact Engine"...
+
+Token Usage:
+  Prompt tokens: 1977
+  Completion tokens: 281
+  Total tokens: 2258
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:36:27
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant User
+participant "Compliance Engine"
+participant "SEBI Scraper"
+participant "Parser & NLP"
+participant "Rule Repository"
+participant "Gap Analyzer"
+participant "Impact Assessor"
+participant "Reporting Portal"
+
+User->>"Compliance Engine": uploadExistingComplianceSetup(config)
+"Compliance Engine"->>"Rule Repository": storeBaseline(config)
+
+User->>"Compliance Engine": runCircularIngestion()
+"Compliance Engine"->>"SEBI Scraper": fetchLatestCirculars()
+"SEBI Scraper"-->>"Compliance Engine": circularDocuments
+
+"Compliance Engine"->>"Parser & NLP": parse(circularDocuments)
+activate "Parser & NLP"
+"Parser & NLP"->>"Parser & NLP": extractClauses()
+"Parser & NLP"->>"Parser & NLP": detectRequirements()
+"Parser & NLP"-->>"Compliance Engine": structuredClauses(requirements)
+deactivate "Parser & NLP"
+
+"Compliance Engine"->>"Rule Repository": saveNewRequirements(structuredClauses)
+
+"Compliance Engine"->>"Gap Analyzer": analyzeGaps(structuredClauses, baselineConfig)
+activat...
+
+Token Usage:
+  Prompt tokens: 1977
+  Completion tokens: 393
+  Total tokens: 2370
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:36:33
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant SEBI
+participant "Circular Ingestion Service"
+participant "Parsing Engine"
+participant "Clause Repository"
+participant "Requirement Extractor"
+participant "Existing Controls DB"
+participant "Gap Analyzer"
+participant "Impact Assessor"
+participant "Compliance Officer"
+participant "IT Ops"
+participant "Business Ops"
+
+SEBI-->>"Circular Ingestion Service": Publish new circular
+"Circular Ingestion Service"->>"Parsing Engine": fetchLatestCirculars()
+activate "Parsing Engine"
+"Parsing Engine"->>"Parsing Engine": parseToClauses()
+"Parsing Engine"->>"Clause Repository": store(clausesTable)
+deactivate "Parsing Engine"
+
+"Compliance Officer"->>"Requirement Extractor": identifyNewRequirements()
+activate "Requirement Extractor"
+"Requirement Extractor"->>"Clause Repository": getLatestClauses()
+"Requirement Extractor"->>"Requirement Extractor": extractComplianceRequirements()
+"Requirement Extractor"-->>"Compliance Officer": requirementsList
+deactivate "Requirement Extractor...
+
+Token Usage:
+  Prompt tokens: 1977
+  Completion tokens: 394
+  Total tokens: 2371
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:37:20
+Function: edit_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid diagram editor. Your task is to generate structured edit instructions for modifying existing Mermaid diagram code based on user instructions.
+
+CRITICAL: You must output ONLY a JSON object with edit instructions, NOT the complete updated code. The system will apply these edits automatically.
+
+Output Format (JSON only, no markdown, no code blocks):
+{
+  "edits": [
+    {
+      "type": "add_class|remove_class|modify_class|add_relationship|remove_relationship|modify_relationship|add_...
+
+Message 2 (user):
+Existing Mermaid diagram code:
+sequenceDiagram
+participant User
+participant "Compliance Engine"
+participant "SEBI Scraper"
+participant "Parser & NLP"
+participant "Rule Repository"
+participant "Gap Analyzer"
+participant "Impact Assessor"
+participant "Reporting Portal"
+
+User->>"Compliance Engine": uploadExistingComplianceSetup(config)
+"Compliance Engine"->>"Rule Repository": storeBaseline(config)
+
+User->>"Compliance Engine": runCircularIngestion()
+"Compliance Engine"->>"SEBI Scraper": fetchLatestC...
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+{
+  "edits": [
+    {
+      "type": "remove_participant",
+      "target": "Parser & NLP"
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "Compliance Engine",
+        "to": "Parser & NLP",
+        "message": "parse(circularDocuments)"
+      }
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "Parser & NLP",
+        "to": "Parser & NLP",
+        "message": "extractClauses()"
+      }
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "Parser & NLP",
+        "to": "Parser & NLP",
+        "message": "detectRequirements()"
+      }
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "Parser & NLP",
+        "to": "Compliance Engine",
+        "message": "structuredClauses(requirements)"
+      }
+    }
+  ]
+}
+
+Token Usage:
+  Prompt tokens: 2066
+  Completion tokens: 227
+  Total tokens: 2293
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+Mermaid Code Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:37:20
+Function: edit_diagram_mermaid
+Code Type: post_edit
+Context: Edit request: remove the parser and NLP block
+
+Mermaid Code:
+--------------------------------------------------------------------------------
+sequenceDiagram
+participant User
+participant "Compliance Engine"
+participant "SEBI Scraper"
+participant "Rule Repository"
+participant "Gap Analyzer"
+participant "Impact Assessor"
+participant "Reporting Portal"
+
+User->>"Compliance Engine": uploadExistingComplianceSetup(config)
+"Compliance Engine"->>"Rule Repository": storeBaseline(config)
+
+User->>"Compliance Engine": runCircularIngestion()
+"Compliance Engine"->>"SEBI Scraper": fetchLatestCirculars()
+"SEBI Scraper"-->>"Compliance Engine": circularDocuments
+
+
+"Compliance Engine"->>"Rule Repository": saveNewRequirements(structuredClauses)
+
+"Compliance Engine"->>"Gap Analyzer": analyzeGaps(structuredClauses, baselineConfig)
+activate "Gap Analyzer"
+"Gap Analyzer"->>"Rule Repository": loadBaseline()
+"Rule Repository"-->>"Gap Analyzer": baselineRules
+"Gap Analyzer"-->>"Compliance Engine": gapReport
+deactivate "Gap Analyzer"
+
+"Compliance Engine"->>"Impact Assessor": assessImpact(gapReport)
+activate "Impact Assessor"
+"Impact Assessor"->>"Impact Assessor": mapToITSystems()
+"Impact Assessor"->>"Impact Assessor": mapToOperations()
+"Impact Assessor"-->>"Compliance Engine": impactAssessment(IT,Operations)
+deactivate "Impact Assessor"
+
+"Compliance Engine"->>"Reporting Portal": generateReports(requirements, gapReport, impactAssessment)
+Reporting Portal-->>User: dashboard(Requirements, Gaps, ITImpact, OpsImpact)
+--------------------------------------------------------------------------------
+Code Length: 1366 characters
+================================================================================
+
