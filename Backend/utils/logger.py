@@ -144,3 +144,60 @@ Input Messages:
         # If logging fails, at least print to console
         print(f"Warning: Failed to write to log file at {log_file}: {e}")
         print(f"Attempted log content:\n{log_text}")
+
+
+def log_mermaid_code(
+    mermaid_code: str,
+    code_type: str = "mermaid",
+    function_name: Optional[str] = None,
+    context: Optional[str] = None
+) -> None:
+    """
+    Logs Mermaid code to the log file.
+    
+    Args:
+        mermaid_code: The Mermaid code to log
+        code_type: Type of code being logged (e.g., "post_edit", "generated", "pre_edit")
+        function_name: Name of the function that generated/edited the code (optional)
+        context: Additional context about the code (optional)
+    """
+    log_file = _get_log_file_path()
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Create log entry
+    log_text = f"""
+{'='*80}
+Mermaid Code Log Entry
+{'='*80}
+Timestamp: {timestamp}
+Function: {function_name or "unknown"}
+Code Type: {code_type}
+"""
+    
+    if context:
+        log_text += f"Context: {context}\n"
+    
+    log_text += f"""
+Mermaid Code:
+{'-'*80}
+{mermaid_code}
+{'-'*80}
+Code Length: {len(mermaid_code)} characters
+{'='*80}
+
+"""
+    
+    # Append to log file
+    try:
+        # Ensure the directory exists
+        log_dir = os.path.dirname(log_file)
+        if log_dir and not os.path.exists(log_dir):
+            os.makedirs(log_dir, exist_ok=True)
+        
+        # Ensure the log file exists and append to it
+        with open(log_file, 'a', encoding='utf-8') as f:
+            f.write(log_text)
+    except Exception as e:
+        # If logging fails, at least print to console
+        print(f"Warning: Failed to write to log file at {log_file}: {e}")
+        print(f"Attempted log content:\n{log_text}")

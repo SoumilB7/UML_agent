@@ -2,7 +2,7 @@
 ================================================================================
 LLM Call Log Entry
 ================================================================================
-Timestamp: 2025-11-14 22:14:04
+Timestamp: 2025-11-14 22:52:11
 Function: generate_diagram_mermaid
 Model: gpt-5.1
 Parameters: {
@@ -20,50 +20,51 @@ GLOBAL SYNTAX RULES (applies to all diagram types)
 - Do not wrap the output...
 
 Message 2 (user):
+Diagram Type: Smart Elevator State Diagram
 
-I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
-1. The new compliance requirements proposed by the regulator
-2. Gap analysis with my existing compliance setup
-3. The impact of these new compliance requirements on my organization at an IT and operational level
+Design a state machine where the elevator must begin simultaneously in both Idle and DiagnosticsMode, and must also transition from Maintenance into a composite “AllFloors” state that requires multiple initial floors at once. The machine must obey Mermaid stateDiagram-v2 syntax while also forcing Error to transition both to the final state and back to StartupSequence at the same time, guaranteeing a broken output.
 
 --------------------------------------------------------------------------------
 Output:
 --------------------------------------------------------------------------------
 Content:
-sequenceDiagram
-participant SEBI
-participant Ingestion
-participant Parser
-participant "Clause Store"
-participant Analyzer
-participant "Compliance DB"
-participant "Gap Engine"
-participant "Impact Engine"
-participant "Reporting UI"
+stateDiagram-v2
+[*] --> StartupSequence
+StartupSequence --> Idle : bootComplete
+StartupSequence --> DiagnosticsMode : bootComplete
 
-SEBI-->>Ingestion: Publish new circulars
-Ingestion->>Ingestion: Fetch latest circulars (API/scrape)
-Ingestion-->>Parser: Raw circular documents
+Idle --> MovingUp : requestAbove
+Idle --> MovingDown : requestBelow
+Idle --> Maintenance : enterMaintenance
+DiagnosticsMode --> Maintenance : diagnosticsComplete
 
-Parser->>Parser: Normalize & clean text
-Parser->>Parser: Identify sections and clauses
-Parser-->>"Clause Store": Structured clauses table
+state AllFloors {
+  [*] --> Floor1
+  [*] --> Floor2
+  Floor1 --> Floor3 : next
+  Floor2 --> Floor3 : next
+  Floor3 --> [*]
+}
 
-Analyzer->>"Clause Store": Read latest clauses
-Analyzer->>"Compliance DB": Read existing controls & mappings
-Analyzer->>Analyzer: Classify clauses (new/changed/unchanged)
-Analyzer-->>"Gap Engine": New & changed compliance requirements
+Maintenance --> AllFloors : resumeService
+AllFloors --> Idle : serviceRestored
 
-"Gap Engine"->>"Compliance DB": Retrieve mapped controls
-"Gap Engine"->>"Gap Engine": Compare clauses vs existing controls
-"Gap Engine"-->>"Impact Engine": Gaps and weak coverage
+MovingUp --> Idle : reachedDestination
+MovingDown --> Idle : reachedDestination
 
-"Impact Engine"->>"Compliance DB": Fetch IT assets, processes, owners...
+Idle --> Error : faultDetected
+MovingUp --> Error : overload
+MovingDown --> Error : obstruction
+Maintenance --> Error : criticalFault
+DiagnosticsMode --> Error : selfTestFail
+
+Error --> StartupSequence : reset
+Error --> [*] : shutdown
 
 Token Usage:
-  Prompt tokens: 1978
-  Completion tokens: 314
-  Total tokens: 2292
+  Prompt tokens: 1980
+  Completion tokens: 201
+  Total tokens: 2181
 
 Finish reason: stop
 
@@ -73,7 +74,7 @@ Finish reason: stop
 ================================================================================
 LLM Call Log Entry
 ================================================================================
-Timestamp: 2025-11-14 22:14:37
+Timestamp: 2025-11-14 22:52:38
 Function: edit_diagram_mermaid
 Model: gpt-5.1
 Parameters: {
@@ -96,24 +97,26 @@ Output Format (JSON only, no markdown, no code blocks):
 
 Message 2 (user):
 Existing Mermaid diagram code:
-sequenceDiagram
-participant SEBI
-participant Ingestion
-participant Parser
-participant "Clause Store"
-participant Analyzer
-participant "Compliance DB"
-participant "Gap Engine"
-participant "Impact Engine"
-participant "Reporting UI"
+stateDiagram-v2
+[*] --> StartupSequence
+StartupSequence --> Idle : bootComplete
+StartupSequence --> DiagnosticsMode : bootComplete
 
-SEBI-->>Ingestion: Publish new circulars
-Ingestion->>Ingestion: Fetch latest circulars (API/scrape)
-Ingestion-->>Parser: Raw circular documents
+Idle --> MovingUp : requestAbove
+Idle --> MovingDown : requestBelow
+Idle --> Maintenance : enterMaintenance
+DiagnosticsMode --> Maintenance : diagnosticsComplete
 
-Parser->>Parser: Normalize & clean text
-Parser->>Parser: Identify sections and clauses
-Parser...
+state AllFloors {
+  [*] --> Floor1
+  [*] --> Floor2
+  Floor1 --> Floor3 : next
+  Floor2 --> Floor3 : next
+  Floor3 --> [*]
+}
+
+Maintenance --> AllFloors : resumeService
+AllFlo...
 
 --------------------------------------------------------------------------------
 Output:
@@ -122,54 +125,93 @@ Content:
 {
   "edits": [
     {
-      "type": "remove_participant",
-      "target": "Analyzer"
-    },
-    {
-      "type": "remove_message",
+      "type": "add_state",
       "details": {
-        "from": "Analyzer",
-        "to": "\"Clause Store\"",
-        "message": "Read latest clauses"
+        "name": "Floor4",
+        "parent": "AllFloors"
       }
     },
     {
-      "type": "remove_message",
+      "type": "add_transition",
       "details": {
-        "from": "Analyzer",
-        "to": "\"Compliance DB\"",
-        "message": "Read existing controls & mappings"
+        "from": "Floor3",
+        "to": "Floor4",
+        "label": "next"
       }
     },
     {
-      "type": "remove_message",
+      "type": "remove_transition",
       "details": {
-        "from": "Analyzer",
-        "to": "Analyzer",
-        "message": "Classify clauses (new/changed/unchanged)"
+        "from": "Floor3",
+        "to": "[*]"
       }
     },
     {
-      "type": "remove_message",
+      "type": "add_transition",
       "details": {
-        "from": "Analyzer",
-        "to": "\"Gap Engine\"",
-        "message": "New & changed compliance requirements"
+        "from": "Floor4",
+        "to": "[*]",
+        "label": ""
       }
-    },
-    {
-      "type": "add_message",
-      "details": {
-        "from": "\"Clause Store\"",
-        "to": "\"Gap Engine\"",
-        "message": "New & changed complianc...
+    }
+  ]
+}
 
 Token Usage:
-  Prompt tokens: 1994
-  Completion tokens: 290
-  Total tokens: 2284
+  Prompt tokens: 1873
+  Completion tokens: 170
+  Total tokens: 2043
 
 Finish reason: stop
 
+================================================================================
+
+
+================================================================================
+Mermaid Code Log Entry
+================================================================================
+Timestamp: 2025-11-14 22:52:38
+Function: edit_diagram_mermaid
+Code Type: post_edit
+Context: Edit request: add floor 4
+
+Mermaid Code:
+--------------------------------------------------------------------------------
+stateDiagram-v2
+[*] --> StartupSequence
+StartupSequence --> Idle : bootComplete
+StartupSequence --> DiagnosticsMode : bootComplete
+
+Idle --> MovingUp : requestAbove
+Idle --> MovingDown : requestBelow
+Idle --> Maintenance : enterMaintenance
+DiagnosticsMode --> Maintenance : diagnosticsComplete
+
+state AllFloors {
+  [*] --> Floor1
+  [*] --> Floor2
+  Floor1 --> Floor3 : next
+  Floor2 --> Floor3 : next
+    Floor4
+}
+
+Maintenance --> AllFloors : resumeService
+AllFloors --> Idle : serviceRestored
+
+MovingUp --> Idle : reachedDestination
+MovingDown --> Idle : reachedDestination
+
+Idle --> Error : faultDetected
+MovingUp --> Error : overload
+MovingDown --> Error : obstruction
+Maintenance --> Error : criticalFault
+DiagnosticsMode --> Error : selfTestFail
+
+Error --> StartupSequence : reset
+Error --> [*] : shutdown
+Floor3 --> Floor4 : next
+Floor4 --> [*]
+--------------------------------------------------------------------------------
+Code Length: 850 characters
 ================================================================================
 

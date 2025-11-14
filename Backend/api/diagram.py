@@ -2,7 +2,8 @@ import logging
 from fastapi import APIRouter, HTTPException
 
 from models import DiagramRequest, DiagramEditRequest, DiagramResponse
-from utils.diagram import generate_diagram_mermaid, edit_diagram_mermaid
+from utils.diagram import generate_diagram_mermaid
+from utils.editor import edit_diagram_mermaid
 
 
 router = APIRouter(prefix="/diagram", tags=['diagram'])
