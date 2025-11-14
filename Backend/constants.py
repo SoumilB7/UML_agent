@@ -167,6 +167,76 @@ DIAGRAM TYPES (exact starting keyword and templates)
   Car : +engine Engine
   Car *-- Engine
 
+DIAGRAM-SPECIFIC HARD RULES (CRITICAL — MUST NEVER BE VIOLATED)
+
+1. All diagram nodes MUST have explicit IDs and be defined before use.
+   - WRONG: (Ingest name)
+   - RIGHT: Ingest["name"]
+   - Always declare: Ingest["name"]  before any arrow that references Ingest.
+
+2. Parentheses-only node syntax is forbidden in diagrams.
+   - Allowed diagram node forms (ID + shape) only:
+     ID[Text]
+     ID(Text)
+     ID((Text))
+     ID[[Text]]
+     ID>{{Text}}]
+     ID{{Text}}
+   - NEVER use: (Text) or (Node Name) with no ID.
+
+3. Arrows must reference node IDs only.
+   - WRONG: (Parse Circulars) --> (Identify)
+   - RIGHT: Parse --> Identify
+   - Each arrow line must use previously-declared IDs.
+
+4. Subgraphs must contain valid ID-based nodes only.
+   - WRONG:
+     subgraph System
+       (Ingest Circulars)
+     end
+   - RIGHT:
+     subgraph System
+       Ingest["Ingest Circulars"]
+     end
+
+5. The `actor` keyword is NOT allowed in diagrams.
+   - `actor Name` is reserved for use-case diagrams only.
+   - In diagrams, model actors as nodes: ActorUser["Compliance Officer"]
+
+6. No implicit or auto-created nodes.
+   - The generator must NOT invent nodes on arrow reference; auto-create only when explicitly allowed by a correction policy (see item 9).
+
+7. Node IDs must not contain spaces; labels may contain spaces.
+   - Use: MapControls["Map Clauses to Existing Controls"]
+   - Not: "Map Controls" as an ID.
+
+8. Auto-correction policy for invalid user-provided diagrams (apply only if correction is safe and unambiguous):
+   - Assign deterministic IDs (short, unique) when user used parentheses-only nodes.
+   - Replace `(Some Label)` with generatedID["Some Label"] and declare the generatedID at top of the diagram/subgraph.
+   - Do NOT change user semantics (do not merge two different labels into one ID).
+   - Record corrections as comments in your validator (but do not output comments to the user; internal only).
+
+9. Error handling:
+   - If a diagram cannot be unambiguously corrected, refuse to generate and output nothing but a minimal valid Mermaid placeholder diagram appropriate for the requested diagram type (e.g., `flowchart TB\nA["Invalid input"]`), instead of emitting broken Mermaid.
+
+
+MULTIPLICITY WHITELIST (CRITICAL)
+
+Mermaid classDiagram only supports the following multiplicities:
+- "0"
+- "1"
+- "*"
+- "many"
+- "0..*"
+
+Forbidden multiplicities include (but are not limited to):
+"0..1", "1..*", "2..5", "3-7", or any numeric range other than "0..*".
+
+If the user provides an unsupported multiplicity:
+- Auto-correct "0..1" → "0..*"
+- Or reject if correction would change semantics.
+
+   
 SYNTAX VALIDATION CHECKLIST (generator must enforce)
 - classDiagram must not contain `->>` sequenceDiagram notation; use correct diagram-specific tokens.
 - stateDiagram-v2 must be the only state diagram start token.

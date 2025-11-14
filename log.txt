@@ -3178,3 +3178,1908 @@ Finish reason: stop
 
 ================================================================================
 
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:57:43
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for a library management system
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class "LibrarySystem"
+"LibrarySystem" : +name String
+"LibrarySystem" : +libraries List~Library~
+"LibrarySystem" : +registerUser(user User) void
+"LibrarySystem" : +searchBooks(query String) List~Book~
+"LibrarySystem" : +authenticate(username String, password String) boolean
+
+class Library
+Library : +id Integer
+Library : +name String
+Library : +address String
+Library : +books List~BookCopy~
+Library : +members List~Member~
+Library : +librarians List~Librarian~
+Library : +addBookCopy(bookCopy BookCopy) void
+Library : +registerMember(member Member) void
+
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +passwordHash String
+User : +status String
+User : +login(username String, password String) boolean
+
+class Member
+Member : +membershipId String
+Member : +maxBorrowLimit Integer
+Member : +getActiveLoans() List~Loan~
+
+class Librarian
+Librarian : +employeeId String
+Librarian : +assignLoan(loan Loan) void
+Librarian : +collectFine(payment Payme...
+
+Token Usage:
+  Prompt tokens: 1905
+  Completion tokens: 1098
+  Total tokens: 3003
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:58:00
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for a library management system
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class "LibrarySystem"
+"LibrarySystem" : +name String
+"LibrarySystem" : +libraries List~Library~
+"LibrarySystem" : +registerUser(user User) void
+"LibrarySystem" : +searchBooks(query String) List~Book~
+
+class Library
+Library : +id Integer
+Library : +name String
+Library : +address String
+Library : +books List~Book~
+Library : +members List~Member~
+Library : +addBook(book Book) void
+Library : +registerMember(member Member) void
+
+class Member
+Member : +memberId Integer
+Member : +name String
+Member : +email String
+Member : +phone String
+Member : +loans List~Loan~
+Member : +reservations List~Reservation~
+Member : +borrowItem(item LibraryItem) Loan
+Member : +reserveItem(item LibraryItem) Reservation
+
+class Librarian
+Librarian : +employeeId Integer
+Librarian : +name String
+Librarian : +email String
+Librarian : +manageInventory() void
+Librarian : +approveLoan(loan Loan) void
+
+class LibraryItem
+LibraryItem : +itemId Integer
+LibraryItem : +title String
+LibraryItem : +publi...
+
+Token Usage:
+  Prompt tokens: 1905
+  Completion tokens: 885
+  Total tokens: 2790
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:58:14
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for a library management system
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class Library
+Library : +name String
+Library : +address String
+Library : +addBook(book Book) void
+Library : +registerMember(member Member) void
+Library : +issueLoan(bookCopy BookCopy, member Member) Loan
+Library : +returnBook(loan Loan) void
+
+class Book
+Book : +isbn String
+Book : +title String
+Book : +publicationYear Integer
+Book : +description String
+Book : +getAvailableCopies() Integer
+
+class BookCopy
+BookCopy : +copyId String
+BookCopy : +acquiredDate Date
+BookCopy : +status String
+
+class Author
+Author : +authorId Integer
+Author : +name String
+Author : +bio String
+
+class Category
+Category : +categoryId Integer
+Category : +name String
+Category : +description String
+
+class Member
+Member : +memberId Integer
+Member : +name String
+Member : +email String
+Member : +phone String
+Member : +address String
+Member : +joinDate Date
+Member : +getActiveLoans() List~Loan~
+
+class Librarian
+Librarian : +staffId Integer
+Librarian : +name String
+Librarian : +email String
+Librar...
+
+Token Usage:
+  Prompt tokens: 1905
+  Completion tokens: 834
+  Total tokens: 2739
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:01:52
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for a library management system
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class Library
+Library : +name String
+Library : +address String
+Library : +addBook(book Book) void
+Library : +registerMember(member Member) void
+Library : +lendItem(itemId String, memberId String) Loan
+Library : +returnItem(loanId String) void
+
+class Book
+Book : +id String
+Book : +title String
+Book : +isbn String
+Book : +publicationYear Integer
+Book : +getAvailability() boolean
+
+class Copy
+Copy : +copyId String
+Copy : +status String
+Copy : +location String
+
+class Member
+Member : +memberId String
+Member : +name String
+Member : +email String
+Member : +phone String
+Member : +register() void
+Member : +deactivate() void
+
+class Librarian
+Librarian : +employeeId String
+Librarian : +name String
+Librarian : +email String
+Librarian : +addBook(book Book) void
+Librarian : +removeBook(book Book) void
+Librarian : +issueLoan(copy Copy, member Member) Loan
+Librarian : +closeLoan(loan Loan) void
+
+class Loan
+Loan : +loanId String
+Loan : +issueDate Date
+Loan : +dueDate Date
+Loan ...
+
+Token Usage:
+  Prompt tokens: 2451
+  Completion tokens: 740
+  Total tokens: 3191
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:02:06
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for a library management system
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class Library
+Library : +name String
+Library : +address String
+Library : +addBook(book Book) void
+Library : +registerMember(member Member) void
+Library : +lendItem(itemId String, memberId String) Loan
+Library : +returnItem(loanId String) void
+
+class "LibraryItem"
+"LibraryItem" : +id String
+"LibraryItem" : +title String
+"LibraryItem" : +publisher String
+"LibraryItem" : +publicationYear Integer
+"LibraryItem" : +isAvailable boolean
+"LibraryItem" : +getDescription() String
+
+class Book
+Book : +isbn String
+Book : +author String
+Book : +pageCount Integer
+
+class Magazine
+Magazine : +issueNumber String
+Magazine : +month String
+
+class DVD
+DVD : +regionCode String
+DVD : +durationMinutes Integer
+
+class Member
+Member : +memberId String
+Member : +name String
+Member : +email String
+Member : +phone String
+Member : +address String
+Member : +register() void
+Member : +deactivate() void
+
+class Librarian
+Librarian : +employeeId String
+Librarian : +name String
+Librarian : +email St...
+
+Token Usage:
+  Prompt tokens: 2451
+  Completion tokens: 809
+  Total tokens: 3260
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:02:19
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for a library management system
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class Library
+Library : +name String
+Library : +address String
+Library : +books List~Book~
+Library : +members List~Member~
+Library : +librarians List~Librarian~
+Library : +addBook(book Book) void
+Library : +registerMember(member Member) void
+Library : +findBookByIsbn(isbn String) Book
+
+class Book
+Book : +isbn String
+Book : +title String
+Book : +publicationYear Integer
+Book : +status BookStatus
+Book : +getCurrentLoan() Loan
+Book : +isAvailable() boolean
+
+class Copy
+Copy : +copyId String
+Copy : +condition String
+Copy : +status CopyStatus
+
+class Member
+Member : +memberId String
+Member : +name String
+Member : +email String
+Member : +phone String
+Member : +active boolean
+Member : +borrow(copy Copy) Loan
+Member : +returnCopy(loan Loan) void
+
+class Librarian
+Librarian : +employeeId String
+Librarian : +name String
+Librarian : +email String
+Librarian : +manageInventory() void
+Librarian : +approveMembership(member Member) void
+
+class Loan
+Loan : +loanId String
+Loan : +l...
+
+Token Usage:
+  Prompt tokens: 2451
+  Completion tokens: 751
+  Total tokens: 3202
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:04:03
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for a library management system
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+
+class Library
+Library : +name String
+Library : +address String
+Library : +books List~Book~
+Library : +members List~Member~
+Library : +librarians List~Librarian~
+Library : +addBook(book Book) void
+Library : +registerMember(member Member) void
+Library : +findBookByIsbn(isbn String) Book
+
+class Book
+Book : +isbn String
+Book : +title String
+Book : +publicationYear Integer
+Book : +copies List~BookCopy~
+Book : +authors List~Author~
+Book : +getAvailableCopies() List~BookCopy~
+
+class BookCopy
+BookCopy : +copyId String
+BookCopy : +status String
+BookCopy : +location String
+BookCopy : +isAvailable() boolean
+
+class Author
+Author : +authorId Integer
+Author : +name String
+Author : +bio String
+
+class Member
+Member : +memberId Integer
+Member : +name String
+Member : +email String
+Member : +phone String
+Member : +address String
+Member : +loans List~Loan~
+Member : +reservations List~Reservation~
+Member : +borrow(copy BookCopy) boolean
+Member : +reserve(book Book) boolean
+
+class...
+
+Token Usage:
+  Prompt tokens: 2569
+  Completion tokens: 736
+  Total tokens: 3305
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:04:19
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for a library management system
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class Library
+Library : +name String
+Library : +address String
+Library : +books List~Book~
+Library : +members List~Member~
+Library : +librarians List~Librarian~
+Library : +addBook(book Book) void
+Library : +registerMember(member Member) void
+Library : +lendBook(book Book, member Member) Loan
+Library : +returnBook(loan Loan) void
+
+class Book
+Book : +isbn String
+Book : +title String
+Book : +publicationYear Integer
+Book : +publisher String
+Book : +language String
+Book : +totalCopies Integer
+Book : +availableCopies Integer
+Book : +getAvailability() Integer
+
+class BookCopy
+BookCopy : +copyId String
+BookCopy : +acquiredDate Date
+BookCopy : +condition String
+BookCopy : +status String
+
+class Author
+Author : +authorId Integer
+Author : +name String
+Author : +bio String
+
+class Category
+Category : +categoryId Integer
+Category : +name String
+Category : +description String
+
+class Member
+Member : +memberId Integer
+Member : +name String
+Member : +email String
+Member : +phone ...
+
+Token Usage:
+  Prompt tokens: 2569
+  Completion tokens: 1046
+  Total tokens: 3615
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:04:32
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for a library management system
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class Library
+Library : +name String
+Library : +address String
+Library : +addBook(book Book) void
+Library : +registerMember(member Member) void
+Library : +lendItem(itemId String, memberId String) Loan
+Library : +returnItem(loanId String) void
+
+class Item
+Item : +id String
+Item : +title String
+Item : +publicationDate Date
+Item : +isAvailable boolean
+Item : +getDetails() String
+
+class Book
+Book : +isbn String
+Book : +author String
+Book : +pages Integer
+
+class Magazine
+Magazine : +issueNumber String
+Magazine : +periodicity String
+
+class Member
+Member : +id String
+Member : +name String
+Member : +email String
+Member : +phone String
+Member : +register() void
+Member : +updateContact(email String, phone String) void
+
+class Librarian
+Librarian : +id String
+Librarian : +name String
+Librarian : +employeeNumber String
+Librarian : +addItem(item Item) void
+Librarian : +removeItem(item Item) void
+Librarian : +manageMember(member Member) void
+
+class Loan
+Loan : +id String
+Loa...
+
+Token Usage:
+  Prompt tokens: 2569
+  Completion tokens: 682
+  Total tokens: 3251
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:04:49
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start))
+Ingest["Ingest Latest SEBI Circulars"]
+Parse["Parse Circulars into Clause Table"]
+ExtractReqs["Extract New Compliance Requirements"]
+MapExisting["Map Clauses to Existing Compliance Controls"]
+GapAnalysis["Perform Gap Analysis"]
+AssessImpactIT["Assess IT Impact"]
+AssessImpactOps["Assess Operational Impact"]
+Consolidate["Consolidate Findings & Recommendations"]
+End((End))
+
+Start --> Ingest
+Ingest --> Parse
+Parse --> ExtractReqs
+ExtractReqs --> MapExisting
+MapExisting --> GapAnalysis
+GapAnalysis --> AssessImpactIT
+GapAnalysis --> AssessImpactOps
+AssessImpactIT --> Consolidate
+AssessImpactOps --> Consolidate
+Consolidate --> End
+
+Token Usage:
+  Prompt tokens: 2641
+  Completion tokens: 157
+  Total tokens: 2798
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:04:52
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start))
+Ingest["Ingest Latest SEBI Circulars"]
+Parse["Parse Circulars into Clause Table"]
+ExtractReqs["Extract New Compliance Requirements"]
+MapExisting["Map Clauses to Existing Compliance Setup"]
+GapAnalysis["Perform Gap Analysis"]
+AssessImpactIT["Assess IT Impact"]
+AssessImpactOps["Assess Operational Impact"]
+Consolidate["Consolidate Findings & Recommendations"]
+End((End))
+
+Start --> Ingest
+Ingest --> Parse
+Parse --> ExtractReqs
+ExtractReqs --> MapExisting
+MapExisting --> GapAnalysis
+GapAnalysis --> AssessImpactIT
+GapAnalysis --> AssessImpactOps
+AssessImpactIT --> Consolidate
+AssessImpactOps --> Consolidate
+Consolidate --> End
+
+Token Usage:
+  Prompt tokens: 2641
+  Completion tokens: 157
+  Total tokens: 2798
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:04:55
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start))
+Ingest["Ingest Latest SEBI Circulars"]
+Parse["Parse Circulars into Clause Table"]
+ExtractReqs["Extract New Compliance Requirements"]
+MapToControls["Map Clauses to Existing Controls"]
+GapAnalysis["Perform Gap Analysis"]
+AssessImpactIT["Assess IT Impact"]
+AssessImpactOps["Assess Operational Impact"]
+Consolidate["Consolidate Findings & Actions"]
+End((End))
+
+Start --> Ingest
+Ingest --> Parse
+Parse --> ExtractReqs
+ExtractReqs --> MapToControls
+MapToControls --> GapAnalysis
+GapAnalysis --> AssessImpactIT
+GapAnalysis --> AssessImpactOps
+AssessImpactIT --> Consolidate
+AssessImpactOps --> Consolidate
+Consolidate --> End
+
+Token Usage:
+  Prompt tokens: 2641
+  Completion tokens: 159
+  Total tokens: 2800
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:05:39
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start))
+Ingest["Ingest latest SEBI circulars"]
+Parse["Parse circulars into structured clauses table"]
+ExtractReqs["Extract new compliance requirements"]
+MapToControls["Map clauses to existing compliance controls"]
+GapAnalysis["Perform gap analysis vs current setup"]
+AssessImpactIT["Assess IT impact (systems, data, security)"]
+AssessImpactOps["Assess operational impact (process, people)"]
+ConsolidateImpact["Consolidate IT and operational impact"]
+Report["Generate compliance impact report"]
+End((End))
+
+Start --> Ingest
+Ingest --> Parse
+Parse --> ExtractReqs
+ExtractReqs --> MapToControls
+MapToControls --> GapAnalysis
+GapAnalysis --> AssessImpactIT
+GapAnalysis --> AssessImpactOps
+AssessImpactIT --> ConsolidateImpact
+AssessImpactOps --> ConsolidateImpact
+ConsolidateImpact --> Report
+Report --> End
+
+Token Usage:
+  Prompt tokens: 2628
+  Completion tokens: 191
+  Total tokens: 2819
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:05:44
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start))
+Ingest["Ingest latest SEBI circulars"]
+Parse["Parse circulars into structured clauses table"]
+ExtractReqs["Extract new compliance requirements"]
+LoadExisting["Load existing compliance controls & policies"]
+MapClauses["Map new clauses to existing controls"]
+GapAnalysis["Perform gap analysis"]
+AssessITImpact["Assess IT impact (systems, data, integrations)"]
+AssessOpsImpact["Assess operational impact (processes, people)"]
+ConsolidateImpact["Consolidate IT & operational impact"]
+Report["Generate compliance impact report"]
+End((End))
+
+Start --> Ingest
+Ingest --> Parse
+Parse --> ExtractReqs
+ExtractReqs --> LoadExisting
+LoadExisting --> MapClauses
+MapClauses --> GapAnalysis
+GapAnalysis --> AssessITImpact
+GapAnalysis --> AssessOpsImpact
+AssessITImpact --> ConsolidateImpact
+AssessOpsImpact --> ConsolidateImpact
+ConsolidateImpact --> Report
+Report --> End
+
+Token Usage:
+  Prompt tokens: 2628
+  Completion tokens: 205
+  Total tokens: 2833
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:05:48
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start))
+Ingest["Ingest Latest SEBI Circulars"]
+Parse["Parse Circulars into Structured Clauses Table"]
+ExtractReqs["Extract New Compliance Requirements"]
+MapExisting["Map Clauses to Existing Compliance Setup"]
+GapAnalysis["Perform Gap Analysis"]
+AssessImpactIT["Assess IT Impact"]
+AssessImpactOps["Assess Operational Impact"]
+Consolidate["Consolidate Findings & Recommendations"]
+End((End))
+
+Start --> Ingest
+Ingest --> Parse
+Parse --> ExtractReqs
+ExtractReqs --> MapExisting
+MapExisting --> GapAnalysis
+GapAnalysis --> AssessImpactIT
+GapAnalysis --> AssessImpactOps
+AssessImpactIT --> Consolidate
+AssessImpactOps --> Consolidate
+Consolidate --> End
+
+Token Usage:
+  Prompt tokens: 2628
+  Completion tokens: 159
+  Total tokens: 2787
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:06:51
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start))
+IngestCirculars["Ingest Latest SEBI Circulars"]
+ParseCirculars["Parse Circulars into Structured Clauses Table"]
+IdentifyRequirements["Identify New Compliance Requirements"]
+MapToExistingControls["Map Clauses to Existing Compliance Controls"]
+PerformGapAnalysis["Perform Gap Analysis"]
+AssessITImpact["Assess IT Impact"]
+AssessOpsImpact["Assess Operational Impact"]
+ConsolidateImpact["Consolidate Overall Impact Assessment"]
+GenerateReport["Generate Compliance Impact Report"]
+End((End))
+
+Start --> IngestCirculars
+IngestCirculars --> ParseCirculars
+ParseCirculars --> IdentifyRequirements
+IdentifyRequirements --> MapToExistingControls
+MapToExistingControls --> PerformGapAnalysis
+PerformGapAnalysis --> AssessITImpact
+PerformGapAnalysis --> AssessOpsImpact
+AssessITImpact --> ConsolidateImpact
+AssessOpsImpact --> ConsolidateImpact
+ConsolidateImpact --> GenerateReport
+GenerateReport --> End
+
+Token Usage:
+  Prompt tokens: 2620
+  Completion tokens: 196
+  Total tokens: 2816
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:06:55
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start))
+IngestCirculars["Ingest latest SEBI circulars"]
+ParseCirculars["Parse circulars into structured clauses table"]
+IdentifyRequirements["Identify new compliance requirements"]
+MapToExistingControls["Map clauses to existing compliance controls"]
+PerformGapAnalysis["Perform gap analysis vs existing setup"]
+AssessITImpact["Assess IT impact of new requirements"]
+AssessOpsImpact["Assess operational impact of new requirements"]
+ConsolidateImpact["Consolidate IT and operational impact"]
+GenerateReport["Generate compliance impact report"]
+End((End))
+
+Start --> IngestCirculars
+IngestCirculars --> ParseCirculars
+ParseCirculars --> IdentifyRequirements
+IdentifyRequirements --> MapToExistingControls
+MapToExistingControls --> PerformGapAnalysis
+PerformGapAnalysis --> AssessITImpact
+PerformGapAnalysis --> AssessOpsImpact
+AssessITImpact --> ConsolidateImpact
+AssessOpsImpact --> ConsolidateImpact
+ConsolidateImpact --> GenerateReport
+GenerateReport --> End
+
+Token Usage:
+  Prompt tokens: 2620
+  Completion tokens: 204
+  Total tokens: 2824
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:06:58
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start)) --> IngestCirculars
+IngestCirculars["Ingest latest SEBI circulars"] --> ParseCirculars
+ParseCirculars["Parse circulars into clause table"] --> ExtractRequirements
+ExtractRequirements["Extract new compliance requirements"] --> MapToControls
+MapToControls["Map clauses to existing controls"] --> GapAnalysis
+GapAnalysis["Perform gap analysis vs current compliance setup"] --> AssessImpact
+AssessImpact["Assess IT and operational impact"] --> ReportFindings
+ReportFindings["Generate compliance impact report"] --> End((End))
+
+Token Usage:
+  Prompt tokens: 2620
+  Completion tokens: 126
+  Total tokens: 2746
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:07:32
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+sequence diagram
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant User
+participant System
+participant SEBISource
+participant Parser
+participant ClauseTable
+participant Analyzer
+participant Repository
+participant ITTeam
+participant OpsTeam
+
+User->>System: requestComplianceUpdate()
+activate System
+System->>SEBISource: fetchLatestCirculars()
+SEBISource-->>System: circularDocuments
+System->>Parser: parseCirculars(circularDocuments)
+activate Parser
+Parser-->>System: parsedClauses
+deactivate Parser
+System->>ClauseTable: storeClauses(parsedClauses)
+ClauseTable-->>System: clausesStored
+
+System->>Analyzer: identifyNewRequirements(clausesStored)
+activate Analyzer
+Analyzer-->>System: newComplianceRequirements
+
+System->>Repository: fetchExistingComplianceSetup()
+Repository-->>System: existingControls
+System->>Analyzer: performGapAnalysis(newComplianceRequirements, existingControls)
+Analyzer-->>System: gapAnalysisReport
+
+System->>Analyzer: assessImpact(newComplianceRequirements)
+Analyzer-->>System: impactAssessment(ITImpact, OpsImpact)...
+
+Token Usage:
+  Prompt tokens: 2623
+  Completion tokens: 279
+  Total tokens: 2902
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:07:37
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+sequence diagram
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant User
+participant System
+participant SEBI
+participant Parser
+participant Analyzer
+participant ITTeam
+participant OpsTeam
+
+User->>System: requestComplianceUpdate()
+activate System
+System->>SEBI: fetchLatestCirculars()
+SEBI-->>System: circularsPDFs
+System->>Parser: parseCirculars(circularsPDFs)
+activate Parser
+Parser-->>System: clausesTable
+deactivate Parser
+
+System->>Analyzer: analyzeNewRequirements(clausesTable)
+activate Analyzer
+Analyzer-->>System: newComplianceRequirements
+System->>Analyzer: performGapAnalysis(newComplianceRequirements, existingControls)
+Analyzer-->>System: gapAnalysisReport
+System->>Analyzer: assessImpact(newComplianceRequirements)
+Analyzer-->>System: impactAssessment(ITImpact, operationalImpact)
+deactivate Analyzer
+
+System-->>ITTeam: shareITImpact(ITImpact)
+System-->>OpsTeam: shareOperationalImpact(operationalImpact)
+System-->>User: consolidatedComplianceReport(newRequirements, gaps, impacts)
+deactivate System
+
+Token Usage:
+  Prompt tokens: 2623
+  Completion tokens: 222
+  Total tokens: 2845
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:07:45
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+sequence diagram
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant User
+participant System
+participant SEBI
+participant Parser
+participant Analyzer
+participant Repository
+participant ITTeam
+participant OpsTeam
+
+User->>System: scheduleComplianceMonitoring()
+System-->>User: monitoringConfigured()
+
+loop periodicFetch
+  System->>SEBI: fetchLatestCirculars()
+  SEBI-->>System: circularsData
+end
+
+System->>Parser: parseCirculars(circularsData)
+activate Parser
+Parser-->>System: clausesTable
+deactivate Parser
+
+System->>Repository: storeClauses(clausesTable)
+Repository-->>System: storedOk
+
+System->>Analyzer: identifyNewRequirements(clausesTable)
+activate Analyzer
+Analyzer-->>System: newComplianceRequirements
+
+System->>Analyzer: performGapAnalysis(newComplianceRequirements, existingControls)
+Analyzer-->>System: gapAnalysisReport
+
+System->>Analyzer: assessImpact(newComplianceRequirements)
+Analyzer-->>System: impactAssessment(ITImpact, OpsImpact)
+deactivate Analyzer
+
+System-->>ITTeam: notifyIT(ITImpact, gapAnalysisReport)
+System-->>OpsTe...
+
+Token Usage:
+  Prompt tokens: 2623
+  Completion tokens: 323
+  Total tokens: 2946
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:11:10
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+sequence diagram
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant User
+participant System
+participant SEBISource
+participant Parser
+participant ClauseTable
+participant Analyzer
+participant ITTeam
+participant OpsTeam
+
+User->>System: initiateComplianceUpdate()
+activate System
+System->>SEBISource: fetchLatestCirculars()
+SEBISource-->>System: circularDocuments
+System->>Parser: parseCirculars(circularDocuments)
+activate Parser
+Parser-->>System: parsedClauses
+deactivate Parser
+System->>ClauseTable: storeClauses(parsedClauses)
+ClauseTable-->>System: confirmStored
+
+System->>Analyzer: identifyNewRequirements(parsedClauses)
+activate Analyzer
+Analyzer-->>System: newComplianceRequirements
+
+System->>Analyzer: performGapAnalysis(newComplianceRequirements, existingControls)
+Analyzer-->>System: gapAnalysisReport
+
+System->>Analyzer: assessImpact(newComplianceRequirements)
+Analyzer-->>System: impactAssessment(ITImpact, OpsImpact)
+deactivate Analyzer
+
+System-->>ITTeam: shareITImpact(ITImpact)
+System-->>OpsTeam: shareOpsImpact(OpsImpact)
+Syst...
+
+Token Usage:
+  Prompt tokens: 2623
+  Completion tokens: 248
+  Total tokens: 2871
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:11:17
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+sequence diagram
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant User
+participant System
+participant SEBI
+participant Parser
+participant Analyzer
+participant Repository
+participant ITTeam
+participant OpsTeam
+
+User->>System: scheduleCircularMonitoring()
+System-->>User: monitoringConfigured()
+
+loop periodicFetch
+  System->>SEBI: fetchLatestCirculars()
+  SEBI-->>System: circularsData
+end
+
+System->>Parser: parseCirculars(circularsData)
+activate Parser
+Parser-->>System: clausesTable
+deactivate Parser
+
+System->>Repository: storeClauses(clausesTable)
+Repository-->>System: storedConfirmation
+
+System->>Analyzer: extractNewRequirements(clausesTable)
+activate Analyzer
+Analyzer-->>System: newComplianceRequirements
+
+System->>Repository: getExistingComplianceSetup()
+Repository-->>System: existingComplianceSetup
+
+System->>Analyzer: performGapAnalysis(newComplianceRequirements, existingComplianceSetup)
+Analyzer-->>System: gapAnalysisReport
+
+System->>Analyzer: assessImpact(newComplianceRequirements)
+Analyzer-->>System: impactAssessment(IT...
+
+Token Usage:
+  Prompt tokens: 2623
+  Completion tokens: 310
+  Total tokens: 2933
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:11:22
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+sequence diagram
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant User
+participant IngestService
+participant SEBISource
+participant Parser
+participant ClauseTable
+participant RequirementExtractor
+participant GapAnalyzer
+participant ImpactAnalyzer
+participant ReportService
+
+User->>IngestService: requestComplianceUpdate()
+activate IngestService
+IngestService->>SEBISource: fetchLatestCirculars()
+activate SEBISource
+SEBISource-->>IngestService: circularDocuments
+deactivate SEBISource
+
+IngestService->>Parser: parse(circularDocuments)
+activate Parser
+Parser-->>ClauseTable: storeParsedClauses()
+deactivate Parser
+
+IngestService-->>User: ingestionAndParsingComplete()
+deactivate IngestService
+
+User->>RequirementExtractor: extractNewRequirements(ClauseTable)
+activate RequirementExtractor
+RequirementExtractor-->>User: newComplianceRequirements
+deactivate RequirementExtractor
+
+User->>GapAnalyzer: performGapAnalysis(newComplianceRequirements)
+activate GapAnalyzer
+GapAnalyzer-->>User: gapAnalysisResults
+deactivate GapAnalyzer
+
+User->>Imp...
+
+Token Usage:
+  Prompt tokens: 2623
+  Completion tokens: 290
+  Total tokens: 2913
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:11:48
+Function: edit_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid diagram editor. Your task is to generate structured edit instructions for modifying existing Mermaid diagram code based on user instructions.
+
+CRITICAL: You must output ONLY a JSON object with edit instructions, NOT the complete updated code. The system will apply these edits automatically.
+
+Output Format (JSON only, no markdown, no code blocks):
+{
+  "edits": [
+    {
+      "type": "add_class|remove_class|modify_class|add_relationship|remove_relationship|modify_relationship|add_...
+
+Message 2 (user):
+Existing Mermaid diagram code:
+sequenceDiagram
+participant User
+participant System
+participant SEBISource
+participant Parser
+participant ClauseTable
+participant Analyzer
+participant ITTeam
+participant OpsTeam
+
+User->>System: initiateComplianceUpdate()
+activate System
+System->>SEBISource: fetchLatestCirculars()
+SEBISource-->>System: circularDocuments
+System->>Parser: parseCirculars(circularDocuments)
+activate Parser
+Parser-->>System: parsedClauses
+deactivate Parser
+System->>ClauseTable: storeClau...
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+{
+  "edits": [
+    {
+      "type": "remove_participant",
+      "target": "Analyzer"
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "System",
+        "to": "Analyzer",
+        "message": "identifyNewRequirements(parsedClauses)"
+      }
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "Analyzer",
+        "to": "System",
+        "message": "newComplianceRequirements"
+      }
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "System",
+        "to": "Analyzer",
+        "message": "performGapAnalysis(newComplianceRequirements, existingControls)"
+      }
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "Analyzer",
+        "to": "System",
+        "message": "gapAnalysisReport"
+      }
+    },
+    {
+      "type": "remove_message",
+      "details": {
+        "from": "System",
+        "to": "Analyzer",
+        "message": "assessImpact(newComplianceRequirements)"
+      }
+    ...
+
+Token Usage:
+  Prompt tokens: 1922
+  Completion tokens: 308
+  Total tokens: 2230
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+Mermaid Code Log Entry
+================================================================================
+Timestamp: 2025-11-15 01:11:48
+Function: edit_diagram_mermaid
+Code Type: post_edit
+Context: Edit request: remove the analyzer block in this
+
+Mermaid Code:
+--------------------------------------------------------------------------------
+sequenceDiagram
+participant User
+participant System
+participant SEBISource
+participant Parser
+participant ClauseTable
+participant ITTeam
+participant OpsTeam
+
+User->>System: initiateComplianceUpdate()
+activate System
+System->>SEBISource: fetchLatestCirculars()
+SEBISource-->>System: circularDocuments
+System->>Parser: parseCirculars(circularDocuments)
+activate Parser
+Parser-->>System: parsedClauses
+deactivate Parser
+System->>ClauseTable: storeClauses(parsedClauses)
+ClauseTable-->>System: confirmStored
+
+
+
+
+System-->>ITTeam: shareITImpact(ITImpact)
+System-->>OpsTeam: shareOpsImpact(OpsImpact)
+System-->>User: summaryReport(newRequirements, gaps, impacts)
+deactivate System
+--------------------------------------------------------------------------------
+Code Length: 674 characters
+================================================================================
+
