@@ -2342,3 +2342,839 @@ Reporting Portal-->>User: dashboard(Requirements, Gaps, ITImpact, OpsImpact)
 Code Length: 1366 characters
 ================================================================================
 
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:50:53
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start))
+Ingest["Ingest latest SEBI circulars"]
+StoreRaw["Store raw circulars"]
+Parse["Parse circulars into structured clauses table"]
+IdentifyReqs["Identify new / changed compliance requirements"]
+MapToControls["Map clauses to existing internal controls & policies"]
+GapAnalysis["Perform gap analysis vs current compliance setup"]
+AssessITImpact["Assess IT impact (systems, data, integrations, security)"]
+AssessOpsImpact["Assess operational impact (processes, roles, SLAs)"]
+ConsolidateImpact["Consolidate overall impact assessment"]
+Report["Generate compliance impact report & remediation plan"]
+End((End))
+
+Start --> Ingest
+Ingest --> StoreRaw
+StoreRaw --> Parse
+Parse --> IdentifyReqs
+IdentifyReqs --> MapToControls
+MapToControls --> GapAnalysis
+GapAnalysis --> AssessITImpact
+GapAnalysis --> AssessOpsImpact
+AssessITImpact --> ConsolidateImpact
+AssessOpsImpact --> ConsolidateImpact
+ConsolidateImpact --> Report
+Report --> End
+
+Token Usage:
+  Prompt tokens: 2293
+  Completion tokens: 218
+  Total tokens: 2511
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:50:59
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start))
+Ingest["Ingest latest SEBI circulars"]
+StoreRaw["Store raw circulars"]
+Parse["Parse circulars into structured clauses table"]
+Classify["Classify clauses by topic and obligation type"]
+ExtractReq["Extract new compliance requirements"]
+MapExisting["Map clauses to existing compliance controls"]
+GapAnalysis["Perform gap analysis vs current compliance setup"]
+AssessImpactIT["Assess IT impact (systems, data, integrations, security)"]
+AssessImpactOps["Assess operational impact (processes, roles, SLAs)"]
+Consolidate["Consolidate findings into compliance impact report"]
+Review["Compliance & IT review and sign-off"]
+End((End))
+
+Start --> Ingest
+Ingest --> StoreRaw
+StoreRaw --> Parse
+Parse --> Classify
+Classify --> ExtractReq
+ExtractReq --> MapExisting
+MapExisting --> GapAnalysis
+GapAnalysis --> AssessImpactIT
+GapAnalysis --> AssessImpactOps
+AssessImpactIT --> Consolidate
+AssessImpactOps --> Consolidate
+Consolidate --> Review
+Review --> End
+
+Token Usage:
+  Prompt tokens: 2293
+  Completion tokens: 224
+  Total tokens: 2517
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:51:03
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+flowchart TB
+Start((Start))
+Ingest["Ingest latest SEBI circulars"]
+StoreRaw["Store raw circulars"]
+Parse["Parse circulars into structured clauses table"]
+ExtractReqs["Extract new compliance requirements"]
+MapExisting["Map clauses to existing compliance controls"]
+GapAnalysis["Perform gap analysis vs current setup"]
+AssessImpactIT["Assess IT impact (systems, data, integrations)"]
+AssessImpactOps["Assess operational impact (processes, roles, SLAs)"]
+ConsolidateImpact["Consolidate IT and operational impact"]
+Report["Generate compliance impact report"]
+End((End))
+
+Start --> Ingest
+Ingest --> StoreRaw
+StoreRaw --> Parse
+Parse --> ExtractReqs
+ExtractReqs --> MapExisting
+MapExisting --> GapAnalysis
+GapAnalysis --> AssessImpactIT
+GapAnalysis --> AssessImpactOps
+AssessImpactIT --> ConsolidateImpact
+AssessImpactOps --> ConsolidateImpact
+ConsolidateImpact --> Report
+Report --> End
+
+Token Usage:
+  Prompt tokens: 2293
+  Completion tokens: 206
+  Total tokens: 2499
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:51:38
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant SEBI
+participant Ingestion
+participant Parser
+participant "Clause Store"
+participant Analyzer
+participant "Existing Controls DB"
+participant "Impact Engine"
+participant "Compliance Team UI"
+
+SEBI-->>Ingestion: Publish new circulars
+Ingestion->>Ingestion: Fetch latest circulars (API/scrape)
+Ingestion-->>Parser: Raw circular documents
+
+Parser->>Parser: Normalize & clean text
+Parser->>"Clause Store": Extract clauses table
+"Clause Store"-->>Analyzer: Structured clauses
+
+Analyzer->>Analyzer: Identify new/changed requirements
+Analyzer->>"Existing Controls DB": Query mapped controls
+"Existing Controls DB"-->>Analyzer: Current control set
+Analyzer->>Analyzer: Perform gap analysis\n(missing/weak controls)
+Analyzer-->>"Impact Engine": Gaps + requirement metadata
+
+"Impact Engine"->>"Impact Engine": Assess IT impact\n(systems, data, integrations)
+"Impact Engine"->>"Impact Engine": Assess operational impact\n(processes, teams, SLAs)
+"Impact Engine"-->>"Compliance Team UI...
+
+Token Usage:
+  Prompt tokens: 1977
+  Completion tokens: 270
+  Total tokens: 2247
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:51:44
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant SEBI
+participant "Circular Ingestion Service"
+participant "Parser & Clause Extractor"
+participant "Requirement Extractor"
+participant "Existing Controls Repository"
+participant "Gap Analyzer"
+participant "Impact Assessor"
+participant "Compliance Officer"
+
+SEBI-->>"Circular Ingestion Service": Publish new circular
+"Circular Ingestion Service"->>"Parser & Clause Extractor": fetchLatestCirculars()
+activate "Parser & Clause Extractor"
+"Parser & Clause Extractor"->>"Parser & Clause Extractor": parseToClauses()
+"Parser & Clause Extractor"-->>"Requirement Extractor": clauses
+deactivate "Parser & Clause Extractor"
+
+activate "Requirement Extractor"
+"Requirement Extractor"->>"Requirement Extractor": identifyNewRequirements()
+"Requirement Extractor"-->>"Gap Analyzer": structuredRequirements
+deactivate "Requirement Extractor"
+
+activate "Gap Analyzer"
+"Gap Analyzer"->>"Existing Controls Repository": getExistingControls()
+"Existing Controls Repository"-->>"Gap Analyzer": ...
+
+Token Usage:
+  Prompt tokens: 1977
+  Completion tokens: 330
+  Total tokens: 2307
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:51:50
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:
+1. The new compliance requirements proposed by the regulator
+2. Gap analysis with my existing compliance setup
+3. The impact of these new compliance requirements on my organization at an IT and operational level
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+sequenceDiagram
+participant SEBI
+participant Ingestion
+participant Parser
+participant "ClauseTable"
+participant Analyzer
+participant "ComplianceDB"
+participant "GapEngine"
+participant "ImpactEngine"
+participant "ComplianceTeam"
+participant "ITOps"
+
+SEBI-->>Ingestion: Publish new circulars
+Ingestion->>Ingestion: Detect new/updated circular
+Ingestion->>Parser: Fetch circular content
+activate Parser
+Parser->>Parser: Clean & normalize text
+Parser->>ClauseTable: Extract clauses into structured table
+deactivate Parser
+
+Analyzer->>ClauseTable: Load latest clauses
+Analyzer->>ComplianceDB: Load existing controls & mappings
+activate Analyzer
+Analyzer->>Analyzer: Identify new/changed requirements
+Analyzer-->>ComplianceTeam: List of new compliance requirements
+deactivate Analyzer
+
+GapEngine->>ClauseTable: Compare clauses vs controls
+GapEngine->>ComplianceDB: Retrieve control coverage
+activate GapEngine
+GapEngine->>GapEngine: Compute control gaps and overlaps
+GapEngine-->>ComplianceTeam: Gap analys...
+
+Token Usage:
+  Prompt tokens: 1977
+  Completion tokens: 303
+  Total tokens: 2280
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:52:18
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlightParallel
+
+state PreFlightParallel {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Calibrated : gpsOk
+  Ready --> [*]
+  Calibrated --> [*]
+}
+
+PreFlightParallel --> FlightModes : startMission
+
+state FlightModes {
+  [*] --> Cruise
+  Cruise --> Hover : enterHover
+  Cruise --> ReturnHome : rthCommand
+  Cruise --> Patrol : patrolCommand
+  Hover --> [*]
+  ReturnHome --> [*]
+  Patrol --> [*]
+}
+
+FlightModes --> EmergencyLanding : criticalFailure
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : abortMission
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 172
+  Total tokens: 2154
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:52:22
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> Setup
+
+state Setup {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+
+  Ready --> [*]
+}
+
+Setup --> FlightModes : launch
+
+state FlightModes {
+  [*] --> Takeoff
+
+  Takeoff --> Cruise : reachAltitude
+  Cruise --> Landing : beginDescent
+
+  Cruise --> FinalA : missionComplete
+  Cruise --> FinalB : missionComplete
+  Cruise --> FinalC : missionComplete
+
+  FinalA --> [*]
+  FinalB --> [*]
+  FinalC --> [*]
+}
+
+FlightModes --> EmergencyLanding : criticalFault
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : terminate
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 176
+  Total tokens: 2158
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:52:26
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : launch
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachedAltitude
+  Cruise --> Landing : beginDescent
+  Landing --> FinalHover : hoverComplete
+  Landing --> FinalShutdown : shutdownComplete
+  Landing --> FinalReturn : returnComplete
+  FinalHover --> [*]
+  FinalShutdown --> [*]
+  FinalReturn --> [*]
+}
+
+FlightModes --> EmergencyLanding : emergencyDetected
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : terminate
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 179
+  Total tokens: 2161
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:54:15
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlightAndCalibration
+
+state PreFlightAndCalibration {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Calibrated : gpsOk
+  Ready --> [*]
+  Calibrated --> [*]
+}
+
+PreFlightAndCalibration --> FlightModes : startMission
+
+state FlightModes {
+  [*] --> Cruise
+  Cruise --> HoverFinal : hoverEvent
+  Cruise --> ReturnFinal : returnEvent
+  Cruise --> PatrolFinal : patrolEvent
+  HoverFinal --> [*]
+  ReturnFinal --> [*]
+  PatrolFinal --> [*]
+}
+
+FlightModes --> EmergencyLanding : emergencyDetected
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : abortMission
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 178
+  Total tokens: 2160
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:54:19
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> ParallelStartup
+
+state ParallelStartup {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Calibrated : gpsOk
+
+  Ready --> [*]
+  Calibrated --> [*]
+}
+
+ParallelStartup --> FlightModes : startMission
+
+state FlightModes {
+  [*] --> Takeoff
+
+  Takeoff --> Cruise : reachCruiseAltitude
+  Cruise --> Landing : beginDescent
+
+  Cruise --> FinalHover : missionComplete
+  Cruise --> FinalReturn : missionComplete
+  Cruise --> FinalRecord : missionComplete
+
+  FinalHover --> [*]
+  FinalReturn --> [*]
+  FinalRecord --> [*]
+}
+
+FlightModes --> EmergencyLanding : criticalFailure
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : abortMission
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 193
+  Total tokens: 2175
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-15 00:54:26
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Autonomous Drone Mission State Diagram
+
+Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+stateDiagram-v2
+[*] --> PreFlight
+state PreFlight {
+  [*] --> PreFlightCheck
+  [*] --> GPSCalibration
+  PreFlightCheck --> Ready : checksComplete
+  GPSCalibration --> Ready : gpsLocked
+  Ready --> [*]
+}
+PreFlight --> FlightModes : launch
+
+state FlightModes {
+  [*] --> Takeoff
+  Takeoff --> Cruise : reachAltitude
+  Cruise --> Landing : beginDescent
+
+  state NormalFlight {
+    [*] --> NF_Active
+    NF_Active --> [*] : completeNormal
+  }
+
+  state ReturnToHome {
+    [*] --> RTH_Active
+    RTH_Active --> [*] : completeRTH
+  }
+
+  state Loiter {
+    [*] --> Loiter_Active
+    Loiter_Active --> [*] : completeLoiter
+  }
+
+  Cruise --> NormalFlight : modeNormal
+  Cruise --> ReturnToHome : modeRTH
+  Cruise --> Loiter : modeLoiter
+}
+
+FlightModes --> EmergencyLanding : criticalFault
+EmergencyLanding --> FlightModes : recover
+EmergencyLanding --> [*] : shutdown
+
+Token Usage:
+  Prompt tokens: 1982
+  Completion tokens: 252
+  Total tokens: 2234
+
+Finish reason: stop
+
+================================================================================
+

@@ -9,6 +9,7 @@ const RL_ACTION_ENDPOINT = `${API_URL}/rl/action`;
 export type ActionType = 
   | 'image_copy'
   | 'variation_selection'
+  | 'variation_hover'
   | 'tab_away'
   | 'new_button'
   | 'mermaid_copy'
@@ -72,6 +73,21 @@ export const trackImageCopy = (diagramId?: string, mermaidCode?: string) => {
     action_type: 'image_copy',
     diagram_id: diagramId,
     mermaid_code: mermaidCode,
+  });
+};
+
+export const trackVariationHover = (
+  variationIndex: number,
+  diagramId?: string,
+  hoveredMermaidCode?: string,
+  allVariations?: string[]
+) => {
+  recordAction({
+    action_type: 'variation_hover',
+    variation_index: variationIndex,
+    diagram_id: diagramId,
+    mermaid_code: hoveredMermaidCode, // The hovered variation
+    all_variations: allVariations, // All 3 variations
   });
 };
 

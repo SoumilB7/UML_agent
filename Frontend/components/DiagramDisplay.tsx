@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react'
 import mermaid from 'mermaid'
-import { trackMermaidCopy, trackVariationSelection, trackImageCopy } from '@/utils/rlTracking'
+import { trackMermaidCopy, trackVariationSelection, trackVariationHover, trackImageCopy } from '@/utils/rlTracking'
 import FeedbackPanel from './FeedbackPanel'
 
 interface DiagramDisplayProps {
@@ -399,7 +399,13 @@ export default function DiagramDisplay({
         <div className="flex gap-2">
           {hasMultipleVariations && onConfirmSelection && selectedVariationIndex !== null && (
             <button
-              onClick={onConfirmSelection}
+              onClick={() => {
+                onConfirmSelection?.()
+                // Track the actual selection when "Use This One" is clicked
+                if (variations && variations[selectedVariationIndex]) {
+                  trackVariationSelection(selectedVariationIndex, effectiveDiagramId, variations[selectedVariationIndex], variations)
+                }
+              }}
               className="px-4 py-1.5 text-xs font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors flex items-center gap-1.5"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -456,7 +462,7 @@ export default function DiagramDisplay({
                 isSelected={selectedVariationIndex === index}
                 onSelect={() => {
                   onSelectVariation?.(index)
-                  trackVariationSelection(index, effectiveDiagramId, variation, variations)
+                  trackVariationHover(index, effectiveDiagramId, variation, variations)
                 }}
                 diagramId={effectiveDiagramId}
               />
