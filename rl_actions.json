@@ -2261,5 +2261,25 @@
     },
     "mermaid_code": "stateDiagram-v2\n[*] --> Init\nInit --> PreChecks : start\nInit --> GPSCalibration : start\nPreChecks --> Ready : checksPassed\nGPSCalibration --> Calibrated : gpsOk\nReady --> FlightModes : enterFlight\nCalibrated --> FlightModes : enterFlight\n\nstate FlightModes {\n  [*] --> Hover\n  Cruise --> ReturnHome : rth\n  ReturnHome --> [*]\n  Hover --> [*]\n  Cruise --> [*]\n    Tilt\n}\n\nFlightModes --> EmergencyLanding : fault\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort\nHover --> Tilt : startCruise\nTilt --> Cruise",
     "diagram_id": "diagram-1763200198171-4ir3qozv3"
+  },
+  {
+    "action_id": "a2758a47-fd10-4822-8ec7-e538fc60647e",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-15T10:30:50.367Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> Init\nInit --> PreChecks : start\nInit --> GPSCalibration : start\nPreChecks --> Ready : checksPassed\nGPSCalibration --> Calibrated : gpsOk\nReady --> FlightModes : enterFlight\nCalibrated --> FlightModes : enterFlight\n\nstate FlightModes {\n  [*] --> Hover\n  Cruise --> ReturnHome : rth\n  ReturnHome --> [*]\n  Hover --> [*]\n  Cruise --> [*]\n    Tilt\n}\n\nFlightModes --> EmergencyLanding : fault\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort\nHover --> Tilt : startCruise\nTilt --> Cruise",
+    "diagram_id": "diagram-1763200198171-4ir3qozv3"
+  },
+  {
+    "action_id": "774a9bc9-f6f2-47cd-b691-27df3feec8d8",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-15T10:41:31.334Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> Init\nInit --> PreChecks : start\nInit --> GPSCalibration : start\nPreChecks --> Ready : checksPassed\nGPSCalibration --> Calibrated : gpsOk\nReady --> FlightModes : enterFlight\nCalibrated --> FlightModes : enterFlight\n\nstate FlightModes {\n  [*] --> Hover\n  Cruise --> ReturnHome : rth\n  ReturnHome --> [*]\n  Hover --> [*]\n  Cruise --> [*]\n    Tilt\n}\n\nFlightModes --> EmergencyLanding : fault\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort\nHover --> Tilt : startCruise\nTilt --> Cruise",
+    "diagram_id": "diagram-1763200198171-4ir3qozv3"
   }
 ]
