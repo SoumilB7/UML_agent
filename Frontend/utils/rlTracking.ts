@@ -16,7 +16,9 @@ export type ActionType =
   | 'prompt_update'
   | 'feedback'
   | 'diagram_generated'
-  | 'diagram_edited';
+  | 'diagram_edited'
+  | 'zoom'
+  | 'pan';
 
 export interface RLActionMetadata {
   [key: string]: any;
@@ -194,6 +196,36 @@ export const trackDiagramEdited = (
     diagram_id: diagramId,
     metadata: {
       had_previous_diagram: !!previousMermaidCode,
+    },
+  });
+};
+
+export const trackZoomToggle = (
+  enabled: boolean,
+  diagramId?: string,
+  mermaidCode?: string
+) => {
+  recordAction({
+    action_type: 'zoom',
+    diagram_id: diagramId,
+    mermaid_code: mermaidCode,
+    metadata: {
+      enabled: enabled,
+    },
+  });
+};
+
+export const trackPanToggle = (
+  enabled: boolean,
+  diagramId?: string,
+  mermaidCode?: string
+) => {
+  recordAction({
+    action_type: 'pan',
+    diagram_id: diagramId,
+    mermaid_code: mermaidCode,
+    metadata: {
+      enabled: enabled,
     },
   });
 };

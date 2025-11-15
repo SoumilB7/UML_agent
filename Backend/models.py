@@ -20,7 +20,7 @@ class DiagramResponse(BaseModel):
 
 # RL Action Models
 class RLActionRequest(BaseModel):
-    action_type: str  # e.g., "image_copy", "variation_selection", "variation_hover", "tab_away", "new_button", "mermaid_copy", "prompt_update", "feedback"
+    action_type: str  # e.g., "image_copy", "variation_selection", "variation_hover", "tab_away", "new_button", "mermaid_copy", "prompt_update", "feedback", "zoom", "pan"
     timestamp: Optional[str] = None  # ISO format timestamp
     metadata: Optional[dict] = None  # Additional context about the action
     # For feedback actions

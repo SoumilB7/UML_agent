@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react'
 import mermaid from 'mermaid'
-import { trackMermaidCopy, trackVariationSelection, trackVariationHover, trackImageCopy } from '@/utils/rlTracking'
+import { trackMermaidCopy, trackVariationSelection, trackVariationHover, trackImageCopy, trackZoomToggle, trackPanToggle } from '@/utils/rlTracking'
 import FeedbackPanel from './FeedbackPanel'
 
 interface DiagramDisplayProps {
@@ -187,6 +187,12 @@ export default function DiagramDisplay({
   const [isDragging, setIsDragging] = useState(false)
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
   const [copied, setCopied] = useState(false)
+  const [zoomEnabled, setZoomEnabled] = useState(true)
+  const [panEnabled, setPanEnabled] = useState(true)
+  const zoomTrackTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  // Track if zoom/pan have been recorded for the current diagram
+  const zoomRecordedRef = useRef<string | null>(null)
+  const panRecordedRef = useRef<string | null>(null)
 
   useEffect(() => {
     mermaid.initialize({
@@ -284,70 +290,150 @@ export default function DiagramDisplay({
     renderDiagram()
   }, [mermaidCode, diagramId])
 
-  // Zoom functions
-  const handleZoomIn = useCallback(() => {
-    setScale(prev => Math.min(prev + 0.2, 5))
+  // Reset zoom/pan tracking flags when diagram changes
+  useEffect(() => {
+    zoomRecordedRef.current = null
+    panRecordedRef.current = null
+    // Reset zoom/pan state when diagram changes
+    setScale(1)
+    setPosition({ x: 0, y: 0 })
+  }, [mermaidCode, diagramId])
+
+  // Cleanup zoom tracking timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (zoomTrackTimeoutRef.current) {
+        clearTimeout(zoomTrackTimeoutRef.current)
+      }
+    }
   }, [])
 
+  // Zoom functions
+  const handleZoomIn = useCallback(() => {
+    if (zoomEnabled) {
+      const newScale = Math.min(scale + 0.2, 5)
+      setScale(newScale)
+      // Track zoom action only once per diagram session
+      if (zoomRecordedRef.current !== effectiveDiagramId) {
+        trackZoomToggle(true, effectiveDiagramId, mermaidCode)
+        zoomRecordedRef.current = effectiveDiagramId
+      }
+    }
+  }, [zoomEnabled, scale, effectiveDiagramId, mermaidCode])
+
   const handleZoomOut = useCallback(() => {
-    setScale(prev => Math.max(prev - 0.2, 0.1))
-  }, [])
+    if (zoomEnabled) {
+      const newScale = Math.max(scale - 0.2, 0.1)
+      setScale(newScale)
+      // Track zoom action only once per diagram session
+      if (zoomRecordedRef.current !== effectiveDiagramId) {
+        trackZoomToggle(true, effectiveDiagramId, mermaidCode)
+        zoomRecordedRef.current = effectiveDiagramId
+      }
+    }
+  }, [zoomEnabled, scale, effectiveDiagramId, mermaidCode])
 
   const handleReset = useCallback(() => {
     setScale(1)
     setPosition({ x: 0, y: 0 })
   }, [])
 
-  // Mouse wheel zoom
-  const handleWheel = useCallback((e: React.WheelEvent) => {
-    e.preventDefault()
-    const delta = e.deltaY > 0 ? -0.1 : 0.1
-    setScale(prev => Math.max(0.1, Math.min(5, prev + delta)))
+  // Toggle zoom mode (for UI control, but don't track this)
+  const handleZoomToggle = useCallback(() => {
+    setZoomEnabled(prev => !prev)
   }, [])
 
-  // Pan functions
+  // Toggle pan mode (for UI control, but don't track this)
+  const handlePanToggle = useCallback(() => {
+    setPanEnabled(prev => {
+      const newPanEnabled = !prev
+      // Disable dragging when pan is turned off
+      if (!newPanEnabled) {
+        setIsDragging(false)
+      }
+      return newPanEnabled
+    })
+  }, [])
+
+  // Mouse wheel zoom (only when zoom is enabled) - track when user actually zooms
+  const handleWheel = useCallback((e: React.WheelEvent) => {
+    if (zoomEnabled) {
+      e.preventDefault()
+      const delta = e.deltaY > 0 ? -0.1 : 0.1
+      const newScale = Math.max(0.1, Math.min(5, scale + delta))
+      setScale(newScale)
+      // Track zoom action only once per diagram session (debounced to avoid too many events)
+      if (zoomRecordedRef.current !== effectiveDiagramId) {
+        if (zoomTrackTimeoutRef.current) {
+          clearTimeout(zoomTrackTimeoutRef.current)
+        }
+        zoomTrackTimeoutRef.current = setTimeout(() => {
+          if (zoomRecordedRef.current !== effectiveDiagramId) {
+            trackZoomToggle(true, effectiveDiagramId, mermaidCode)
+            zoomRecordedRef.current = effectiveDiagramId
+          }
+        }, 300) // Track after 300ms of no zoom activity
+      }
+    }
+  }, [zoomEnabled, scale, effectiveDiagramId, mermaidCode])
+
+  // Pan functions (only when pan is enabled) - track when user actually pans
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    if (e.button === 0) { // Left mouse button
+    if (panEnabled && e.button === 0) { // Left mouse button
       setIsDragging(true)
       setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y })
+      // Track pan action only once per diagram session
+      if (panRecordedRef.current !== effectiveDiagramId) {
+        trackPanToggle(true, effectiveDiagramId, mermaidCode)
+        panRecordedRef.current = effectiveDiagramId
+      }
     }
-  }, [position])
+  }, [panEnabled, position, effectiveDiagramId, mermaidCode])
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (isDragging) {
+    if (panEnabled && isDragging) {
       setPosition({
         x: e.clientX - dragStart.x,
         y: e.clientY - dragStart.y
       })
     }
-  }, [isDragging, dragStart])
+  }, [panEnabled, isDragging, dragStart])
 
   const handleMouseUp = useCallback(() => {
-    setIsDragging(false)
-  }, [])
+    if (panEnabled) {
+      setIsDragging(false)
+    }
+  }, [panEnabled])
 
-  // Touch support for mobile
+  // Touch support for mobile (only when pan is enabled) - track when user actually pans
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    if (e.touches.length === 1) {
+    if (panEnabled && e.touches.length === 1) {
       const touch = e.touches[0]
       setIsDragging(true)
       setDragStart({ x: touch.clientX - position.x, y: touch.clientY - position.y })
+      // Track pan action only once per diagram session
+      if (panRecordedRef.current !== effectiveDiagramId) {
+        trackPanToggle(true, effectiveDiagramId, mermaidCode)
+        panRecordedRef.current = effectiveDiagramId
+      }
     }
-  }, [position])
+  }, [panEnabled, position, effectiveDiagramId, mermaidCode])
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (isDragging && e.touches.length === 1) {
+    if (panEnabled && isDragging && e.touches.length === 1) {
       const touch = e.touches[0]
       setPosition({
         x: touch.clientX - dragStart.x,
         y: touch.clientY - dragStart.y
       })
     }
-  }, [isDragging, dragStart])
+  }, [panEnabled, isDragging, dragStart])
 
   const handleTouchEnd = useCallback(() => {
-    setIsDragging(false)
-  }, [])
+    if (panEnabled) {
+      setIsDragging(false)
+    }
+  }, [panEnabled])
 
   // Copy mermaid code to clipboard
   const handleCopyCode = useCallback(async () => {
@@ -404,6 +490,9 @@ export default function DiagramDisplay({
                 // Track the actual selection when "Use This One" is clicked
                 if (variations && variations[selectedVariationIndex]) {
                   trackVariationSelection(selectedVariationIndex, effectiveDiagramId, variations[selectedVariationIndex], variations)
+                  // Reset zoom/pan tracking when variation is selected
+                  zoomRecordedRef.current = null
+                  panRecordedRef.current = null
                 }
               }}
               className="px-4 py-1.5 text-xs font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg transition-colors flex items-center gap-1.5"
@@ -463,6 +552,9 @@ export default function DiagramDisplay({
                 onSelect={() => {
                   onSelectVariation?.(index)
                   trackVariationHover(index, effectiveDiagramId, variation, variations)
+                  // Reset zoom/pan tracking when variation is hovered
+                  zoomRecordedRef.current = null
+                  panRecordedRef.current = null
                 }}
                 diagramId={effectiveDiagramId}
               />
@@ -473,9 +565,9 @@ export default function DiagramDisplay({
 
       <div 
         ref={containerRef}
-        className={`flex-1 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 overflow-hidden relative cursor-move ${
-          hasMultipleVariations ? 'min-h-[300px]' : 'min-h-[400px]'
-        }`}
+        className={`flex-1 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 overflow-hidden relative ${
+          panEnabled ? 'cursor-move' : 'cursor-default'
+        } ${hasMultipleVariations ? 'min-h-[300px]' : 'min-h-[400px]'}`}
         onWheel={handleWheel}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -515,24 +607,65 @@ export default function DiagramDisplay({
         ) : imageUrl ? (
           <>
             <div className="absolute top-2 right-2 z-10 flex flex-col gap-2 bg-white/90 backdrop-blur-sm rounded-lg p-2 shadow-lg border border-gray-200">
+              {/* Zoom Toggle Button */}
               <button
-                onClick={handleZoomIn}
-                className="p-2 hover:bg-gray-100 rounded transition-colors"
-                title="Zoom In (or scroll up)"
+                onClick={handleZoomToggle}
+                className={`p-2 rounded transition-colors ${
+                  zoomEnabled 
+                    ? 'bg-primary-100 text-primary-700 hover:bg-primary-200' 
+                    : 'hover:bg-gray-100 text-gray-600'
+                }`}
+                title={zoomEnabled ? "Zoom Enabled - Click to disable" : "Zoom Disabled - Click to enable"}
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
                 </svg>
               </button>
+              {/* Pan Toggle Button */}
               <button
-                onClick={handleZoomOut}
-                className="p-2 hover:bg-gray-100 rounded transition-colors"
-                title="Zoom Out (or scroll down)"
+                onClick={handlePanToggle}
+                className={`p-2 rounded transition-colors ${
+                  panEnabled 
+                    ? 'bg-primary-100 text-primary-700 hover:bg-primary-200' 
+                    : 'hover:bg-gray-100 text-gray-600'
+                }`}
+                title={panEnabled ? "Pan Enabled - Click to disable" : "Pan Disabled - Click to enable"}
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
                 </svg>
               </button>
+              {/* Zoom In Button (only active when zoom is enabled) */}
+              <button
+                onClick={handleZoomIn}
+                disabled={!zoomEnabled}
+                className={`p-2 rounded transition-colors ${
+                  zoomEnabled 
+                    ? 'hover:bg-gray-100' 
+                    : 'opacity-50 cursor-not-allowed'
+                }`}
+                title={zoomEnabled ? "Zoom In (or scroll up)" : "Enable zoom first"}
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+              </button>
+              {/* Zoom Out Button (only active when zoom is enabled) */}
+              <button
+                onClick={handleZoomOut}
+                disabled={!zoomEnabled}
+                className={`p-2 rounded transition-colors ${
+                  zoomEnabled 
+                    ? 'hover:bg-gray-100' 
+                    : 'opacity-50 cursor-not-allowed'
+                }`}
+                title={zoomEnabled ? "Zoom Out (or scroll down)" : "Enable zoom first"}
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                </svg>
+              </button>
+              {/* Reset Button */}
               <button
                 onClick={handleReset}
                 className="p-2 hover:bg-gray-100 rounded transition-colors"
@@ -562,7 +695,7 @@ export default function DiagramDisplay({
               />
             </div>
             <div className="absolute bottom-2 left-2 z-10 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1.5 text-xs text-gray-600 shadow-sm border border-gray-200">
-              Zoom: {Math.round(scale * 100)}% | Drag to pan
+              Zoom: {Math.round(scale * 100)}% | Drag to pan | Scroll to zoom
             </div>
           </>
         ) : (
