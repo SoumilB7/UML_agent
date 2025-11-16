@@ -43,8 +43,7 @@ async def generate_diagram(request: DiagramRequest):
                 variation = generate_diagram_mermaid(request.prompt)
                 variations.append(variation)
             
-            # Return first variation as mermaid_code for backward compatibility
-            # and all variations in the variations list
+
             return DiagramResponse(
                 mermaid_code=variations[0],
                 variations=variations

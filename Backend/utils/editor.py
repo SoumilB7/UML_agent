@@ -27,7 +27,6 @@ def apply_mermaid_edit(existing_mermaid_code: str, edit_instructions: dict) -> s
     lines = existing_mermaid_code.split('\n')
     diagram_type = _detect_diagram_type(lines)
     
-    # Apply each edit in sequence
     for edit in edit_instructions["edits"]:
         edit_type = edit.get("type")
         if not edit_type:
@@ -84,7 +83,7 @@ def apply_mermaid_edit(existing_mermaid_code: str, edit_instructions: dict) -> s
                 logger.warning(f"Unknown edit type: {edit_type}")
         except Exception as e:
             logger.error(f"Error applying edit {edit_type}: {e}", exc_info=True)
-            # Continue with other edits even if one fails
+
     
     return '\n'.join(lines)
 
@@ -110,7 +109,7 @@ def _find_class_definition(lines: list, class_name: str) -> int:
     """Find the line index where a class is defined. Returns -1 if not found."""
     for i, line in enumerate(lines):
         stripped = line.strip()
-        # Match: class ClassName or class "ClassName"
+
         if re.match(rf'^class\s+{re.escape(class_name)}\s*$', stripped, re.IGNORECASE) or \
            re.match(rf'^class\s+"{re.escape(class_name)}"\s*$', stripped):
             return i
@@ -121,10 +120,8 @@ def _find_class_attributes_start(lines: list, class_name: str, class_line_idx: i
     """Find where attributes for a class start (colon syntax)."""
     for i in range(class_line_idx + 1, len(lines)):
         line = lines[i].strip()
-        # Check if it's an attribute line: ClassName : +attr Type
         if re.match(rf'^{re.escape(class_name)}\s*:\s*[+\-#~]', line):
             return i
-        # Check if we've hit another class definition or relationship
         if line.startswith('class ') or re.match(r'^[A-Za-z_][A-Za-z0-9_]*\s*(<|--|\.\.|o--|\*--)', line):
             break
     return -1
@@ -134,7 +131,6 @@ def _find_class_attributes_end(lines: list, class_name: str, start_idx: int) -> 
     """Find where attributes for a class end."""
     for i in range(start_idx, len(lines)):
         line = lines[i].strip()
-        # Stop if we hit a non-attribute line for this class
         if not re.match(rf'^{re.escape(class_name)}\s*:\s*', line):
             return i
     return len(lines)
@@ -156,13 +152,13 @@ def _apply_add_class(lines: list, details: dict) -> list:
     for method in methods:
         new_lines.append(f"{class_name} : {method}")
     
-    # Find insertion point
+
     if position == "end":
-        # Find last class definition
+
         insert_idx = len(lines)
         for i in range(len(lines) - 1, -1, -1):
             if lines[i].strip().startswith('class '):
-                # Find end of this class (next class or relationship)
+
                 existing_class_name = lines[i].strip().split()[1] if len(lines[i].strip().split()) > 1 else ""
                 insert_idx = i + 1
                 while insert_idx < len(lines) and \
@@ -174,7 +170,7 @@ def _apply_add_class(lines: list, details: dict) -> list:
         after_class = position.split(":", 1)[1]
         idx = _find_class_definition(lines, after_class)
         if idx >= 0:
-            # Find end of this class
+
             insert_idx = idx + 1
             while insert_idx < len(lines) and \
                   (lines[insert_idx].strip().startswith(after_class + ' :') or 
@@ -190,7 +186,7 @@ def _apply_add_class(lines: list, details: dict) -> list:
     else:
         insert_idx = len(lines)
     
-    # Insert the new class
+
     lines[insert_idx:insert_idx] = new_lines
     return lines
 
@@ -201,10 +197,10 @@ def _apply_remove_class(lines: list, class_name: str) -> list:
     if class_idx < 0:
         return lines
     
-    # Find all lines related to this class
+
     indices_to_remove = [class_idx]
     
-    # Remove attribute/method lines
+
     for i in range(class_idx + 1, len(lines)):
         line = lines[i].strip()
         if line.startswith(f"{class_name} :"):
@@ -212,25 +208,24 @@ def _apply_remove_class(lines: list, class_name: str) -> list:
         elif line.startswith('class ') or re.match(r'^[A-Za-z_][A-Za-z0-9_]*\s*(<|--|\.\.|o--|\*--)', line):
             break
     
-    # Remove relationships involving this class
+
     for i in range(len(lines) - 1, -1, -1):
         if i in indices_to_remove:
             continue
         line = lines[i].strip()
-        # Check if this line contains a relationship with the class
+
         if re.search(rf'\b{re.escape(class_name)}\b', line) and \
            re.search(r'(<|--|\.\.|o--|\*--)', line):
             indices_to_remove.append(i)
     
-    # Remove note lines
+
     for i in range(len(lines) - 1, -1, -1):
         if i in indices_to_remove:
             continue
         line = lines[i].strip()
         if line.startswith('note ') and class_name in line:
             indices_to_remove.append(i)
-    
-    # Remove in reverse order to maintain indices
+
     for idx in sorted(indices_to_remove, reverse=True):
         lines.pop(idx)
     
@@ -243,36 +238,35 @@ def _apply_modify_class(lines: list, class_name: str, details: dict) -> list:
     if class_idx < 0:
         return lines
     
-    # Rename class if needed
+
     new_name = details.get("new_name")
     if new_name and new_name != class_name:
-        # Rename class definition
+
         lines[class_idx] = lines[class_idx].replace(f"class {class_name}", f"class {new_name}")
-        # Rename all attribute/method lines
         for i in range(class_idx + 1, len(lines)):
             if lines[i].strip().startswith(f"{class_name} :"):
                 lines[i] = lines[i].replace(f"{class_name} :", f"{new_name} :")
             elif lines[i].strip().startswith('class ') or \
                  re.match(r'^[A-Za-z_][A-Za-z0-9_]*\s*(<|--|\.\.|o--|\*--)', lines[i].strip()):
                 break
-        # Rename in relationships
+
         for i in range(len(lines)):
             lines[i] = re.sub(rf'\b{re.escape(class_name)}\b', new_name, lines[i])
         class_name = new_name
     
-    # Find attribute/method section
+
     attr_start = _find_class_attributes_start(lines, class_name, class_idx)
     if attr_start < 0:
         attr_start = class_idx + 1
     
     attr_end = _find_class_attributes_end(lines, class_name, attr_start)
     
-    # Handle attribute modifications
+
     remove_attrs = details.get("remove_attributes", [])
     add_attrs = details.get("add_attributes", [])
     modify_attrs = details.get("modify_attributes", [])
     
-    # Remove attributes
+
     for attr_name in remove_attrs:
         for i in range(attr_end - 1, attr_start - 1, -1):
             if attr_name in lines[i] and lines[i].strip().startswith(f"{class_name} :"):
@@ -280,7 +274,7 @@ def _apply_modify_class(lines: list, class_name: str, details: dict) -> list:
                 attr_end -= 1
                 break
     
-    # Modify attributes
+
     for mod in modify_attrs:
         old_attr = mod.get("old", "")
         new_attr = mod.get("new", "")
@@ -289,26 +283,24 @@ def _apply_modify_class(lines: list, class_name: str, details: dict) -> list:
                 lines[i] = lines[i].replace(old_attr, new_attr)
                 break
     
-    # Add attributes
+
     position = details.get("position", "end")
     for attr in add_attrs:
         if position == "end":
             lines.insert(attr_end, f"{class_name} : {attr}")
             attr_end += 1
-        # Could add more position logic here
-    
-    # Handle method modifications (similar to attributes)
+
     remove_methods = details.get("remove_methods", [])
     add_methods = details.get("add_methods", [])
     modify_methods = details.get("modify_methods", [])
     
-    # Re-find attribute/method section after modifications
+
     attr_start = _find_class_attributes_start(lines, class_name, class_idx)
     if attr_start < 0:
         attr_start = class_idx + 1
     attr_end = _find_class_attributes_end(lines, class_name, attr_start)
     
-    # Remove methods
+
     for method_name in remove_methods:
         for i in range(attr_end - 1, attr_start - 1, -1):
             if method_name in lines[i] and lines[i].strip().startswith(f"{class_name} :"):
@@ -316,7 +308,7 @@ def _apply_modify_class(lines: list, class_name: str, details: dict) -> list:
                 attr_end -= 1
                 break
     
-    # Modify methods
+
     for mod in modify_methods:
         old_method = mod.get("old", "")
         new_method = mod.get("new", "")
@@ -325,7 +317,7 @@ def _apply_modify_class(lines: list, class_name: str, details: dict) -> list:
                 lines[i] = lines[i].replace(old_method, new_method)
                 break
     
-    # Add methods
+
     for method in add_methods:
         lines.insert(attr_end, f"{class_name} : {method}")
         attr_end += 1
@@ -345,7 +337,7 @@ def _apply_add_relationship(lines: list, details: dict) -> list:
     if not from_class or not to_class:
         return lines
     
-    # Build relationship line
+
     if mult_from and mult_to:
         rel_line = f'{from_class} "{mult_from}" {rel_type} "{mult_to}" {to_class}'
     elif mult_from:
@@ -358,7 +350,7 @@ def _apply_add_relationship(lines: list, details: dict) -> list:
     if label:
         rel_line += f' : {label}'
     
-    # Find insertion point (after class definitions, before notes)
+
     insert_idx = len(lines)
     for i in range(len(lines) - 1, -1, -1):
         line = lines[i].strip()
@@ -381,7 +373,7 @@ def _apply_remove_relationship(lines: list, details: dict) -> list:
     if not from_class or not to_class:
         return lines
     
-    # Find and remove matching relationship
+
     for i in range(len(lines) - 1, -1, -1):
         line = lines[i].strip()
         if from_class in line and to_class in line and \
@@ -406,12 +398,11 @@ def _apply_modify_relationship(lines: list, details: dict) -> list:
     if not from_class or not to_class:
         return lines
     
-    # Find the relationship line
+
     for i, line in enumerate(lines):
         if from_class in line and to_class in line and \
            (old_type is None or old_type in line) and \
            re.search(r'(<|--|\.\.|o--|\*--)', line):
-            # Rebuild the relationship line
             if new_mult_from and new_mult_to:
                 new_line = f'{from_class} "{new_mult_from}" {new_type} "{new_mult_to}" {to_class}'
             elif new_mult_from:
@@ -419,14 +410,12 @@ def _apply_modify_relationship(lines: list, details: dict) -> list:
             elif new_mult_to:
                 new_line = f'{from_class} {new_type} "{new_mult_to}" {to_class}'
             else:
-                # Replace old_type with new_type in the line
                 if old_type:
                     new_line = re.sub(rf'{re.escape(old_type)}', new_type, line)
                 else:
-                    # Replace any relationship type with new_type
+
                     new_line = re.sub(r'(<\|--|--|\.\.>|o--|\*--)', new_type, line)
-                # Ensure from_class and to_class are at the start and end
-                # Extract existing multiplicities and label if any
+
                 existing_label = None
                 if ' : ' in line:
                     parts = line.split(' : ', 1)
@@ -434,8 +423,7 @@ def _apply_modify_relationship(lines: list, details: dict) -> list:
                     line_without_label = parts[0]
                 else:
                     line_without_label = line
-                
-                # Check for multiplicities in the original line
+
                 mult_match = re.search(rf'{re.escape(from_class)}\s*"([^"]+)"\s*{re.escape(old_type)}\s*"([^"]+)"\s*{re.escape(to_class)}', line_without_label)
                 if mult_match:
                     new_line = f'{from_class} "{mult_match.group(1)}" {new_type} "{mult_match.group(2)}" {to_class}'

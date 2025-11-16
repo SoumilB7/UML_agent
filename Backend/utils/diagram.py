@@ -36,16 +36,13 @@ def extract_mermaid_code(text: str) -> str:
     Returns:
         str: The extracted Mermaid code.
     """
-    # Remove markdown code blocks if present
+
     text = text.strip()
-    
-    # Check for ```mermaid or ``` blocks
     mermaid_pattern = r'```(?:mermaid)?\s*(.*?)```'
     match = re.search(mermaid_pattern, text, re.DOTALL)
     if match:
         return match.group(1).strip()
     
-    # If no code blocks, return the text as-is (assuming it's already Mermaid code)
     return text
 
 
@@ -65,7 +62,6 @@ def unescape_mermaid_code(mermaid_code: str) -> str:
         str: The unescaped Mermaid code ready for rendering
     """
     try:
-        # First, check if it's a JSON-encoded string (starts and ends with quotes)
         if mermaid_code.startswith('"') and mermaid_code.endswith('"'):
             try:
                 # If it's a JSON-encoded string, decode it first
@@ -75,34 +71,19 @@ def unescape_mermaid_code(mermaid_code: str) -> str:
                 # If JSON decode fails, continue with original string
                 pass
         
-        # Now handle escape sequences
-        # The model might return strings with literal backslash sequences like "\\n"
-        # We need to convert these to actual characters
-        
-        # Use Python's codecs.decode with 'unicode_escape' to handle escape sequences
-        # This is the most reliable way to convert \n, \t, \", etc. to their actual characters
-        # We encode to bytes using 'raw_unicode_escape' first to preserve the escape sequences
-        # as they are, then decode with 'unicode_escape' to interpret them
-        
+
         try:
-            # Method 1: Use encode/decode to properly handle escape sequences
-            # Encode to bytes, then decode with unicode_escape to convert \n to newline
-            # This converts literal \n (backslash+n) to actual newline character
             unescaped = mermaid_code.encode('utf-8').decode('unicode_escape')
         except (UnicodeDecodeError, ValueError, UnicodeEncodeError):
-            # Method 2: If codecs fails, do manual replacement
-            # This handles the case where escape sequences are literal strings
             unescaped = mermaid_code
-            # Replace in order: handle \\ first to avoid double replacement issues
-            # Then handle other escape sequences
             escape_replacements = [
-                ('\\\\', '\x00BACKSLASH\x00'),  # Temporary placeholder for backslashes
-                ('\\n', '\n'),   # Newline
-                ('\\t', '\t'),   # Tab
-                ('\\r', '\r'),   # Carriage return
-                ('\\"', '"'),    # Double quote
-                ("\\'", "'"),    # Single quote
-                ('\x00BACKSLASH\x00', '\\'),  # Restore backslashes
+                ('\\\\', '\x00BACKSLASH\x00'),
+                ('\\n', '\n'),
+                ('\\t', '\t'),
+                ('\\r', '\r'),
+                ('\\"', '"'),
+                ("\\'", "'"),
+                ('\x00BACKSLASH\x00', '\\'),
             ]
             
             for old, new in escape_replacements:
@@ -111,7 +92,6 @@ def unescape_mermaid_code(mermaid_code: str) -> str:
         return unescaped
     except Exception as e:
         logger.warning(f"Error unescaping Mermaid code, using original: {e}")
-        # If unescaping fails, return original (might already be properly formatted)
         return mermaid_code
 
 
@@ -127,17 +107,12 @@ def render_mermaid_to_image(mermaid_code: str, format: str = "png") -> Optional[
         bytes: Image data as bytes, or None if rendering fails
     """
     try:
-        # First, unescape the Mermaid code to convert \n to newlines, \" to quotes, etc.
         cleaned_code = unescape_mermaid_code(mermaid_code)
         logger.debug(f"Cleaned Mermaid code (first 200 chars): {cleaned_code[:200]}")
         
-        # Encode the cleaned Mermaid code to base64url (URL-safe base64)
         mermaid_base64 = base64.urlsafe_b64encode(cleaned_code.encode('utf-8')).decode('utf-8')
-        # Remove padding if present (mermaid.ink doesn't need it)
         mermaid_base64 = mermaid_base64.rstrip('=')
         
-        # Use mermaid.ink API to render the diagram
-        # For PNG: /img/{base64}, For SVG: /svg/{base64}
         endpoint = "svg" if format.lower() == "svg" else "img"
         url = f"https://mermaid.ink/{endpoint}/{mermaid_base64}"
         
@@ -151,7 +126,6 @@ def render_mermaid_to_image(mermaid_code: str, format: str = "png") -> Optional[
             
             response.raise_for_status()
             
-            # Check if we got an image response
             content_type = response.headers.get('content-type', '')
             logger.debug(f"Content type: {content_type}")
             
@@ -209,7 +183,6 @@ def generate_diagram_mermaid(user_prompt: str) -> str:
             stream=False,
         )
 
-        # Log the LLM call
         log_llm_call(
             model=OPENAI_MODEL_NAME,
             messages=messages,
@@ -221,14 +194,12 @@ def generate_diagram_mermaid(user_prompt: str) -> str:
 
         raw_answer = response.choices[0].message.content.strip()
         
-        # Extract Mermaid code (in case model wraps it in markdown)
         mermaid_code = extract_mermaid_code(raw_answer)
         
         logger.info(f"Generated Mermaid code (length: {len(mermaid_code)} chars)")
         return mermaid_code
 
     except Exception as e:
-        # Log the error
         log_llm_call(
             model=OPENAI_MODEL_NAME,
             messages=[

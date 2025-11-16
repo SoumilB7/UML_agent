@@ -3136,5 +3136,187 @@
     },
     "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
     "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "dc8a4201-3179-460f-abbc-51be4f953f84",
+    "action_type": "new_button",
+    "timestamp": "2025-11-16T06:10:10.615Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "cac8915b-25a0-4978-96a0-73697527ecd8",
+    "action_type": "diagram_generated",
+    "timestamp": "2025-11-16T06:10:30.255Z",
+    "metadata": {
+      "num_variations": 3
+    },
+    "prompt": "Autonomous Drone Mission State Diagram\n\nCreate a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.",
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\nPreFlight --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> [*]\n  Navigate --> [*]\n  Survey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFault\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission\nFlightModes --> [*]",
+    "diagram_id": "diagram-1763273410616-uyxxun1bm"
+  },
+  {
+    "action_id": "32b9d7b3-9818-417d-afca-03db0dc25c30",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:10:32.172Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\nPreFlight --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> [*]\n  Navigate --> [*]\n  Survey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFault\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission\nFlightModes --> [*]",
+    "diagram_id": "diagram-1763273410616-uyxxun1bm"
+  },
+  {
+    "action_id": "5d24b196-84b2-4b71-a49c-51e792f63050",
+    "action_type": "new_button",
+    "timestamp": "2025-11-16T06:12:00.528Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlight\nstate PreFlight {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\nPreFlight --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> [*]\n  Navigate --> [*]\n  Survey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFault\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission\nFlightModes --> [*]",
+    "diagram_id": "diagram-1763273410616-uyxxun1bm"
+  },
+  {
+    "action_id": "e49d5809-4e52-4595-ad49-ee49cb6c3177",
+    "action_type": "diagram_generated",
+    "timestamp": "2025-11-16T06:12:17.611Z",
+    "metadata": {
+      "num_variations": 3
+    },
+    "prompt": "Autonomous Drone Mission State Diagram\n\nCreate a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.",
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "68ff3af9-a37f-4359-aecb-c8e32a294a76",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:12:21.119Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "420b3f9b-eab3-468c-94b7-10e70934159c",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:12:23.081Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "b5fd130d-db86-4816-b7be-6ea1d59fc9a6",
+    "action_type": "variation_selection",
+    "timestamp": "2025-11-16T06:12:28.689Z",
+    "metadata": {},
+    "variation_index": 0,
+    "all_variations": [
+      "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+      "stateDiagram-v2\n[*] --> PreChecks\n[*] --> GPSCalibration\n\nstate PreChecks {\n  [*] --> PreFlightCheck\n  PreFlightCheck --> [*] : checksComplete\n}\n\nstate GPSCalibration {\n  [*] --> Calibrating\n  Calibrating --> [*] : gpsReady\n}\n\nPreChecks --> FlightModes : enterFlight\nGPSCalibration --> FlightModes : enterFlight\n\nstate FlightModes {\n  [*] --> Takeoff\n\n  Takeoff --> Hover : reachedAltitude\n  Hover --> Cruise : startCruise\n\n  Cruise --> FinalA : missionComplete\n  Cruise --> FinalB : missionComplete\n  Cruise --> FinalC : missionComplete\n\n  FinalA\n  FinalB\n  FinalC\n}\n\nEmergencyLanding\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : terminateMission",
+      "stateDiagram-v2\n[*] --> Init\nInit --> ParallelStart\n\nstate ParallelStart {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nParallelStart --> FlightModes : allSystemsGo\n\nstate FlightModes {\n  [*] --> Cruise\n\n  Cruise --> Hover : switchToHover\n  Cruise --> ReturnHome : switchToReturn\n  Cruise --> Patrol : switchToPatrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\n\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission"
+    ],
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "3b096691-c485-4581-815b-7745946c5f13",
+    "action_type": "mermaid_copy",
+    "timestamp": "2025-11-16T06:12:36.875Z",
+    "metadata": {},
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "be5bf262-6fef-4312-96f3-c037466cefce",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:12:39.069Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "202f7c5d-7aa3-4ea4-9e82-708b11f2948c",
+    "action_type": "diagram_edited",
+    "timestamp": "2025-11-16T06:12:50.401Z",
+    "metadata": {
+      "had_previous_diagram": true
+    },
+    "prompt": "remove the upper block entirely",
+    "mermaid_code": "stateDiagram-v2\n\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\n\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "c90dd7af-32eb-44f7-a45e-d8fff34a60bd",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:12:51.963Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\n\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "69bab518-9ec7-4892-a181-d5472ae84884",
+    "action_type": "mermaid_copy",
+    "timestamp": "2025-11-16T06:12:53.431Z",
+    "metadata": {},
+    "mermaid_code": "stateDiagram-v2\n\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\n\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "6a20040c-dec5-487d-8e19-b126f62d1778",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:12:53.723Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\n\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : emergencyDetected\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "de14ea6c-7ba0-49b7-8bdb-ecba9bc496c6",
+    "action_type": "diagram_edited",
+    "timestamp": "2025-11-16T06:13:23.568Z",
+    "metadata": {
+      "had_previous_diagram": true
+    },
+    "prompt": "remove the connections that are outside the block",
+    "mermaid_code": "stateDiagram-v2\n\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n}\n\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "f644e21c-ad73-439c-a254-a2fde80e37d1",
+    "action_type": "mermaid_copy",
+    "timestamp": "2025-11-16T06:13:25.838Z",
+    "metadata": {},
+    "mermaid_code": "stateDiagram-v2\n\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n}\n\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "5a1a5988-b4bb-42cc-9f8c-2b10c1436edf",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:13:26.312Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n}\n\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
+  },
+  {
+    "action_id": "ca49fc0e-567e-45ff-b891-963af634f4e5",
+    "action_type": "new_button",
+    "timestamp": "2025-11-16T06:14:06.814Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n}\n\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : hold\n  Cruise --> ReturnHome : rth\n  Cruise --> Patrol : patrol\n\n  Hover --> FinalHover : completeHover\n  ReturnHome --> FinalReturn : completeReturn\n  Patrol --> FinalPatrol : completePatrol\n\n  FinalHover --> [*]\n  FinalReturn --> [*]\n  FinalPatrol --> [*]\n}\n",
+    "diagram_id": "diagram-1763273520528-ojxjms9g9"
   }
 ]

@@ -5,7 +5,7 @@ import json
 # Defaults
 OPENAI_MODEL_NAME = "gpt-5.1"
 
-
+# Prompts
 MERMAID_SYSTEM_PROMPT = """You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
 
 GLOBAL SYNTAX RULES (applies to all diagram types)

@@ -38,11 +38,9 @@ def save_rl_action(action_data: dict):
     """Save a single RL action to the JSON file"""
     ensure_rl_actions_file()
     actions = load_rl_actions()
-    
-    # Add action to the list
     actions.append(action_data)
     
-    # Write back to file
+
     try:
         with open(RL_ACTIONS_FILE, 'w') as f:
             json.dump(actions, f, indent=2, ensure_ascii=False)
@@ -75,7 +73,7 @@ async def record_rl_action(request: RLActionRequest):
             "metadata": request.metadata or {},
         }
         
-        # Add optional fields if present
+
         if request.rating is not None:
             action_data["rating"] = request.rating
         
