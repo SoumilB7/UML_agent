@@ -9,13 +9,12 @@ import os
 app = FastAPI(
     title="Mermaid Diagram Generator API",
     description="API to generate Mermaid UML diagrams from prompts",
-    version="0.0.1"
+    version="0.0.8"
 )
 
-# Add CORS middleware to allow frontend to call the API
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

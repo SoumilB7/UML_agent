@@ -2723,5 +2723,418 @@
     },
     "mermaid_code": "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Library\nLibrary : +id Integer\nLibrary : +name String\nLibrary : +location String\nLibrary : +registerStudent(studentId Integer) void\nLibrary : +registerTeacher(teacherId Integer) void\nLibrary : +lendBook(userId Integer, bookId Integer) boolean\nLibrary : +acceptReturn(userId Integer, bookId Integer) void\nLibrary : Library : +timeOpen Time\nLibrary : Library : +timeClose Time\n\nclass Book\nBook : +id Integer\nBook : +title String\nBook : +author String\nBook : +isbn String\nBook : +isAvailable boolean\n\nclass Loan\nLoan : +id Integer\nLoan : +userId Integer\nLoan : +bookId Integer\nLoan : +loanDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass User\nUser : +id Integer\nUser : +name String\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" --> \"*\" Book\nLibrary \"1\" --> \"*\" Loan\nUser \"1\" --> \"*\" Loan\nLoan \"1\" --> \"1\" Book\nStudent --> Library : borrows/returns\nTeacher --> Library : borrows/requests\nTeacher --> Student : recommends books\n\nnote for Library \"Central library managing books and loans\"\nnote for Student \"Represents a student user of the library\"\nnote for Teacher \"Represents a teacher user of the library\"",
     "diagram_id": "diagram-1763271647303-ke9kd09h3"
+  },
+  {
+    "action_id": "659eee24-bb77-4960-9cc4-6fa7b19727c2",
+    "action_type": "prompt_update",
+    "timestamp": "2025-11-16T05:44:28.772Z",
+    "metadata": {},
+    "prompt": "generate a student teacher class diagram interaction on the library diagram",
+    "previous_prompt": "a",
+    "diagram_id": "diagram-1763271647303-ke9kd09h3"
+  },
+  {
+    "action_id": "ae0a7705-2aac-4cc4-974a-0ad04bf884e7",
+    "action_type": "new_button",
+    "timestamp": "2025-11-16T05:44:31.037Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Library\nLibrary : +id Integer\nLibrary : +name String\nLibrary : +location String\nLibrary : +registerStudent(studentId Integer) void\nLibrary : +registerTeacher(teacherId Integer) void\nLibrary : +lendBook(userId Integer, bookId Integer) boolean\nLibrary : +acceptReturn(userId Integer, bookId Integer) void\nLibrary : Library : +timeOpen Time\nLibrary : Library : +timeClose Time\n\nclass Book\nBook : +id Integer\nBook : +title String\nBook : +author String\nBook : +isbn String\nBook : +isAvailable boolean\n\nclass Loan\nLoan : +id Integer\nLoan : +userId Integer\nLoan : +bookId Integer\nLoan : +loanDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass User\nUser : +id Integer\nUser : +name String\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" --> \"*\" Book\nLibrary \"1\" --> \"*\" Loan\nUser \"1\" --> \"*\" Loan\nLoan \"1\" --> \"1\" Book\nStudent --> Library : borrows/returns\nTeacher --> Library : borrows/requests\nTeacher --> Student : recommends books\n\nnote for Library \"Central library managing books and loans\"\nnote for Student \"Represents a student user of the library\"\nnote for Teacher \"Represents a teacher user of the library\"",
+    "diagram_id": "diagram-1763271647303-ke9kd09h3"
+  },
+  {
+    "action_id": "fdfcef0a-5526-46cc-bd89-fa5e4b0637fe",
+    "action_type": "diagram_generated",
+    "timestamp": "2025-11-16T05:45:04.792Z",
+    "metadata": {
+      "num_variations": 3
+    },
+    "prompt": "generate a student teacher class diagram interaction on the library diagram",
+    "mermaid_code": "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +issueBook(userId Integer, bookId Integer) boolean\nLibrarian : +collectBook(userId Integer, bookId Integer) boolean\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +isAvailable boolean\n\nclass Library\nLibrary : +name String\nLibrary : +address String\nLibrary : +open() void\nLibrary : +close() void\n\nclass Loan\nLoan : +loanId Integer\nLoan : +issueDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass Catalog\nCatalog : +searchByTitle(title String) Book\nCatalog : +searchByAuthor(author String) Book\n\nclass User\nUser : +userId Integer\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" *-- \"*\" Book\nLibrary \"1\" *-- \"*\" Loan\nLibrary \"1\" *-- \"1\" Catalog\nLibrary \"1\" *-- \"*\" Librarian\nStudent \"1\" --> \"*\" Loan : borrows\nTeacher \"1\" --> \"*\" Loan : borrows\nLoan \"1\" --> \"1\" Book : for\nLibrarian \"1\" --> \"*\" Loan : manages\nStudent \"1\" --> \"1\" Library : memberOf\nTeacher \"1\" --> \"1\" Library : memberOf\nLibrarian \"1\" --> \"1\" Library : worksAt\nStudent \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Student : recommends\n\nnote for Student \"Represents a student who can borrow books from the library\"\nnote for Teacher \"Represents a teacher who can borrow and recommend books\"\nnote for Library \"Represents the library as an aggregate of books, loans, catalog, and staff\"",
+    "diagram_id": "diagram-1763271871038-b82an2hak"
+  },
+  {
+    "action_id": "6aac7383-26ef-42f4-a3e5-43df90cb2780",
+    "action_type": "variation_selection",
+    "timestamp": "2025-11-16T05:45:08.130Z",
+    "metadata": {},
+    "variation_index": 0,
+    "all_variations": [
+      "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +issueBook(userId Integer, bookId Integer) boolean\nLibrarian : +collectBook(userId Integer, bookId Integer) boolean\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +isAvailable boolean\n\nclass Library\nLibrary : +name String\nLibrary : +address String\nLibrary : +open() void\nLibrary : +close() void\n\nclass Loan\nLoan : +loanId Integer\nLoan : +issueDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass Catalog\nCatalog : +searchByTitle(title String) Book\nCatalog : +searchByAuthor(author String) Book\n\nclass User\nUser : +userId Integer\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" *-- \"*\" Book\nLibrary \"1\" *-- \"*\" Loan\nLibrary \"1\" *-- \"1\" Catalog\nLibrary \"1\" *-- \"*\" Librarian\nStudent \"1\" --> \"*\" Loan : borrows\nTeacher \"1\" --> \"*\" Loan : borrows\nLoan \"1\" --> \"1\" Book : for\nLibrarian \"1\" --> \"*\" Loan : manages\nStudent \"1\" --> \"1\" Library : memberOf\nTeacher \"1\" --> \"1\" Library : memberOf\nLibrarian \"1\" --> \"1\" Library : worksAt\nStudent \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Student : recommends\n\nnote for Student \"Represents a student who can borrow books from the library\"\nnote for Teacher \"Represents a teacher who can borrow and recommend books\"\nnote for Library \"Represents the library as an aggregate of books, loans, catalog, and staff\"",
+      "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +issueBook(userId Integer, bookId Integer) boolean\nLibrarian : +receiveBook(userId Integer, bookId Integer) boolean\nLibrarian : +manageInventory() void\n\nclass Library\nLibrary : +name String\nLibrary : +address String\nLibrary : +open() void\nLibrary : +close() void\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +availableCopies Integer\n\nclass Loan\nLoan : +loanId Integer\nLoan : +issueDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass Catalog\nCatalog : +searchByTitle(title String) Book\nCatalog : +searchByAuthor(author String) Book\n\nclass User\nUser : +userId Integer\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\n\nLibrary \"1\" --> \"*\" Book\nLibrary \"1\" --> \"many\" Librarian\nLibrary \"1\" --> \"1\" Catalog\n\nStudent \"1\" --> \"*\" Loan\nTeacher \"1\" --> \"*\" Loan\nLoan \"1\" --> \"1\" Book\nLoan \"1\" --> \"1\" Librarian\nLibrarian \"1\" --> \"*\" Loan\n\nStudent --> Librarian : requests borrowing\nTeacher --> Librarian : requests borrowing\nTeacher --> Student : guides on book selection\nStudent --> Catalog : searches books\nTeacher --> Catalog : searches books\nLibrarian --> Catalog : updates records\n\nnote for Library \"Represents the school library where students and teachers interact with books through librarians\"",
+      "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Library\nLibrary : +id Integer\nLibrary : +name String\nLibrary : +location String\nLibrary : +lendBook(userId Integer, bookId Integer) boolean\nLibrary : +acceptReturn(userId Integer, bookId Integer) boolean\nLibrary : +searchCatalog(query String) List~Book~\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +availableCopies Integer\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +approveLoan(userId Integer, bookId Integer) boolean\nLibrarian : +manageInventory() void\n\nclass Loan\nLoan : +loanId Integer\nLoan : +userId Integer\nLoan : +bookId Integer\nLoan : +loanDate Date\nLoan : +dueDate Date\nLoan : +isOverdue() boolean\n\nStudent \"1\" --> \"*\" Loan : borrows\nTeacher \"1\" --> \"*\" Loan : borrows\nLoan \"1\" --> \"1\" Book : for\nLibrary \"1\" --> \"*\" Book : holds\nLibrary \"1\" --> \"*\" Loan : manages\nLibrary \"1\" --> \"*\" Librarian : employs\nStudent \"1\" --> \"1\" Library : memberOf\nTeacher \"1\" --> \"1\" Library : memberOf\nLibrarian \"1\" --> \"*\" Loan : processes\nTeacher \"1\" --> \"*\" Student : mentors\n\nnote for Student \"Represents a learner who can borrow books from the library\"\nnote for Teacher \"Represents an instructor who can borrow and recommend books\"\nnote for Library \"Central library system managing books, loans, and staff\""
+    ],
+    "mermaid_code": "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +issueBook(userId Integer, bookId Integer) boolean\nLibrarian : +collectBook(userId Integer, bookId Integer) boolean\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +isAvailable boolean\n\nclass Library\nLibrary : +name String\nLibrary : +address String\nLibrary : +open() void\nLibrary : +close() void\n\nclass Loan\nLoan : +loanId Integer\nLoan : +issueDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass Catalog\nCatalog : +searchByTitle(title String) Book\nCatalog : +searchByAuthor(author String) Book\n\nclass User\nUser : +userId Integer\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" *-- \"*\" Book\nLibrary \"1\" *-- \"*\" Loan\nLibrary \"1\" *-- \"1\" Catalog\nLibrary \"1\" *-- \"*\" Librarian\nStudent \"1\" --> \"*\" Loan : borrows\nTeacher \"1\" --> \"*\" Loan : borrows\nLoan \"1\" --> \"1\" Book : for\nLibrarian \"1\" --> \"*\" Loan : manages\nStudent \"1\" --> \"1\" Library : memberOf\nTeacher \"1\" --> \"1\" Library : memberOf\nLibrarian \"1\" --> \"1\" Library : worksAt\nStudent \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Student : recommends\n\nnote for Student \"Represents a student who can borrow books from the library\"\nnote for Teacher \"Represents a teacher who can borrow and recommend books\"\nnote for Library \"Represents the library as an aggregate of books, loans, catalog, and staff\"",
+    "diagram_id": "diagram-1763271871038-b82an2hak"
+  },
+  {
+    "action_id": "4665ad0e-9a11-40d5-99f8-43b4ea368354",
+    "action_type": "mermaid_copy",
+    "timestamp": "2025-11-16T05:45:08.944Z",
+    "metadata": {},
+    "mermaid_code": "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +issueBook(userId Integer, bookId Integer) boolean\nLibrarian : +collectBook(userId Integer, bookId Integer) boolean\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +isAvailable boolean\n\nclass Library\nLibrary : +name String\nLibrary : +address String\nLibrary : +open() void\nLibrary : +close() void\n\nclass Loan\nLoan : +loanId Integer\nLoan : +issueDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass Catalog\nCatalog : +searchByTitle(title String) Book\nCatalog : +searchByAuthor(author String) Book\n\nclass User\nUser : +userId Integer\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" *-- \"*\" Book\nLibrary \"1\" *-- \"*\" Loan\nLibrary \"1\" *-- \"1\" Catalog\nLibrary \"1\" *-- \"*\" Librarian\nStudent \"1\" --> \"*\" Loan : borrows\nTeacher \"1\" --> \"*\" Loan : borrows\nLoan \"1\" --> \"1\" Book : for\nLibrarian \"1\" --> \"*\" Loan : manages\nStudent \"1\" --> \"1\" Library : memberOf\nTeacher \"1\" --> \"1\" Library : memberOf\nLibrarian \"1\" --> \"1\" Library : worksAt\nStudent \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Student : recommends\n\nnote for Student \"Represents a student who can borrow books from the library\"\nnote for Teacher \"Represents a teacher who can borrow and recommend books\"\nnote for Library \"Represents the library as an aggregate of books, loans, catalog, and staff\"",
+    "diagram_id": "diagram-1763271871038-b82an2hak"
+  },
+  {
+    "action_id": "44a218eb-99be-43d0-9d85-62b01edd0951",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T05:45:11.022Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +issueBook(userId Integer, bookId Integer) boolean\nLibrarian : +collectBook(userId Integer, bookId Integer) boolean\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +isAvailable boolean\n\nclass Library\nLibrary : +name String\nLibrary : +address String\nLibrary : +open() void\nLibrary : +close() void\n\nclass Loan\nLoan : +loanId Integer\nLoan : +issueDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass Catalog\nCatalog : +searchByTitle(title String) Book\nCatalog : +searchByAuthor(author String) Book\n\nclass User\nUser : +userId Integer\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" *-- \"*\" Book\nLibrary \"1\" *-- \"*\" Loan\nLibrary \"1\" *-- \"1\" Catalog\nLibrary \"1\" *-- \"*\" Librarian\nStudent \"1\" --> \"*\" Loan : borrows\nTeacher \"1\" --> \"*\" Loan : borrows\nLoan \"1\" --> \"1\" Book : for\nLibrarian \"1\" --> \"*\" Loan : manages\nStudent \"1\" --> \"1\" Library : memberOf\nTeacher \"1\" --> \"1\" Library : memberOf\nLibrarian \"1\" --> \"1\" Library : worksAt\nStudent \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Student : recommends\n\nnote for Student \"Represents a student who can borrow books from the library\"\nnote for Teacher \"Represents a teacher who can borrow and recommend books\"\nnote for Library \"Represents the library as an aggregate of books, loans, catalog, and staff\"",
+    "diagram_id": "diagram-1763271871038-b82an2hak"
+  },
+  {
+    "action_id": "dde5affa-26de-4a3e-aea3-b61f7b7b9410",
+    "action_type": "zoom",
+    "timestamp": "2025-11-16T05:45:35.801Z",
+    "metadata": {
+      "enabled": true
+    },
+    "mermaid_code": "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +issueBook(userId Integer, bookId Integer) boolean\nLibrarian : +collectBook(userId Integer, bookId Integer) boolean\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +isAvailable boolean\n\nclass Library\nLibrary : +name String\nLibrary : +address String\nLibrary : +open() void\nLibrary : +close() void\n\nclass Loan\nLoan : +loanId Integer\nLoan : +issueDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass Catalog\nCatalog : +searchByTitle(title String) Book\nCatalog : +searchByAuthor(author String) Book\n\nclass User\nUser : +userId Integer\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" *-- \"*\" Book\nLibrary \"1\" *-- \"*\" Loan\nLibrary \"1\" *-- \"1\" Catalog\nLibrary \"1\" *-- \"*\" Librarian\nStudent \"1\" --> \"*\" Loan : borrows\nTeacher \"1\" --> \"*\" Loan : borrows\nLoan \"1\" --> \"1\" Book : for\nLibrarian \"1\" --> \"*\" Loan : manages\nStudent \"1\" --> \"1\" Library : memberOf\nTeacher \"1\" --> \"1\" Library : memberOf\nLibrarian \"1\" --> \"1\" Library : worksAt\nStudent \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Student : recommends\n\nnote for Student \"Represents a student who can borrow books from the library\"\nnote for Teacher \"Represents a teacher who can borrow and recommend books\"\nnote for Library \"Represents the library as an aggregate of books, loans, catalog, and staff\"",
+    "diagram_id": "diagram-1763271871038-b82an2hak"
+  },
+  {
+    "action_id": "0e7c0f23-55ee-41df-82ad-f37e1f863b59",
+    "action_type": "diagram_edited",
+    "timestamp": "2025-11-16T05:45:39.212Z",
+    "metadata": {
+      "had_previous_diagram": true
+    },
+    "prompt": "I want you to add time close and time open in library parameters as integers",
+    "mermaid_code": "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +issueBook(userId Integer, bookId Integer) boolean\nLibrarian : +collectBook(userId Integer, bookId Integer) boolean\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +isAvailable boolean\n\nclass Library\nLibrary : +name String\nLibrary : +address String\nLibrary : +open() void\nLibrary : +close() void\nLibrary : +timeOpen Integer\nLibrary : +timeClose Integer\n\nclass Loan\nLoan : +loanId Integer\nLoan : +issueDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass Catalog\nCatalog : +searchByTitle(title String) Book\nCatalog : +searchByAuthor(author String) Book\n\nclass User\nUser : +userId Integer\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" *-- \"*\" Book\nLibrary \"1\" *-- \"*\" Loan\nLibrary \"1\" *-- \"1\" Catalog\nLibrary \"1\" *-- \"*\" Librarian\nStudent \"1\" --> \"*\" Loan : borrows\nTeacher \"1\" --> \"*\" Loan : borrows\nLoan \"1\" --> \"1\" Book : for\nLibrarian \"1\" --> \"*\" Loan : manages\nStudent \"1\" --> \"1\" Library : memberOf\nTeacher \"1\" --> \"1\" Library : memberOf\nLibrarian \"1\" --> \"1\" Library : worksAt\nStudent \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Student : recommends\n\nnote for Student \"Represents a student who can borrow books from the library\"\nnote for Teacher \"Represents a teacher who can borrow and recommend books\"\nnote for Library \"Represents the library as an aggregate of books, loans, catalog, and staff\"",
+    "diagram_id": "diagram-1763271871038-b82an2hak"
+  },
+  {
+    "action_id": "aaf972b6-a156-4af2-ae20-d477ede6ac29",
+    "action_type": "mermaid_copy",
+    "timestamp": "2025-11-16T05:45:41.426Z",
+    "metadata": {},
+    "mermaid_code": "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +issueBook(userId Integer, bookId Integer) boolean\nLibrarian : +collectBook(userId Integer, bookId Integer) boolean\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +isAvailable boolean\n\nclass Library\nLibrary : +name String\nLibrary : +address String\nLibrary : +open() void\nLibrary : +close() void\nLibrary : +timeOpen Integer\nLibrary : +timeClose Integer\n\nclass Loan\nLoan : +loanId Integer\nLoan : +issueDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass Catalog\nCatalog : +searchByTitle(title String) Book\nCatalog : +searchByAuthor(author String) Book\n\nclass User\nUser : +userId Integer\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" *-- \"*\" Book\nLibrary \"1\" *-- \"*\" Loan\nLibrary \"1\" *-- \"1\" Catalog\nLibrary \"1\" *-- \"*\" Librarian\nStudent \"1\" --> \"*\" Loan : borrows\nTeacher \"1\" --> \"*\" Loan : borrows\nLoan \"1\" --> \"1\" Book : for\nLibrarian \"1\" --> \"*\" Loan : manages\nStudent \"1\" --> \"1\" Library : memberOf\nTeacher \"1\" --> \"1\" Library : memberOf\nLibrarian \"1\" --> \"1\" Library : worksAt\nStudent \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Student : recommends\n\nnote for Student \"Represents a student who can borrow books from the library\"\nnote for Teacher \"Represents a teacher who can borrow and recommend books\"\nnote for Library \"Represents the library as an aggregate of books, loans, catalog, and staff\"",
+    "diagram_id": "diagram-1763271871038-b82an2hak"
+  },
+  {
+    "action_id": "92b9f842-8389-4b20-bf1e-b1aab3d31c87",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T05:45:42.298Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +issueBook(userId Integer, bookId Integer) boolean\nLibrarian : +collectBook(userId Integer, bookId Integer) boolean\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +isAvailable boolean\n\nclass Library\nLibrary : +name String\nLibrary : +address String\nLibrary : +open() void\nLibrary : +close() void\nLibrary : +timeOpen Integer\nLibrary : +timeClose Integer\n\nclass Loan\nLoan : +loanId Integer\nLoan : +issueDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass Catalog\nCatalog : +searchByTitle(title String) Book\nCatalog : +searchByAuthor(author String) Book\n\nclass User\nUser : +userId Integer\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" *-- \"*\" Book\nLibrary \"1\" *-- \"*\" Loan\nLibrary \"1\" *-- \"1\" Catalog\nLibrary \"1\" *-- \"*\" Librarian\nStudent \"1\" --> \"*\" Loan : borrows\nTeacher \"1\" --> \"*\" Loan : borrows\nLoan \"1\" --> \"1\" Book : for\nLibrarian \"1\" --> \"*\" Loan : manages\nStudent \"1\" --> \"1\" Library : memberOf\nTeacher \"1\" --> \"1\" Library : memberOf\nLibrarian \"1\" --> \"1\" Library : worksAt\nStudent \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Student : recommends\n\nnote for Student \"Represents a student who can borrow books from the library\"\nnote for Teacher \"Represents a teacher who can borrow and recommend books\"\nnote for Library \"Represents the library as an aggregate of books, loans, catalog, and staff\"",
+    "diagram_id": "diagram-1763271871038-b82an2hak"
+  },
+  {
+    "action_id": "044fef82-c08f-4c47-8343-7f2d43044772",
+    "action_type": "new_button",
+    "timestamp": "2025-11-16T05:46:11.628Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "classDiagram\ndirection LR\nclass Student\nStudent : +id Integer\nStudent : +name String\nStudent : +borrowBook(bookId Integer) boolean\nStudent : +returnBook(bookId Integer) boolean\n\nclass Teacher\nTeacher : +id Integer\nTeacher : +name String\nTeacher : +requestBook(bookId Integer) boolean\nTeacher : +recommendBook(bookId Integer, studentId Integer) void\n\nclass Librarian\nLibrarian : +id Integer\nLibrarian : +name String\nLibrarian : +issueBook(userId Integer, bookId Integer) boolean\nLibrarian : +collectBook(userId Integer, bookId Integer) boolean\n\nclass Book\nBook : +isbn String\nBook : +title String\nBook : +author String\nBook : +isAvailable boolean\n\nclass Library\nLibrary : +name String\nLibrary : +address String\nLibrary : +open() void\nLibrary : +close() void\nLibrary : +timeOpen Integer\nLibrary : +timeClose Integer\n\nclass Loan\nLoan : +loanId Integer\nLoan : +issueDate Date\nLoan : +dueDate Date\nLoan : +returnDate Date\n\nclass Catalog\nCatalog : +searchByTitle(title String) Book\nCatalog : +searchByAuthor(author String) Book\n\nclass User\nUser : +userId Integer\nUser : +email String\n\nUser <|-- Student\nUser <|-- Teacher\nLibrary \"1\" *-- \"*\" Book\nLibrary \"1\" *-- \"*\" Loan\nLibrary \"1\" *-- \"1\" Catalog\nLibrary \"1\" *-- \"*\" Librarian\nStudent \"1\" --> \"*\" Loan : borrows\nTeacher \"1\" --> \"*\" Loan : borrows\nLoan \"1\" --> \"1\" Book : for\nLibrarian \"1\" --> \"*\" Loan : manages\nStudent \"1\" --> \"1\" Library : memberOf\nTeacher \"1\" --> \"1\" Library : memberOf\nLibrarian \"1\" --> \"1\" Library : worksAt\nStudent \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Catalog : searches\nTeacher \"1\" ..> Student : recommends\n\nnote for Student \"Represents a student who can borrow books from the library\"\nnote for Teacher \"Represents a teacher who can borrow and recommend books\"\nnote for Library \"Represents the library as an aggregate of books, loans, catalog, and staff\"",
+    "diagram_id": "diagram-1763271871038-b82an2hak"
+  },
+  {
+    "action_id": "731516bc-6218-4730-9954-e6fe5c677f33",
+    "action_type": "prompt_update",
+    "timestamp": "2025-11-16T05:48:04.039Z",
+    "metadata": {},
+    "prompt": "Autonomous Drone Mission State Diagram\n\nCreate a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.",
+    "previous_prompt": "Diagram Type: Autonomous Drone Mission State Diagram\n\nCreate a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "b096fae4-7727-492f-84a4-5ca94b0cac4f",
+    "action_type": "diagram_generated",
+    "timestamp": "2025-11-16T05:48:25.577Z",
+    "metadata": {
+      "num_variations": 3
+    },
+    "prompt": "Autonomous Drone Mission State Diagram\n\nCreate a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax guaranteeing an invalid output.",
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlightParallel --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "aa582a4d-81eb-4016-9e4e-a5bf9f834341",
+    "action_type": "zoom",
+    "timestamp": "2025-11-16T05:48:29.078Z",
+    "metadata": {
+      "enabled": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlightParallel --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "0f007bcc-bb12-4b73-a4cc-1884d879c1c9",
+    "action_type": "pan",
+    "timestamp": "2025-11-16T05:48:55.488Z",
+    "metadata": {
+      "enabled": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlightParallel --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "2b37b884-a85d-4328-b3a7-6ca65da293ee",
+    "action_type": "variation_selection",
+    "timestamp": "2025-11-16T05:49:01.446Z",
+    "metadata": {},
+    "variation_index": 0,
+    "all_variations": [
+      "stateDiagram-v2\n[*] --> PreFlightParallel\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlightParallel --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+      "stateDiagram-v2\n[*] --> ParallelInit\n\nstate ParallelInit {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nParallelInit --> FlightModes : initComplete\n\nstate FlightModes {\n  [*] --> Cruise\n\n  Cruise --> Hover : modeEvent\n  Cruise --> ReturnToBase : modeEvent\n  Cruise --> Patrol : modeEvent\n\n  Hover --> FinalHover\n  ReturnToBase --> FinalRTB\n  Patrol --> FinalPatrol\n\n  FinalHover --> [*]\n  FinalRTB --> [*]\n  FinalPatrol --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\n\nEmergencyLanding --> FlightModes : recoverable\nEmergencyLanding --> [*] : unrecoverable",
+      "stateDiagram-v2\n[*] --> Init\nInit --> PreFlightParallel : startMission\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : enterFlight\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> HoverFinal : hoverEvent\n  Cruise --> ReturnFinal : returnEvent\n  Cruise --> PatrolFinal : patrolEvent\n  HoverFinal --> [*]\n  ReturnFinal --> [*]\n  PatrolFinal --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*]"
+    ],
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlightParallel --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "fa37f427-ebdb-46c8-8fdd-d7f40e0b772d",
+    "action_type": "mermaid_copy",
+    "timestamp": "2025-11-16T05:49:09.715Z",
+    "metadata": {},
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlightParallel --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "c722c24d-f2a9-4e30-a706-95050fd75e11",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T05:49:10.551Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Ready : gpsLocked\n  Ready --> [*]\n}\nPreFlightParallel --> FlightModes : startMission\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "871a8161-ee4c-46b9-8042-7fb7f3718323",
+    "action_type": "diagram_edited",
+    "timestamp": "2025-11-16T05:49:22.794Z",
+    "metadata": {
+      "had_previous_diagram": true
+    },
+    "prompt": "remove the upper block entirely",
+    "mermaid_code": "stateDiagram-v2\n}\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "9da05c25-7bcb-4447-a52f-e75dc9401d3f",
+    "action_type": "zoom",
+    "timestamp": "2025-11-16T05:49:26.151Z",
+    "metadata": {
+      "enabled": true
+    },
+    "mermaid_code": "stateDiagram-v2\n}\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "7b394a35-42ed-40a1-8eeb-e3a571c91ca7",
+    "action_type": "mermaid_copy",
+    "timestamp": "2025-11-16T05:49:26.369Z",
+    "metadata": {},
+    "mermaid_code": "stateDiagram-v2\n}\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "3cc52c6f-1c1c-4322-b286-f613d2a8d5c6",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T05:49:26.719Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n}\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "f78bb702-76e4-4a0b-8c7c-e4e0834b13b4",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T05:49:32.805Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n}\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "89c88526-92a1-4073-90ed-ae6b9d4ceb9b",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T05:49:41.216Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n}\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "69e840e1-6a25-4324-b80d-35b6e61a05bc",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T05:55:44.169Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n}\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "9d1502dd-35f6-4c57-bfc9-50c61b3ee7d4",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T05:58:13.672Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n}\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "cd946906-206d-4af4-a00d-ce00d5734cb1",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T05:58:16.011Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n}\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "52327648-56bc-44b9-bef2-a7671e4af610",
+    "action_type": "pan",
+    "timestamp": "2025-11-16T05:58:23.270Z",
+    "metadata": {
+      "enabled": true
+    },
+    "mermaid_code": "stateDiagram-v2\n}\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "f8bbad7b-6c28-4849-b433-e5ff899ca619",
+    "action_type": "new_button",
+    "timestamp": "2025-11-16T05:58:32.027Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n}\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : enterHover\n  Cruise --> Navigate : enterNavigate\n  Cruise --> Survey : enterSurvey\n  Hover --> FinalHover : completeHover\n  Navigate --> FinalNavigate : completeNavigate\n  Survey --> FinalSurvey : completeSurvey\n  FinalHover --> [*]\n  FinalNavigate --> [*]\n  FinalSurvey --> [*]\n}\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abort",
+    "diagram_id": "diagram-1763271971629-4qv7608us"
+  },
+  {
+    "action_id": "d3626132-737c-4fcd-94c3-25e85fb08016",
+    "action_type": "diagram_generated",
+    "timestamp": "2025-11-16T05:58:52.024Z",
+    "metadata": {
+      "num_variations": 3
+    },
+    "prompt": "Autonomous Drone Mission State Diagram\n\nCreate a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.",
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "a8594c6c-c6f5-43d4-964c-531ff56d28fb",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:00:49.897Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "d2e21564-9223-420a-9030-725a42c01b1a",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:00:51.136Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "d27247f4-2448-4fff-9c9f-146eb1581f22",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:01:28.395Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "9e280179-8099-4826-9317-24d944b10ca8",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:01:40.379Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "0b202ac4-51f2-451d-912f-305cc5d2a0a6",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:02:02.622Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "33d13db4-36b9-4ab5-a6b1-0c38b4598451",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:02:23.876Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "3514eb31-ca5f-4904-9c60-f5134f847c81",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:02:25.546Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "4c5d47d0-add7-497b-99b2-78707f998fcc",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:02:40.669Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "aa7ea89b-27e5-4350-ba88-1a0cc8c0c166",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:02:46.990Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "b6a5a5cb-4e57-4a78-b330-a861847fc9f8",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:03:35.249Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
+  },
+  {
+    "action_id": "d99a0ee8-d2d1-4ee7-a111-af94d29bb219",
+    "action_type": "tab_away",
+    "timestamp": "2025-11-16T06:03:40.723Z",
+    "metadata": {
+      "had_diagram": true
+    },
+    "mermaid_code": "stateDiagram-v2\n[*] --> PreFlightParallel\n\nstate PreFlightParallel {\n  [*] --> PreFlightCheck\n  [*] --> GPSCalibration\n  PreFlightCheck --> Ready : checksComplete\n  GPSCalibration --> Calibrated : gpsOk\n  Ready --> [*]\n  Calibrated --> [*]\n}\n\nPreFlightParallel --> FlightModes : startMission\n\nstate FlightModes {\n  [*] --> Cruise\n  Cruise --> Hover : reachHover\n  Cruise --> ReturnToHome : reachRTH\n  Cruise --> Loiter : reachLoiter\n  Hover --> [*]\n  ReturnToHome --> [*]\n  Loiter --> [*]\n}\n\nFlightModes --> EmergencyLanding : criticalFailure\nEmergencyLanding --> FlightModes : recover\nEmergencyLanding --> [*] : abortMission",
+    "diagram_id": "diagram-1763272712027-zcer2olg7"
   }
 ]
