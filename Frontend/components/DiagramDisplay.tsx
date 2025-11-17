@@ -239,7 +239,7 @@ export default function DiagramDisplay({
 
         const div = document.createElement('div')
         div.className = 'mermaid'
-        div.id = diagramId
+        div.id = effectiveDiagramId
         div.textContent = mermaidCode
         tempContainer.appendChild(div)
 
