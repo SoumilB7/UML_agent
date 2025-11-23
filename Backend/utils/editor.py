@@ -455,6 +455,12 @@ def _apply_add_attribute(lines: list, class_name: str, details: dict) -> list:
     if not attribute:
         return lines
     
+    # Sanitize attribute to remove potential class prefix
+    if attribute.strip().startswith(f"{class_name} :"):
+        attribute = attribute.strip()[len(f"{class_name} :"):].strip()
+    elif attribute.strip().startswith(f"{class_name}:"):
+        attribute = attribute.strip()[len(f"{class_name}:"):].strip()
+    
     class_idx = _find_class_definition(lines, class_name)
     if class_idx < 0:
         return lines
@@ -501,6 +507,12 @@ def _apply_modify_attribute(lines: list, class_name: str, details: dict) -> list
     new_attr = details.get("new")
     if not old_attr or not new_attr:
         return lines
+        
+    # Sanitize new_attr to remove potential class prefix
+    if new_attr.strip().startswith(f"{class_name} :"):
+        new_attr = new_attr.strip()[len(f"{class_name} :"):].strip()
+    elif new_attr.strip().startswith(f"{class_name}:"):
+        new_attr = new_attr.strip()[len(f"{class_name}:"):].strip()
     
     class_idx = _find_class_definition(lines, class_name)
     if class_idx < 0:
@@ -525,6 +537,12 @@ def _apply_add_method(lines: list, class_name: str, details: dict) -> list:
     method = details.get("method")
     if not method:
         return lines
+        
+    # Sanitize method to remove potential class prefix
+    if method.strip().startswith(f"{class_name} :"):
+        method = method.strip()[len(f"{class_name} :"):].strip()
+    elif method.strip().startswith(f"{class_name}:"):
+        method = method.strip()[len(f"{class_name}:"):].strip()
     
     class_idx = _find_class_definition(lines, class_name)
     if class_idx < 0:
@@ -571,6 +589,12 @@ def _apply_modify_method(lines: list, class_name: str, details: dict) -> list:
     new_method = details.get("new")
     if not old_method or not new_method:
         return lines
+        
+    # Sanitize new_method to remove potential class prefix
+    if new_method.strip().startswith(f"{class_name} :"):
+        new_method = new_method.strip()[len(f"{class_name} :"):].strip()
+    elif new_method.strip().startswith(f"{class_name}:"):
+        new_method = new_method.strip()[len(f"{class_name}:"):].strip()
     
     class_idx = _find_class_definition(lines, class_name)
     if class_idx < 0:

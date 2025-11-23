@@ -6,7 +6,7 @@ import DiagramDisplay from './DiagramDisplay'
 import SettingsModal from './SettingsModal'
 import {
   trackNewButton,
-  trackTabAway,
+  // trackTabAway,
   trackDiagramGenerated,
   trackDiagramEdited
 } from '@/utils/rlTracking'
@@ -141,7 +141,8 @@ export default function DiagramGenerator() {
     previousMermaidCodeRef.current = ''
   }
 
-  // Track tab visibility changes (when user clicks away)
+  // Track tab visibility changes (when user clicks away) - REMOVED per user request
+  /*
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden && mermaidCode) {
@@ -156,6 +157,7 @@ export default function DiagramGenerator() {
       document.removeEventListener('visibilitychange', handleVisibilityChange)
     }
   }, [diagramId, mermaidCode])
+  */
 
   return (
     <div className="min-h-screen flex flex-col">

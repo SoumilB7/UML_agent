@@ -6,7 +6,7 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 const RL_ACTION_ENDPOINT = `${API_URL}/rl/action`;
 
-export type ActionType = 
+export type ActionType =
   | 'image_copy'
   | 'variation_selection'
   | 'variation_hover'
@@ -45,7 +45,7 @@ export interface RLActionPayload {
 const USER_ID_KEY = 'uml_agent_user_id';
 
 function generateUUID(): string {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
     return v.toString(16);
   });
@@ -53,7 +53,7 @@ function generateUUID(): string {
 
 function getOrCreateUserId(): string {
   if (typeof window === 'undefined') return 'server-side';
-  
+
   let userId = localStorage.getItem(USER_ID_KEY);
   if (!userId) {
     userId = generateUUID();
@@ -88,6 +88,11 @@ export async function recordAction(payload: RLActionPayload): Promise<void> {
     payload.user_id = getOrCreateUserId();
     payload.session_id = getSessionId();
 
+    console.log(`[RL Tracking] Recording action: ${payload.action_type}`, {
+      endpoint: RL_ACTION_ENDPOINT,
+      payload
+    });
+
     const response = await fetch(RL_ACTION_ENDPOINT, {
       method: 'POST',
       headers: {
@@ -98,12 +103,16 @@ export async function recordAction(payload: RLActionPayload): Promise<void> {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      console.error('Failed to record RL action:', errorData);
-      // Don't throw - we don't want to break the UI if tracking fails
+      console.error('[RL Tracking] Failed to record RL action:', {
+        status: response.status,
+        statusText: response.statusText,
+        error: errorData
+      });
+    } else {
+      console.log(`[RL Tracking] Successfully recorded action: ${payload.action_type}`);
     }
   } catch (error) {
-    console.error('Error recording RL action:', error);
-    // Silently fail - tracking shouldn't break the app
+    console.error('[RL Tracking] Error recording RL action:', error);
   }
 }
 
