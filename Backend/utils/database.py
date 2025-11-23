@@ -1,5 +1,6 @@
 import os
 import logging
+import certifi
 from motor.motor_asyncio import AsyncIOMotorClient
 from dotenv import load_dotenv
 
@@ -31,7 +32,11 @@ async def get_database():
         
         logger.info(f"Connecting to MongoDB at: {masked_url}")
         
-        db.client = AsyncIOMotorClient(MONGODB_URL)
+        # Use certifi for SSL certificate verification (crucial for Vercel/AWS Lambda)
+        db.client = AsyncIOMotorClient(
+            MONGODB_URL,
+            tlsCAFile=certifi.where()
+        )
     return db.client[DATABASE_NAME]
 
 async def close_mongo_connection():

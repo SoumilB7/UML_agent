@@ -2,7 +2,8 @@ fastapi>=0.104.0
 uvicorn>=0.24.0
 python-dotenv
 motor
-pymongo>=1.0.0
+pymongo
+certifi>=1.0.0
 openai>=1.0.0
 httpx>=0.25.0
 pydantic>=2.0.0
