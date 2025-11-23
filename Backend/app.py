@@ -1,10 +1,6 @@
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-from fastapi.middleware.cors import CORSMiddleware
-from api import diagram, rl
-import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 app = FastAPI(
     title="Mermaid Diagram Generator API",
@@ -12,9 +8,29 @@ app = FastAPI(
     version="0.0.8"
 )
 
+# CORS Configuration
+environment = os.getenv("ENVIRONMENT", "development")
+logger = logging.getLogger(__name__)
+
+if environment == "production":
+    # Production: Only allow the specific frontend URL
+    origins = [
+        "https://uml-agent.vercel.app",
+        "https://uml-agent-back.vercel.app" # Allow self if needed
+    ]
+    logger.info("Running in PRODUCTION mode. CORS restricted to specific origins.")
+else:
+    # Development: Allow localhost and production (for testing)
+    origins = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "https://uml-agent.vercel.app"
+    ]
+    logger.info("Running in DEVELOPMENT mode. CORS allows localhost.")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
