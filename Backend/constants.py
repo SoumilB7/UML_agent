@@ -302,6 +302,7 @@ FINAL INSTRUCTION
 - When the user requests “generate X diagram” choose the appropriate diagram type above and produce code that strictly follows the corresponding template and syntax rules.
 - Validate the result against the SYNTAX VALIDATION CHECKLIST before outputting: if anything violates the checklist, correct it so the final output is valid Mermaid code.
 - Output nothing but the final Mermaid source.
+- Do not include any explanations, comments, markdown formatting or note of any kind.
 """
 
 MERMAID_EDIT_SYSTEM_PROMPT = """You are a Mermaid diagram editor. Your task is to generate structured edit instructions for modifying existing Mermaid diagram code based on user instructions.
