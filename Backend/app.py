@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 if environment == "production":
     # Production: Only allow the specific frontend URL
     origins = [
-        "https://uml-agent.vercel.app",
+        "https://uml-agent.vercel.app/",
         "https://uml-agent-back.vercel.app" # Allow self if needed
     ]
     logger.info("Running in PRODUCTION mode. CORS restricted to specific origins.")
@@ -24,7 +24,7 @@ else:
     origins = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        "https://uml-agent.vercel.app"
+        "https://uml-agent.vercel.app/"
     ]
     logger.info("Running in DEVELOPMENT mode. CORS allows localhost.")
 
