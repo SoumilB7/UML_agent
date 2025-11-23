@@ -1,9 +1,8 @@
-'use client'
-
 import { useState, useEffect, useRef } from 'react'
 import PromptInput from './PromptInput'
 import DiagramDisplay from './DiagramDisplay'
 import SettingsModal from './SettingsModal'
+import ImportModal from './ImportModal'
 import {
   trackNewButton,
   // trackTabAway,
@@ -30,6 +29,7 @@ export default function DiagramGenerator() {
   const [diagramId, setDiagramId] = useState<string>(generateDiagramId())
   const [currentPrompt, setCurrentPrompt] = useState<string>('')
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [isImportOpen, setIsImportOpen] = useState(false)
   const previousMermaidCodeRef = useRef<string>('')
 
   const handleGenerate = async (prompt: string, numVariations: number = 1) => {
@@ -141,43 +141,56 @@ export default function DiagramGenerator() {
     previousMermaidCodeRef.current = ''
   }
 
-  // Track tab visibility changes (when user clicks away) - REMOVED per user request
-  /*
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.hidden && mermaidCode) {
-        // User clicked away from tab
-        trackTabAway(diagramId, mermaidCode)
-      }
-    }
-
-    document.addEventListener('visibilitychange', handleVisibilityChange)
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange)
-    }
-  }, [diagramId, mermaidCode])
-  */
+  const handleImport = (code: string) => {
+    setMermaidCode(code)
+    setIsEditing(true)
+    setVariations([])
+    setSelectedVariationIndex(null)
+    // Generate new ID for imported diagram
+    setDiagramId(generateDiagramId())
+    // Track as new diagram (conceptually)
+    trackNewButton(diagramId, code)
+  }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Header */}
-      <header className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Mermaid Diagram Generator</h1>
-            <p className="text-sm text-gray-600 mt-1">Transform your ideas into UML diagrams</p>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-purple-600">
+                Diagram AI
+              </h1>
+              <p className="text-xs text-gray-500 font-medium">Intelligent UML Generation</p>
+            </div>
           </div>
-          <button
-            onClick={() => setIsSettingsOpen(true)}
-            className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-            title="Settings"
-          >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsImportOpen(true)}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-primary-600 transition-colors shadow-sm flex items-center gap-2"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+              </svg>
+              Import
+            </button>
+            <button
+              onClick={() => setIsSettingsOpen(true)}
+              className="p-2 text-gray-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+              title="Settings"
+            >
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -185,7 +198,7 @@ export default function DiagramGenerator() {
       <div className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-180px)]">
           {/* Left Panel - Input */}
-          <div className="flex flex-col">
+          <div className="flex flex-col h-full">
             <PromptInput
               onGenerate={handleGenerate}
               onNew={handleNew}
@@ -197,7 +210,7 @@ export default function DiagramGenerator() {
           </div>
 
           {/* Right Panel - Diagram */}
-          <div className="flex flex-col">
+          <div className="flex flex-col h-full">
             <DiagramDisplay
               mermaidCode={mermaidCode}
               isLoading={isLoading}
@@ -211,6 +224,15 @@ export default function DiagramGenerator() {
         </div>
       </div>
 
+      {/* Footer */}
+      <footer className="bg-white border-t border-gray-200 py-4 mt-auto">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p className="text-sm text-gray-500 font-medium flex items-center justify-center gap-1">
+            Made with <span className="text-red-500 animate-pulse">♥️</span> by <span className="font-bold text-gray-700">SoumilB7</span>
+          </p>
+        </div>
+      </footer>
+
       <SettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
@@ -220,6 +242,12 @@ export default function DiagramGenerator() {
             setError('')
           }
         }}
+      />
+
+      <ImportModal
+        isOpen={isImportOpen}
+        onClose={() => setIsImportOpen(false)}
+        onImport={handleImport}
       />
     </div>
   )
