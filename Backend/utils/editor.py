@@ -882,19 +882,20 @@ def _apply_modify_note(lines: list, details: dict) -> list:
     return lines
 
 
-def edit_diagram_mermaid(user_prompt: str, existing_mermaid_code: str) -> str:
+def edit_diagram_mermaid(user_prompt: str, existing_mermaid_code: str, api_key: str = None) -> str:
     """
     Calls OpenAI API to generate edit instructions, then applies them to existing Mermaid code.
 
     Args:
         user_prompt (str): The user's prompt describing what changes to make to the diagram.
         existing_mermaid_code (str): The existing Mermaid diagram code to modify.
+        api_key (str): Optional OpenAI API key.
 
     Returns:
         str: The updated Mermaid code for the UML diagram.
     """
     try:
-        openai_client = get_openai_client()
+        openai_client = get_openai_client(api_key)
         
         system_prompt = MERMAID_EDIT_SYSTEM_PROMPT
 

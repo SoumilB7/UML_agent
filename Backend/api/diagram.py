@@ -1,5 +1,5 @@
 import logging
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Header
 
 from models import DiagramRequest, DiagramEditRequest, DiagramResponse
 from utils.diagram import generate_diagram_mermaid
@@ -11,15 +11,12 @@ logger = logging.getLogger(__name__)
 
 
 @router.post("/generate", response_model=DiagramResponse)
-async def generate_diagram(request: DiagramRequest):
+async def generate_diagram(
+    request: DiagramRequest,
+    x_openai_key: str = Header(None, alias="X-OpenAI-Key")
+):
     """
     Generate Mermaid UML diagram code from a user prompt.
-    
-    Args:
-        request: DiagramRequest containing the user's prompt and num_variations
-        
-    Returns:
-        DiagramResponse containing the Mermaid code(s)
     """
     if not request.prompt or not request.prompt.strip():
         raise HTTPException(status_code=400, detail="Prompt cannot be empty")
@@ -33,14 +30,14 @@ async def generate_diagram(request: DiagramRequest):
     try:
         if num_variations == 1:
             # Single generation
-            mermaid_code = generate_diagram_mermaid(request.prompt)
+            mermaid_code = generate_diagram_mermaid(request.prompt, api_key=x_openai_key)
             return DiagramResponse(mermaid_code=mermaid_code)
         else:
             # Multiple variations
             variations = []
             for i in range(num_variations):
                 logger.info(f"Generating variation {i+1}/{num_variations}")
-                variation = generate_diagram_mermaid(request.prompt)
+                variation = generate_diagram_mermaid(request.prompt, api_key=x_openai_key)
                 variations.append(variation)
             
 
@@ -58,15 +55,12 @@ async def generate_diagram(request: DiagramRequest):
 
 
 @router.post("/edit", response_model=DiagramResponse)
-async def edit_diagram(request: DiagramEditRequest):
+async def edit_diagram(
+    request: DiagramEditRequest,
+    x_openai_key: str = Header(None, alias="X-OpenAI-Key")
+):
     """
     Edit/update existing Mermaid UML diagram code based on a user prompt.
-    
-    Args:
-        request: DiagramEditRequest containing the user's edit prompt and existing mermaid code
-        
-    Returns:
-        DiagramResponse containing the updated Mermaid code
     """
     if not request.prompt or not request.prompt.strip():
         raise HTTPException(status_code=400, detail="Prompt cannot be empty")
@@ -77,7 +71,8 @@ async def edit_diagram(request: DiagramEditRequest):
     try:
         updated_mermaid_code = edit_diagram_mermaid(
             user_prompt=request.prompt,
-            existing_mermaid_code=request.existing_mermaid_code
+            existing_mermaid_code=request.existing_mermaid_code,
+            api_key=x_openai_key
         )
         return DiagramResponse(mermaid_code=updated_mermaid_code)
     

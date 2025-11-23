@@ -23,6 +23,10 @@ class RLActionRequest(BaseModel):
     action_type: str  
     timestamp: Optional[str] = None
     metadata: Optional[dict] = None
+    
+    # User tracking fields
+    user_id: str
+    session_id: str
 
     rating: Optional[int] = None
     feedback_text: Optional[str] = None

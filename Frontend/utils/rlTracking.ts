@@ -36,7 +36,43 @@ export interface RLActionPayload {
   mermaid_code?: string;
   diagram_id?: string;
   all_variations?: string[]; // All variation codes
+  user_id?: string;
+  session_id?: string;
 }
+
+// --- User & Session Management ---
+
+const USER_ID_KEY = 'uml_agent_user_id';
+
+function generateUUID(): string {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+function getOrCreateUserId(): string {
+  if (typeof window === 'undefined') return 'server-side';
+  
+  let userId = localStorage.getItem(USER_ID_KEY);
+  if (!userId) {
+    userId = generateUUID();
+    localStorage.setItem(USER_ID_KEY, userId);
+  }
+  return userId;
+}
+
+// Session ID is created once per page load
+let currentSessionId: string | null = null;
+
+function getSessionId(): string {
+  if (!currentSessionId) {
+    currentSessionId = generateUUID();
+  }
+  return currentSessionId;
+}
+
+// --------------------------------
 
 /**
  * Record a user action to the backend
@@ -47,6 +83,10 @@ export async function recordAction(payload: RLActionPayload): Promise<void> {
     if (!payload.timestamp) {
       payload.timestamp = new Date().toISOString();
     }
+
+    // Add user and session IDs
+    payload.user_id = getOrCreateUserId();
+    payload.session_id = getSessionId();
 
     const response = await fetch(RL_ACTION_ENDPOINT, {
       method: 'POST',

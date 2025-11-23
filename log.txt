@@ -12021,3 +12021,834 @@ Finish reason: stop
 
 ================================================================================
 
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-23 15:28:28
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for an e-commerce system with User, Product, Order, and Payment classes
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +passwordHash String
+User : +register(name String, email String, password String) boolean
+User : +login(email String, password String) boolean
+
+class Product
+Product : +id Integer
+Product : +name String
+Product : +description String
+Product : +price Decimal
+Product : +stockQuantity Integer
+Product : +updateStock(quantity Integer) void
+
+class Order
+Order : +id Integer
+Order : +orderDate Date
+Order : +status String
+Order : +totalAmount Decimal
+Order : +addProduct(product Product, quantity Integer) void
+Order : +calculateTotal() Decimal
+
+class Payment
+Payment : +id Integer
+Payment : +amount Decimal
+Payment : +paymentDate Date
+Payment : +method String
+Payment : +status String
+Payment : +process() boolean
+Payment : +refund() boolean
+
+User "1" --> "*" Order : places
+Order "*" --> "*" Product : contains
+Order "1" --> "*" Payment : has
+
+note for User "Represents a customer using the e-commer...
+
+Token Usage:
+  Prompt tokens: 2575
+  Completion tokens: 292
+  Total tokens: 2867
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-23 15:28:32
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for an e-commerce system with User, Product, Order, and Payment classes
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +register(name String, email String, password String) boolean
+User : +login(email String, password String) boolean
+
+class Product
+Product : +id Integer
+Product : +name String
+Product : +description String
+Product : +price Decimal
+Product : +stockQuantity Integer
+
+class Order
+Order : +id Integer
+Order : +orderDate Date
+Order : +status String
+Order : +totalAmount Decimal
+Order : +addProduct(product Product, quantity Integer) void
+Order : +calculateTotal() Decimal
+
+class Payment
+Payment : +id Integer
+Payment : +amount Decimal
+Payment : +paymentDate Date
+Payment : +method String
+Payment : +status String
+Payment : +process() boolean
+
+User "1" --> "many" Order
+Order "1" --> "*" Product
+Order "1" --> "1" Payment
+note for User "Represents a customer using the e-commerce system"
+note for Product "Item available for purchase"
+note for Order "Customer order containing one or more products"
+note...
+
+Token Usage:
+  Prompt tokens: 2575
+  Completion tokens: 262
+  Total tokens: 2837
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-23 15:28:37
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for an e-commerce system with User, Product, Order, and Payment classes
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +passwordHash String
+User : +register(name String, email String, password String) boolean
+User : +login(email String, password String) boolean
+
+class Product
+Product : +id Integer
+Product : +name String
+Product : +description String
+Product : +price Decimal
+Product : +stockQuantity Integer
+Product : +updateStock(quantity Integer) void
+
+class Order
+Order : +id Integer
+Order : +orderDate Date
+Order : +status String
+Order : +totalAmount Decimal
+Order : +addProduct(product Product, quantity Integer) void
+Order : +calculateTotal() Decimal
+
+class Payment
+Payment : +id Integer
+Payment : +amount Decimal
+Payment : +paymentDate Date
+Payment : +method String
+Payment : +status String
+Payment : +process() boolean
+Payment : +refund() boolean
+
+User "1" --> "*" Order : places
+Order "*" --> "*" Product : contains
+Order "1" --> "*" Payment : has
+
+note for User "Represents a customer using the e-commer...
+
+Token Usage:
+  Prompt tokens: 2575
+  Completion tokens: 285
+  Total tokens: 2860
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-23 15:34:09
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for an e-commerce system with User, Product, Order, and Payment classes
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +passwordHash String
+User : +register(name String, email String, password String) boolean
+User : +login(email String, password String) boolean
+
+class Product
+Product : +id Integer
+Product : +name String
+Product : +description String
+Product : +price Decimal
+Product : +stockQuantity Integer
+Product : +updateStock(quantity Integer) void
+
+class Order
+Order : +id Integer
+Order : +orderDate Date
+Order : +status String
+Order : +totalAmount Decimal
+Order : +addProduct(product Product, quantity Integer) void
+Order : +calculateTotal() Decimal
+
+class Payment
+Payment : +id Integer
+Payment : +amount Decimal
+Payment : +paymentDate Date
+Payment : +method String
+Payment : +status String
+Payment : +process() boolean
+Payment : +refund() boolean
+
+User "1" --> "many" Order : places
+Order "1" --> "*" Product : contains
+Order "1" --> "*" Payment : has
+
+note for User "Represents a customer using the e-com...
+
+Token Usage:
+  Prompt tokens: 2575
+  Completion tokens: 297
+  Total tokens: 2872
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-23 15:34:13
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for an e-commerce system with User, Product, Order, and Payment classes
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +passwordHash String
+User : +register(name String, email String, password String) boolean
+User : +login(email String, password String) boolean
+
+class Product
+Product : +id Integer
+Product : +name String
+Product : +description String
+Product : +price Decimal
+Product : +stockQuantity Integer
+Product : +updateStock(quantity Integer) void
+
+class Order
+Order : +id Integer
+Order : +orderDate Date
+Order : +status String
+Order : +totalAmount Decimal
+Order : +addProduct(product Product, quantity Integer) void
+Order : +calculateTotal() Decimal
+
+class Payment
+Payment : +id Integer
+Payment : +amount Decimal
+Payment : +paymentDate Date
+Payment : +method String
+Payment : +status String
+Payment : +process() boolean
+Payment : +refund() boolean
+
+User "1" --> "many" Order
+Order "1" --> "*" Product
+Order "1" --> "*" Payment
+
+Token Usage:
+  Prompt tokens: 2575
+  Completion tokens: 237
+  Total tokens: 2812
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-23 15:34:18
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for an e-commerce system with User, Product, Order, and Payment classes
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +passwordHash String
+User : +register(name String, email String, password String) boolean
+User : +login(email String, password String) boolean
+
+class Product
+Product : +id Integer
+Product : +name String
+Product : +description String
+Product : +price Decimal
+Product : +stockQuantity Integer
+Product : +updateStock(quantity Integer) void
+
+class Order
+Order : +id Integer
+Order : +orderDate Date
+Order : +status String
+Order : +totalAmount Decimal
+Order : +addProduct(product Product, quantity Integer) void
+Order : +calculateTotal() Decimal
+
+class Payment
+Payment : +id Integer
+Payment : +amount Decimal
+Payment : +method String
+Payment : +status String
+Payment : +process() boolean
+Payment : +refund() boolean
+
+User "1" --> "many" Order : places
+Order "*" --> "*" Product : contains
+Order "1" --> "1" Payment : paid by
+
+note for User "Represents a customer using the e-commerce system"
+note for P...
+
+Token Usage:
+  Prompt tokens: 2575
+  Completion tokens: 284
+  Total tokens: 2859
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-23 15:38:22
+Function: edit_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid diagram editor. Your task is to generate structured edit instructions for modifying existing Mermaid diagram code based on user instructions.
+
+CRITICAL: You must output ONLY a JSON object with edit instructions, NOT the complete updated code. The system will apply these edits automatically.
+
+Output Format (JSON only, no markdown, no code blocks):
+{
+  "edits": [
+    {
+      "type": "add_class|remove_class|modify_class|add_relationship|remove_relationship|modify_relationship|add_...
+
+Message 2 (user):
+Existing Mermaid diagram code:
+classDiagram
+direction LR
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +passwordHash String
+User : +register(name String, email String, password String) boolean
+User : +login(email String, password String) boolean
+
+class Product
+Product : +id Integer
+Product : +name String
+Product : +description String
+Product : +price Decimal
+Product : +stockQuantity Integer
+Product : +updateStock(quantity Integer) void
+
+class Order
+Order : +id Int...
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+{
+  "edits": [
+    {
+      "type": "add_attribute",
+      "target": "Order",
+      "details": {
+        "attribute": "+orderType String",
+        "position": "after:+status String"
+      }
+    }
+  ]
+}
+
+Token Usage:
+  Prompt tokens: 1973
+  Completion tokens: 64
+  Total tokens: 2037
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+Mermaid Code Log Entry
+================================================================================
+Timestamp: 2025-11-23 15:38:22
+Function: edit_diagram_mermaid
+Code Type: post_edit
+Context: Edit request: add order type tag a string to the order
+
+
+Mermaid Code:
+--------------------------------------------------------------------------------
+classDiagram
+direction LR
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +passwordHash String
+User : +register(name String, email String, password String) boolean
+User : +login(email String, password String) boolean
+
+class Product
+Product : +id Integer
+Product : +name String
+Product : +description String
+Product : +price Decimal
+Product : +stockQuantity Integer
+Product : +updateStock(quantity Integer) void
+
+class Order
+Order : +id Integer
+Order : +orderDate Date
+Order : +status String
+Order : +totalAmount Decimal
+Order : +addProduct(product Product, quantity Integer) void
+Order : +calculateTotal() Decimal
+Order : +orderType String
+
+class Payment
+Payment : +id Integer
+Payment : +amount Decimal
+Payment : +paymentDate Date
+Payment : +method String
+Payment : +status String
+Payment : +process() boolean
+Payment : +refund() boolean
+
+User "1" --> "many" Order : places
+Order "1" --> "*" Product : contains
+Order "1" --> "*" Payment : has
+
+note for User "Represents a customer using the e-commerce system"
+note for Product "Represents an item available for purchase"
+note for Order "Represents a purchase order made by a user"
+note for Payment "Represents a payment transaction for an order"
+--------------------------------------------------------------------------------
+Code Length: 1225 characters
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-23 15:48:55
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for an e-commerce system with User, Product, Order, and Payment classes
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +passwordHash String
+User : +register(name String, email String, password String) boolean
+User : +login(email String, password String) boolean
+
+class Product
+Product : +id Integer
+Product : +name String
+Product : +description String
+Product : +price Decimal
+Product : +stockQuantity Integer
+Product : +updateStock(quantity Integer) void
+
+class Order
+Order : +id Integer
+Order : +orderDate Date
+Order : +status String
+Order : +totalAmount Decimal
+Order : +addProduct(product Product, quantity Integer) void
+Order : +calculateTotal() Decimal
+
+class Payment
+Payment : +id Integer
+Payment : +amount Decimal
+Payment : +paymentDate Date
+Payment : +method String
+Payment : +status String
+Payment : +process() boolean
+Payment : +refund() boolean
+
+User "1" --> "*" Order : places
+Order "*" --> "*" Product : contains
+Order "1" --> "*" Payment : has
+
+note for User "Represents a customer using the e-commer...
+
+Token Usage:
+  Prompt tokens: 2575
+  Completion tokens: 292
+  Total tokens: 2867
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-23 15:49:00
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for an e-commerce system with User, Product, Order, and Payment classes
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +register(name String, email String, password String) boolean
+User : +login(email String, password String) boolean
+
+class Product
+Product : +id Integer
+Product : +name String
+Product : +price Decimal
+Product : +stockQuantity Integer
+Product : +updateStock(quantity Integer) void
+
+class Order
+Order : +id Integer
+Order : +orderDate Date
+Order : +status String
+Order : +totalAmount Decimal
+Order : +addProduct(product Product, quantity Integer) void
+Order : +calculateTotal() Decimal
+
+class Payment
+Payment : +id Integer
+Payment : +amount Decimal
+Payment : +method String
+Payment : +status String
+Payment : +process() boolean
+
+User "1" --> "*" Order : places
+Order "*" --> "*" Product : contains
+Order "1" --> "1" Payment : paid by
+User "1" --> "*" Payment : owns
+
+note for User "Represents a customer using the e-commerce system"
+note for Product "Item available for purchase"
+note for Order "Cust...
+
+Token Usage:
+  Prompt tokens: 2575
+  Completion tokens: 272
+  Total tokens: 2847
+
+Finish reason: stop
+
+================================================================================
+
+
+================================================================================
+LLM Call Log Entry
+================================================================================
+Timestamp: 2025-11-23 15:49:03
+Function: generate_diagram_mermaid
+Model: gpt-5.1
+Parameters: {
+  "temperature": 0.3,
+  "top_p": 0.7
+}
+
+Input Messages:
+--------------------------------------------------------------------------------
+Message 1 (system):
+You are a Mermaid UML diagram generator. Follow these CRITICAL RULES exactly and produce **only valid Mermaid code** that will render without syntax errors. Output nothing but the Mermaid source (no markdown fences, no prose, no comments, no extra characters, no explanation). All examples below are templates the generator must follow when asked for that diagram type.
+
+GLOBAL SYNTAX RULES (applies to all diagram types)
+- Output ONLY Mermaid code; absolutely no extra text.
+- Do not wrap the output...
+
+Message 2 (user):
+Create a class diagram for an e-commerce system with User, Product, Order, and Payment classes
+
+--------------------------------------------------------------------------------
+Output:
+--------------------------------------------------------------------------------
+Content:
+classDiagram
+direction LR
+class User
+User : +id Integer
+User : +name String
+User : +email String
+User : +register(name String, email String, password String) boolean
+User : +login(email String, password String) boolean
+
+class Product
+Product : +id Integer
+Product : +name String
+Product : +description String
+Product : +price Decimal
+Product : +stockQuantity Integer
+
+class Order
+Order : +id Integer
+Order : +orderDate Date
+Order : +status String
+Order : +totalAmount Decimal
+Order : +addProduct(product Product, quantity Integer) void
+Order : +calculateTotal() Decimal
+
+class Payment
+Payment : +id Integer
+Payment : +amount Decimal
+Payment : +method String
+Payment : +status String
+Payment : +pay() boolean
+Payment : +refund() boolean
+
+User "1" --> "*" Order
+Order "1" --> "*" Product
+Order "1" --> "1" Payment
+note for User "Represents a customer using the e-commerce system"
+note for Product "Item available for purchase"
+note for Order "Customer order containing one or more products"
+note for Pa...
+
+Token Usage:
+  Prompt tokens: 2575
+  Completion tokens: 260
+  Total tokens: 2835
+
+Finish reason: stop
+
+================================================================================
+

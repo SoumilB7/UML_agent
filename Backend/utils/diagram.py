@@ -15,13 +15,17 @@ OPANAI_API_KEY = dotenv.get_key('.env', 'OPENAI_API_KEY')  # Ensure .env is load
 logger = logging.getLogger(__name__)
 
 
-def get_openai_client():
+def get_openai_client(api_key: str = None):
     """
     Returns an OpenAI client instance.
+    Args:
+        api_key: Optional API key. If not provided, tries to load from .env
     """
-    api_key = OPANAI_API_KEY
     if not api_key:
-        raise ValueError("OPENAI_API_KEY not found in .env file")
+        api_key = OPANAI_API_KEY
+    
+    if not api_key:
+        raise ValueError("OpenAI API key not found. Please provide it in settings or .env file")
     return OpenAI(api_key=api_key)
 
 
@@ -153,18 +157,19 @@ def render_mermaid_to_image(mermaid_code: str, format: str = "png") -> Optional[
         return None
 
 
-def generate_diagram_mermaid(user_prompt: str) -> str:
+def generate_diagram_mermaid(user_prompt: str, api_key: str = None) -> str:
     """
     Calls OpenAI API to generate a Mermaid UML diagram code for the user's prompt.
 
     Args:
         user_prompt (str): The user's prompt describing the UML diagram they want.
+        api_key (str): Optional OpenAI API key.
 
     Returns:
         str: The Mermaid code for the UML diagram, or None if an error occurs.
     """
     try:
-        openai_client = get_openai_client()
+        openai_client = get_openai_client(api_key)
         
         system_prompt = MERMAID_SYSTEM_PROMPT
 

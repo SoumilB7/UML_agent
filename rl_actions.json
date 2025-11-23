@@ -123,7 +123,7 @@
     "action_type": "prompt_update",
     "timestamp": "2025-11-16T16:11:33.291Z",
     "metadata": {},
-    "prompt": "Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.",
+    "prompt": "Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax ï¿½ guaranteeing an invalid output.",
     "previous_prompt": "create a sequence diagram of an IdP generated SSO flow with SAML 2.0\nwhere the IdP is hosted on premises in a corporate net and the SP is in an AWS VPC",
     "diagram_id": "diagram-1763309111673-imzydcd5a"
   },
@@ -144,7 +144,7 @@
     "metadata": {
       "num_variations": 3
     },
-    "prompt": "Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.",
+    "prompt": "Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax ï¿½ guaranteeing an invalid output.",
     "mermaid_code": "stateDiagram-v2\n[*] --> Init\nInit --> PreFlightCheck : start\nInit --> GPSCalibration : start\nPreFlightCheck --> Ready : checksPassed\nGPSCalibration --> Ready : gpsOk\nReady --> FlightModes : enterFlight\n\nstate FlightModes {\n  [*] --> Hover\n  [*] --> Cruise\n  [*] --> ReturnHome\n\n  Hover --> FinalHover : completeHover\n  Cruise --> FinalCruise : completeCruise\n  ReturnHome --> FinalReturnHome : completeReturn\n\n  FinalHover --> [*]\n  FinalCruise --> [*]\n  FinalReturnHome --> [*]\n}\n\nReady --> EmergencyLanding : faultDetected\nEmergencyLanding --> FlightModes : emergencyRoute\nEmergencyLanding --> [*] : terminate",
     "diagram_id": "diagram-1763309494833-uyhuwpxtg"
   },
@@ -248,7 +248,7 @@
     "timestamp": "2025-11-16T16:16:08.441Z",
     "metadata": {},
     "prompt": "I am working on a compliance monitoring solution which will pull in the latest circulars from SEBI and parse them. Once it is parsed into a table to clauses, you will need to extract the following information:\n1. The new compliance requirements proposed by the regulator\n2. Gap analysis with my existing compliance setup\n3. The impact of these new compliance requirements on my organization at an IT and operational level",
-    "previous_prompt": "Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax — guaranteeing an invalid output.",
+    "previous_prompt": "Create a state machine where the drone must start simultaneously in both PreFlightCheck and GPSCalibration, and where the composite state FlightModes must contain three different final states at once, each reached from a single event. The machine must also enforce that EmergencyLanding transitions both into FlightModes itself and directly to the global final state, while strictly following Mermaid stateDiagram-v2 syntax ï¿½ guaranteeing an invalid output.",
     "diagram_id": "diagram-1763309494833-uyhuwpxtg"
   },
   {
@@ -1316,5 +1316,13 @@
     },
     "mermaid_code": "classDiagram\ndirection LR\nclass User\nUser : +id Integer\nUser : +name String\nUser : +email String\nUser : +register(name String, email String, password String) boolean\nUser : +login(email String, password String) boolean\n\nclass Product\nProduct : +id Integer\nProduct : +name String\nProduct : +price Decimal\nProduct : +stockQuantity Integer\nProduct : +updateStock(quantity Integer) void\n\nclass Order\nOrder : +id Integer\nOrder : +orderDate Date\nOrder : +status String\nOrder : +totalAmount Decimal\nOrder : +addProduct(product Product, quantity Integer) void\nOrder : +calculateTotal() Decimal\n\nclass Payment\nPayment : +id Integer\nPayment : +amount Decimal\nPayment : +method String\nPayment : +status String\nPayment : +process() boolean\n\nUser \"1\" --> \"0..*\" Order\nOrder \"1\" --> \"*\" Product\nOrder \"1\" --> \"0..*\" Payment\nPayment \"1\" --> \"1\" Order\n\nnote for User \"Represents a customer using the e-commerce system\"\nnote for Product \"Represents an item available for purchase\"\nnote for Order \"Represents a purchase made by a user\"\nnote for Payment \"Represents a payment attempt for an order\"",
     "diagram_id": "diagram-1763890176771-zfpn37ddy"
+  },
+  {
+    "action_id": "bde4d819-603e-4af6-ae96-7060d83f5db8",
+    "action_type": "test_action",
+    "timestamp": "2025-11-23T09:44:18.288674",
+    "metadata": {
+      "test": "true"
+    }
   }
 ]
