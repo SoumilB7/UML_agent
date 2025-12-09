@@ -167,7 +167,15 @@ export default function DiagramGenerator() {
               <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-purple-600">
                 Diagram AI
               </h1>
-              <p className="text-xs text-gray-500 font-medium">Intelligent UML Generation</p>
+              <div className="flex items-center gap-2">
+                <p className="text-xs text-gray-500 font-medium">Intelligent UML Generation</p>
+                <span className="text-[10px] px-1.5 py-0.5 bg-green-100 text-green-700 rounded-full border border-green-200 font-medium" title="Your API key is stored locally in your browser">
+                  BYOK Secured
+                </span>
+                <span className="text-[10px] px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded-full border border-blue-200 font-medium hidden sm:inline-block">
+                  v1.0
+                </span>
+              </div>
             </div>
           </div>
           <div className="flex items-center gap-2">
