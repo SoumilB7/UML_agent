@@ -237,7 +237,7 @@ export default function DiagramGenerator() {
       <footer className="bg-white/60 backdrop-blur-sm border-t border-primary-100 py-4 mt-auto flex-none">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-sm text-gray-500 font-medium flex items-center justify-center gap-1">
-            Made with <span className="text-primary-500 animate-pulse">♥️</span> by <span className="font-bold text-gray-700">SoumilB7</span>
+            Made with <span className="text-primary-500 animate-pulse">♥️</span> by <a href="https://github.com/SoumilB7" target="_blank" rel="noopener noreferrer" className="font-bold text-gray-700 hover:text-primary-600 transition-colors">SoumilB7</a>
             <span className="mx-2 text-gray-300">|</span>
             <a href="/about" className="hover:text-primary-600 transition-colors">About & Benchmarks</a>
           </p>
