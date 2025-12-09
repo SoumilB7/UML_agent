@@ -153,9 +153,9 @@ export default function DiagramGenerator() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100">
+    <div className="h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
       {/* Header */}
-      <header className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10 shadow-sm">
+      <header className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10 shadow-sm flex-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
@@ -195,10 +195,10 @@ export default function DiagramGenerator() {
       </header>
 
       {/* Main Content */}
-      <div className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-180px)]">
+      <div className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
           {/* Left Panel - Input */}
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col h-full overflow-hidden">
             <PromptInput
               onGenerate={handleGenerate}
               onNew={handleNew}
@@ -210,7 +210,7 @@ export default function DiagramGenerator() {
           </div>
 
           {/* Right Panel - Diagram */}
-          <div className="flex flex-col h-full">
+          <div className="flex flex-col h-full overflow-hidden">
             <DiagramDisplay
               mermaidCode={mermaidCode}
               isLoading={isLoading}
@@ -225,7 +225,7 @@ export default function DiagramGenerator() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 py-4 mt-auto">
+      <footer className="bg-white/80 backdrop-blur-sm border-t border-gray-200 py-4 mt-auto flex-none">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-sm text-gray-500 font-medium flex items-center justify-center gap-1">
             Made with <span className="text-red-500 animate-pulse">♥️</span> by <span className="font-bold text-gray-700">SoumilB7</span>
