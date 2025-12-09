@@ -170,7 +170,7 @@ export default function AboutPage() {
                         <div className="grid sm:grid-cols-3 gap-6 text-sm text-claude-text-secondary">
                             <div>
                                 <strong className="block text-gray-900 mb-1">Spatial Memory</strong>
-                                Claude 4.5 Opus maintains the highest coherence in large state diagrams (>50 nodes), significantly reducing edge-crossing artifacts compared to V3.2.
+                                Claude 4.5 Opus maintains the highest coherence in large state diagrams (less than 50 nodes), significantly reducing edge-crossing artifacts compared to V3.2.
                             </div>
                             <div>
                                 <strong className="block text-gray-900 mb-1">Code Logic (SWE-bench)</strong>
