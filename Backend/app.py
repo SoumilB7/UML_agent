@@ -31,7 +31,9 @@ if environment == "production":
     # Production: Only allow the specific frontend URL
     origins = [
         "https://uml-agent.vercel.app",
-        "https://uml-agent-back.vercel.app" # Allow self if needed
+        "https://uml-agent-back.vercel.app",
+        "generate-diagrams.vercel.app",
+        "generatediagrams.vercel.app" # Allow self if needed
     ]
     logger.info("Running in PRODUCTION mode. CORS restricted to specific origins.")
 else:
