@@ -153,27 +153,27 @@ export default function DiagramGenerator() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-claude-bg text-claude-text-primary overflow-hidden font-serif">
+    <div className="min-h-screen flex flex-col bg-claude-bg text-claude-text-primary font-serif">
       {/* Header */}
-      <header className="border-b border-claude-border bg-claude-card/80 backdrop-blur-sm sticky top-0 z-10 shadow-sm flex-none">
+      <header className="border-b border-claude-border bg-claude-card sticky top-0 z-50 shadow-sm flex-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center shadow-md">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center shadow-md shrink-0">
               <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
               </svg>
             </div>
             <div>
-              <h1 className="text-2xl font-bold font-serif text-claude-text-primary tracking-tight">
+              <h1 className="text-xl sm:text-2xl font-bold font-serif text-claude-text-primary tracking-tight">
                 Diagram AI
               </h1>
-              <div className="flex items-center gap-2">
-                <p className="text-xs text-gray-500 font-medium">Intelligent UML Generation</p>
-                <span className="text-[10px] px-1.5 py-0.5 bg-primary-100 text-primary-700 rounded-full border border-primary-200 font-medium" title="Your API key is stored locally in your browser">
+              <div className="flex items-center gap-2 flex-wrap">
+                <p className="text-xs text-gray-500 font-medium hidden sm:block">Intelligent UML Generation</p>
+                <span className="text-[10px] px-1.5 py-0.5 bg-primary-100 text-primary-700 rounded-full border border-primary-200 font-medium whitespace-nowrap" title="Your API key is stored locally in your browser">
                   BYOK Secured
                 </span>
-                <span className="text-[10px] px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded-full border border-gray-200 font-medium hidden sm:inline-block">
-                  v1.0
+                <span className="text-[10px] px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded-full border border-gray-200 font-medium">
+                  v1.0.0
                 </span>
               </div>
             </div>
@@ -181,16 +181,16 @@ export default function DiagramGenerator() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsImportOpen(true)}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 transition-all shadow-sm flex items-center gap-2"
+              className="px-3 py-2 sm:px-4 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 transition-all shadow-sm flex items-center gap-2 relative z-10 active:scale-95 duration-100"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
               </svg>
-              Import
+              <span className="hidden sm:inline">Import</span>
             </button>
             <button
               onClick={() => setIsSettingsOpen(true)}
-              className="p-2 text-gray-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+              className="p-2 text-gray-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors relative z-10 active:scale-95 duration-100"
               title="Settings"
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -202,11 +202,11 @@ export default function DiagramGenerator() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <div className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
-          {/* Left Panel - Input */}
-          <div className="flex flex-col h-full overflow-hidden">
+      {/* Main Content - Flex col on mobile, Side-by-side on LG screens */}
+      <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 lg:overflow-hidden lg:h-[calc(100vh-80px)]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-auto lg:h-full">
+          {/* Left Panel - Input (Scrolls on mobile, fixed height on desktop) */}
+          <div className="flex flex-col h-auto lg:h-full lg:overflow-hidden order-1 relative z-10">
             <PromptInput
               onGenerate={handleGenerate}
               onNew={handleNew}
@@ -214,11 +214,12 @@ export default function DiagramGenerator() {
               error={error}
               hasExistingDiagram={!!mermaidCode && isEditing}
               diagramId={diagramId}
+              currentPrompt={currentPrompt}
             />
           </div>
 
-          {/* Right Panel - Diagram */}
-          <div className="flex flex-col h-full overflow-hidden">
+          {/* Right Panel - Diagram (Scrolls on mobile, fixed height on desktop) */}
+          <div className="flex flex-col h-[500px] lg:h-full lg:overflow-hidden order-2 mb-6 lg:mb-0">
             <DiagramDisplay
               mermaidCode={mermaidCode}
               isLoading={isLoading}

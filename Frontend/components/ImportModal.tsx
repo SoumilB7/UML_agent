@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface ImportModalProps {
     isOpen: boolean
@@ -10,6 +10,14 @@ interface ImportModalProps {
 
 export default function ImportModal({ isOpen, onClose, onImport }: ImportModalProps) {
     const [code, setCode] = useState('')
+
+    useEffect(() => {
+        const handleEsc = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') onClose()
+        }
+        if (isOpen) window.addEventListener('keydown', handleEsc)
+        return () => window.removeEventListener('keydown', handleEsc)
+    }, [isOpen, onClose])
 
     if (!isOpen) return null
 

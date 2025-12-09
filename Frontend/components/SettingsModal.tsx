@@ -20,6 +20,14 @@ export default function SettingsModal({ isOpen, onClose, onSave }: SettingsModal
         }
     }, [isOpen])
 
+    useEffect(() => {
+        const handleEsc = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') onClose()
+        }
+        if (isOpen) window.addEventListener('keydown', handleEsc)
+        return () => window.removeEventListener('keydown', handleEsc)
+    }, [isOpen, onClose])
+
     const handleSave = () => {
         localStorage.setItem('openai_api_key', apiKey.trim())
         onSave(apiKey.trim())
