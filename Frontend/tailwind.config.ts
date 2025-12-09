@@ -32,6 +32,10 @@ const config: Config = {
           900: '#6d352b',
         },
       },
+      fontFamily: {
+        sans: ['var(--font-saira)', 'sans-serif'],
+        serif: ['var(--font-saira)', 'serif'], // Override serif to use Saira as requested
+      },
     },
   },
   plugins: [],

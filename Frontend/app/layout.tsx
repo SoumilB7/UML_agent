@@ -1,5 +1,12 @@
 import type { Metadata } from 'next'
+import { Saira } from 'next/font/google'
 import './globals.css'
+
+const saira = Saira({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-saira',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://uml-agent.vercel.app'),
@@ -34,7 +41,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className={`${saira.variable} font-sans antialiased`}>{children}</body>
     </html>
   )
 }
