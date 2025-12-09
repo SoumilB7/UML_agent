@@ -238,6 +238,8 @@ export default function DiagramGenerator() {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-sm text-gray-500 font-medium flex items-center justify-center gap-1">
             Made with <span className="text-primary-500 animate-pulse">♥️</span> by <span className="font-bold text-gray-700">SoumilB7</span>
+            <span className="mx-2 text-gray-300">|</span>
+            <a href="/about" className="hover:text-primary-600 transition-colors">About & Benchmarks</a>
           </p>
         </div>
       </footer>
