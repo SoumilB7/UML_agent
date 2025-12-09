@@ -40,7 +40,7 @@ function VariationThumbnail({ mermaidCode, index, isSelected, onSelect, diagramI
       setIsRendering(true)
       setRenderError(false)
       let tempContainer: HTMLDivElement | null = null
-      
+
       try {
         // Ensure mermaid is initialized
         if (typeof mermaid === 'undefined' || !mermaid.run) {
@@ -121,11 +121,10 @@ function VariationThumbnail({ mermaidCode, index, isSelected, onSelect, diagramI
   return (
     <button
       onClick={onSelect}
-      className={`relative p-2 border-2 rounded-lg transition-all ${
-        isSelected
+      className={`relative p-2 border-2 rounded-lg transition-all ${isSelected
           ? 'border-primary-600 bg-primary-50 shadow-md'
           : 'border-gray-200 bg-white hover:border-primary-300 hover:bg-primary-50/50'
-      }`}
+        }`}
     >
       <div className="aspect-square w-full bg-gray-50 rounded overflow-hidden flex items-center justify-center">
         {thumbnailUrl ? (
@@ -164,8 +163,8 @@ function VariationThumbnail({ mermaidCode, index, isSelected, onSelect, diagramI
   )
 }
 
-export default function DiagramDisplay({ 
-  mermaidCode, 
+export default function DiagramDisplay({
+  mermaidCode,
   isLoading,
   variations = [],
   selectedVariationIndex = null,
@@ -180,7 +179,7 @@ export default function DiagramDisplay({
   const [renderError, setRenderError] = useState<string>('')
   // Use diagramId from props, or generate a fallback if not provided
   const effectiveDiagramId = diagramId || `mermaid-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-  
+
   // Zoom and pan state
   const [scale, setScale] = useState(1)
   const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -271,7 +270,7 @@ export default function DiagramDisplay({
         // We'll use SVG directly as it works perfectly for display and zoom/pan
         const svgData = new XMLSerializer().serializeToString(svgElement)
         const svgDataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)))
-        
+
         // Use SVG directly - it works great as an image and avoids CORS issues
         setImageUrl(svgDataUrl)
 
@@ -438,7 +437,7 @@ export default function DiagramDisplay({
   // Copy mermaid code to clipboard
   const handleCopyCode = useCallback(async () => {
     if (!mermaidCode) return
-    
+
     try {
       await navigator.clipboard.writeText(mermaidCode)
       setCopied(true)
@@ -470,15 +469,15 @@ export default function DiagramDisplay({
   const hasMultipleVariations = variations && variations.length > 1
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col h-full">
+    <div className="bg-claude-card rounded-xl shadow-sm border border-claude-border p-6 flex flex-col h-full font-serif">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-gray-900">
+          <h2 className="text-sm font-semibold text-claude-text-primary">
             {hasMultipleVariations ? 'Select a Variation' : 'Diagram Preview'}
           </h2>
-          <p className="text-xs text-gray-500 mt-1">
-            {hasMultipleVariations 
-              ? 'Choose one of the generated variations to continue' 
+          <p className="text-xs text-claude-text-secondary mt-1 font-sans">
+            {hasMultipleVariations
+              ? 'Choose one of the generated variations to continue'
               : 'Zoom and pan to explore the diagram'}
           </p>
         </div>
@@ -563,11 +562,10 @@ export default function DiagramDisplay({
         </div>
       )}
 
-      <div 
+      <div
         ref={containerRef}
-        className={`flex-1 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 overflow-hidden relative ${
-          panEnabled ? 'cursor-move' : 'cursor-default'
-        } ${hasMultipleVariations ? 'min-h-[300px]' : 'min-h-[400px]'}`}
+        className={`flex-1 border-2 border-dashed border-gray-200 rounded-lg bg-gray-50 overflow-hidden relative ${panEnabled ? 'cursor-move' : 'cursor-default'
+          } ${hasMultipleVariations ? 'min-h-[300px]' : 'min-h-[400px]'}`}
         onWheel={handleWheel}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
@@ -610,11 +608,10 @@ export default function DiagramDisplay({
               {/* Zoom Toggle Button */}
               <button
                 onClick={handleZoomToggle}
-                className={`p-2 rounded transition-colors ${
-                  zoomEnabled 
-                    ? 'bg-primary-100 text-primary-700 hover:bg-primary-200' 
+                className={`p-2 rounded transition-colors ${zoomEnabled
+                    ? 'bg-primary-100 text-primary-700 hover:bg-primary-200'
                     : 'hover:bg-gray-100 text-gray-600'
-                }`}
+                  }`}
                 title={zoomEnabled ? "Zoom Enabled - Click to disable" : "Zoom Disabled - Click to enable"}
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -624,11 +621,10 @@ export default function DiagramDisplay({
               {/* Pan Toggle Button */}
               <button
                 onClick={handlePanToggle}
-                className={`p-2 rounded transition-colors ${
-                  panEnabled 
-                    ? 'bg-primary-100 text-primary-700 hover:bg-primary-200' 
+                className={`p-2 rounded transition-colors ${panEnabled
+                    ? 'bg-primary-100 text-primary-700 hover:bg-primary-200'
                     : 'hover:bg-gray-100 text-gray-600'
-                }`}
+                  }`}
                 title={panEnabled ? "Pan Enabled - Click to disable" : "Pan Disabled - Click to enable"}
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -639,11 +635,10 @@ export default function DiagramDisplay({
               <button
                 onClick={handleZoomIn}
                 disabled={!zoomEnabled}
-                className={`p-2 rounded transition-colors ${
-                  zoomEnabled 
-                    ? 'hover:bg-gray-100' 
+                className={`p-2 rounded transition-colors ${zoomEnabled
+                    ? 'hover:bg-gray-100'
                     : 'opacity-50 cursor-not-allowed'
-                }`}
+                  }`}
                 title={zoomEnabled ? "Zoom In (or scroll up)" : "Enable zoom first"}
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -654,11 +649,10 @@ export default function DiagramDisplay({
               <button
                 onClick={handleZoomOut}
                 disabled={!zoomEnabled}
-                className={`p-2 rounded transition-colors ${
-                  zoomEnabled 
-                    ? 'hover:bg-gray-100' 
+                className={`p-2 rounded transition-colors ${zoomEnabled
+                    ? 'hover:bg-gray-100'
                     : 'opacity-50 cursor-not-allowed'
-                }`}
+                  }`}
                 title={zoomEnabled ? "Zoom Out (or scroll down)" : "Enable zoom first"}
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -676,7 +670,7 @@ export default function DiagramDisplay({
                 </svg>
               </button>
             </div>
-            <div 
+            <div
               className="absolute inset-0 flex items-center justify-center"
               style={{
                 transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
@@ -710,7 +704,7 @@ export default function DiagramDisplay({
         )}
       </div>
       <div ref={svgRef} className="hidden"></div>
-      
+
       {/* Feedback Panel - Show only when diagram is displayed */}
       {mermaidCode && !hasMultipleVariations && !isLoading && (
         <div className="mt-4">

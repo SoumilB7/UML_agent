@@ -153,26 +153,26 @@ export default function DiagramGenerator() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+    <div className="h-screen flex flex-col bg-claude-bg text-claude-text-primary overflow-hidden font-serif">
       {/* Header */}
-      <header className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10 shadow-sm flex-none">
+      <header className="border-b border-claude-border bg-claude-card/80 backdrop-blur-sm sticky top-0 z-10 shadow-sm flex-none">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center shadow-md">
               <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
               </svg>
             </div>
             <div>
-              <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-purple-600">
+              <h1 className="text-2xl font-bold font-serif text-claude-text-primary tracking-tight">
                 Diagram AI
               </h1>
               <div className="flex items-center gap-2">
                 <p className="text-xs text-gray-500 font-medium">Intelligent UML Generation</p>
-                <span className="text-[10px] px-1.5 py-0.5 bg-green-100 text-green-700 rounded-full border border-green-200 font-medium" title="Your API key is stored locally in your browser">
+                <span className="text-[10px] px-1.5 py-0.5 bg-primary-100 text-primary-700 rounded-full border border-primary-200 font-medium" title="Your API key is stored locally in your browser">
                   BYOK Secured
                 </span>
-                <span className="text-[10px] px-1.5 py-0.5 bg-blue-100 text-blue-700 rounded-full border border-blue-200 font-medium hidden sm:inline-block">
+                <span className="text-[10px] px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded-full border border-gray-200 font-medium hidden sm:inline-block">
                   v1.0
                 </span>
               </div>
@@ -181,7 +181,7 @@ export default function DiagramGenerator() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsImportOpen(true)}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-primary-600 transition-colors shadow-sm flex items-center gap-2"
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-lg hover:bg-primary-50 hover:text-primary-700 hover:border-primary-200 transition-all shadow-sm flex items-center gap-2"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -233,10 +233,10 @@ export default function DiagramGenerator() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white/80 backdrop-blur-sm border-t border-gray-200 py-4 mt-auto flex-none">
+      <footer className="bg-white/60 backdrop-blur-sm border-t border-primary-100 py-4 mt-auto flex-none">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-sm text-gray-500 font-medium flex items-center justify-center gap-1">
-            Made with <span className="text-red-500 animate-pulse">♥️</span> by <span className="font-bold text-gray-700">SoumilB7</span>
+            Made with <span className="text-primary-500 animate-pulse">♥️</span> by <span className="font-bold text-gray-700">SoumilB7</span>
           </p>
         </div>
       </footer>
