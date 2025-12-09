@@ -23,7 +23,7 @@ export default function PromptInput({ onGenerate, onNew, isLoading, error, hasEx
   const [prompt, setPrompt] = useState('')
   const [generateMany, setGenerateMany] = useState(false)
   const previousPromptRef = useRef<string>('')
-  
+
   // Track prompt changes when user types
   useEffect(() => {
     if (prompt && prompt !== previousPromptRef.current && previousPromptRef.current) {
@@ -66,16 +66,14 @@ export default function PromptInput({ onGenerate, onNew, isLoading, error, hasEx
                   type="button"
                   onClick={() => setGenerateMany(!generateMany)}
                   disabled={isLoading}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
-                    generateMany ? 'bg-primary-600' : 'bg-gray-300'
-                  }`}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${generateMany ? 'bg-primary-600' : 'bg-gray-300'
+                    }`}
                   role="switch"
                   aria-checked={generateMany}
                 >
                   <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                      generateMany ? 'translate-x-6' : 'translate-x-1'
-                    }`}
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${generateMany ? 'translate-x-6' : 'translate-x-1'
+                      }`}
                   />
                 </button>
                 <span className="text-xs text-gray-600">Many (3)</span>
@@ -104,13 +102,13 @@ export default function PromptInput({ onGenerate, onNew, isLoading, error, hasEx
             id="prompt"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder={hasExistingDiagram 
-              ? "Describe the changes you want to make to the diagram..." 
+            placeholder={hasExistingDiagram
+              ? "Describe the changes you want to make to the diagram..."
               : "Describe the diagram you want to generate..."}
-            className="w-full h-48 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none text-sm text-gray-900 placeholder-gray-400 transition-all"
+            className="w-full h-32 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none text-sm text-gray-900 placeholder-gray-400 transition-all"
             disabled={isLoading}
           />
-          
+
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
               {error}
@@ -150,8 +148,8 @@ export default function PromptInput({ onGenerate, onNew, isLoading, error, hasEx
       </div>
 
       {/* Example Prompts */}
-      <div className="mt-auto pt-6 border-t border-gray-200">
-        <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-3">
+      <div className="mt-4 pt-4 border-t border-gray-200 flex-1 overflow-y-auto min-h-0">
+        <p className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-3 sticky top-0 bg-white pb-2">
           Example Prompts
         </p>
         <div className="space-y-2">
